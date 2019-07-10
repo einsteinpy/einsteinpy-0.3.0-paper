@@ -127,8 +127,6 @@
 %%
 %% If you wish, you may supply running head information, although
 %% this information may be modified by the editorial offices.
-\shorttitle{Sample article}
-\shortauthors{Schwarz et al.}
 %%
 %% You can add a light gray and diagonal water-mark to the first page 
 %% with this command:
@@ -194,18 +192,15 @@
 %% automatically put the author and affiliation information from the manuscript
 %% and save the corresponding author the trouble of entering it by hand.
 
-\correspondingauthor{Shreyas Bapat}
-\email{shreyas@einsteinpy.org, bapat.shreyas@gmail.com}
-
 \author[0000-0002-0870-4665]{Shreyas Bapat}
 \affil{School of Computing and Electrical Engineering, Indian Institute of Technology Mandi \\
 Mandi, Himachal Pradesh, 175005, India}
 
-\author{Ritwik Saha}
+\author{Bhavya Bhatt}
 \affiliation{School of Computing and Electrical Engineering, Indian Institute of Technology Mandi \\
 Mandi, Himachal Pradesh, 175005, India}
 
-\author{Bhavya Bhatt}
+\author{Ritwik Saha}
 \affiliation{School of Computing and Electrical Engineering, Indian Institute of Technology Mandi \\
 Mandi, Himachal Pradesh, 175005, India}
 
@@ -213,16 +208,6 @@ Mandi, Himachal Pradesh, 175005, India}
 \affiliation{School of Computing and Electrical Engineering, Indian Institute of Technology Mandi \\
 Mandi, Himachal Pradesh, 175005, India}
 \collaboration{(EinsteinPy Core Development)}
-
-\author{Julie Steffen}
-\affiliation{AAS Director of Publishing}
-\affiliation{American Astronomical Society \\
-2000 Florida Ave., NW, Suite 300 \\
-Washington, DC 20009-1231, USA}
-
-\author{Jeff Lewandowski}
-\affiliation{IOP Senior Publisher for the AAS Journals}
-\affiliation{IOP Publishing, Washington, DC 20005}
 
 %% Note that the \and command from previous versions of AASTeX is now
 %% depreciated in this version as it is no longer necessary. AASTeX 
@@ -239,30 +224,17 @@ Washington, DC 20009-1231, USA}
 %% Mark off the abstract in the ``abstract'' environment. 
 \begin{abstract}
 
-This example manuscript is intended to serve as a tutorial and template for
-authors to use when writing their own AAS Journal articles. The manuscript
-includes a history of \aastex\ and documents the new features in the
-previous versions as well as the new features in version 6.2. This
-manuscript includes many figure and table examples to illustrate these new
-features.  Information on features not explicitly mentioned in the article
-can be viewed in the manuscript comments or more extensive online
-documentation. Authors are welcome replace the text, tables, figures, and
-bibliography with their own and submit the resulting manuscript to the AAS
-Journals peer review system.  The first lesson in the tutorial is to remind
-authors that the AAS Journals, the Astrophysical Journal (ApJ), the
-Astrophysical Journal Letters (ApJL), and Astronomical Journal (AJ), all
-have a 250 word limit for the abstract\footnote{Note that manuscripts 
-submitted to the new Research Notes of the American Astronomical Society 
-(RNAAS) do \textbf{not} have abstracts.}.  If you exceed this length the
-Editorial office will ask you to shorten it.
+This paper presents EinsteinPy (version 0.2), a community-developed Python
+package for gravitational and relativistic astrophysics. Python is a free, easy to use high level programming language which have seen a huge expansion in the number of its users and developers in recent years. Many great frameworks came as Python packages which provides a very high level of abstraction glancing over the dirty nitty gitties of the algorithms and provide an easy to use coding interface. One example is Keras - Framework for deep learning which has made field like deep learning to become a easy to code task for its users. This example really demonstrates the power of abstraction which is achievable in Python. The aim of the EinsteinPy is no different and is developed keeping in mind the state of a theoretical gravitational physicist with a little or no background in computer programming and trying to enter the field of numerical relativity or trying to use simulations in his research. Currently EinsteinPy supports simulation of time-like and null geodesics and calculate trajectories in different background geometries some of which are Schwarzschild, Kerr and KerrNewmann along with coordinate inter-conversion pipeline. It has a partially developed pipeline for plotting and visualization with dependencies on libraries like plotly, matplotlib etc. One of the unique feature of EinsteinPy is a sufficiently developed symbolic tensor manipulation utilites which is a great tool in itself for teaching yourself tensor algebra which for many beginner students can be overwhelmingly tricky. Currently EinsteinPy also provide few utility functions for hypersurface embedding of Schwarzschild spacetime which further will be extended to model gravitational lensing simulation. The current version of the library is in a state that can be used by any serious student of general relativity trying to get essence of this beautiful subject but is somewhere lost in the heavy mathematical formalism of the subject. EinsteinPy provides such students to really see through the equations and visualize whats really happening.
+
 
 \end{abstract}
 
 %% Keywords should appear after the \end{abstract} command. 
 %% See the online documentation for the full list of available subject
 %% keywords and the rules for their use.
-\keywords{editorials, notices --- 
-miscellaneous --- catalogs --- surveys}
+\keywords{gravitational physics, astrophysics --- 
+simulations --- black holes --- gravitational waves}
 
 %% From the front matter, we move on to the body of the paper.
 %% Sections are demarcated by \section and \subsection, respectively.
@@ -280,112 +252,9 @@ miscellaneous --- catalogs --- surveys}
 %% to the KEY in the \bibitem in the reference list below. 
 
 \section{Introduction} \label{sec:intro}
-
-\latex\ \footnote{\url{http://www.latex-project.org/}} is a document markup
-language that is particularly well suited for the publication of
-mathematical and scientific articles \citep{lamport94}. \latex\ was written
-in 1985 by Leslie Lamport who based it on the \TeX\ typesetting language
-which itself was created by Donald E. Knuth in 1978.  In 1988 a suite of
-\latex\ macros were developed to investigate electronic submission and
-publication of AAS Journal articles \citep{1989BAAS...21..780H}.  Shortly
-afterwards, Chris Biemesdefer merged these macros and more into a \latex\
-2.08 style file called \aastex.  These early \aastex\ versions introduced
-many common commands and practices that authors take for granted today.
-Substantial revisions
-were made by Lee Brotzman and Pierre Landau when the package was updated to
-v4.0.  AASTeX v5.0, written in 1995 by Arthur Ogawa, upgraded to \latex\ 2e
-which uses the document class in lieu of a style file.  Other improvements
-to version 5 included hypertext support, landscape deluxetables and
-improved figure support to facilitate electronic submission.  
-\aastex\ v5.2 was released in 2005 and introduced additional graphics
-support plus new mark up to identifier astronomical objects, datasets and
-facilities.
-
-In 1996 Maxim Markevitch modified the AAS preprint style file, aaspp4.sty,
-to closely emulate the very tight, two column style of a typeset
-Astrophysical Journal article.  The result was emulateapj.sty.  A year
-later Alexey Vikhlinin took over development and maintenance.  In 2001 he
-converted emulateapj into a class file in \latex\ 2e and in 2003 Vikhlinin
-completely rewrote emulateapj based on the APS Journal's RevTEX class.
-
-During this time emulateapj gained growing acceptance in the astronomical
-community as it filled an author need to obtain an approximate number of
-manuscript pages prior to submission for cost and length estimates. The
-tighter typeset also had the added advantage of saving paper when printing
-out hard copies.
-
-Even though author publication charges are no longer based on print pages
-\footnote{see Section \ref{sec:pubcharge} in the Appendix for more details
-about how current article costs are calculated.} the emulateapj class file
-has proven to be extremely popular with AAS Journal authors.  An informal
-analysis of submitted \latex\ manuscripts in 2015 revealed that $\sim$65\%
-either called emulateapj or have a commented emulateapj classfile call
-indicating it was used at some stage of the manuscript construction.
-Clearly authors want to have access to a tightly typeset version of the
-article when corresponding with co-authors and for preprint submissions.
-
-When planning the next \aastex\ release the popularity of emulateapj played
-an important roll in the decision to drop the old base code and adopt and
-modify emulateapj for \aastex\ v6.+ instead.  The change brings \aastex\
-inline with what the majority of authors are already using while still
-delivering new and improved features.  \aastex\ v6.0 through v6.2 were written
-by Amy Hendrickson and released in January 2016 (v6.0), October 2016 (v6.1),
-and January 2018 (v6.2), respectively.  Some of the new features in v6.0 
-included:
-
-\begin{enumerate}
-\item improved citations for third party data repositories and software,
-\item easier construction of matrix figures consisting of multiple 
-encapsulated postscript (EPS) or portable document format (PDF) files,
-\item figure set mark up for large collections of similar figures,
-\item color mark up to easily enable/disable revised text highlighting,
-\item improved url support, and
-\item numerous table options such as the ability to hide columns, column 
-decimal alignment, automatic column math mode and numbering, plus splitting of
-wide tables.
-\end{enumerate}
-
-The features in v6.1 were:
-
-\begin{enumerate}
-\item ORCID support for preprints,
-\item improved author, affiliation and collaboration mark up,
-\item reintroduced the old AASTeX v5.2 {\tt\string\received}, 
-      {\tt\string\revised}, {\tt\string\accepted}, and
-      {\tt\string\published} commands plus
-      added the new {\tt\string\submitjournal} command to document
-      which AAS Journal the manuscript was submitted to, plus
-\item new typeset style options.
-\end{enumerate}
-
-The new features in v6.2 are:
-
-\begin{enumerate}
-\item A new RNAAS style option for Research Note manuscripts,
-\item Titles no longer put in all caps,
-\item No page skip between the title page and article body,
-\item re-introduce RevTeX's widetext environment for long lines in
-      two column style formats, and
-\item upgrade to the {\tt\string\doi} command.
-\end{enumerate}
-
-The rest of this article provides information and examples on how to create
-your own AAS Journal manuscript with v6.2.  Special emphasis is placed on
-how to use the full potential of \aastex\ v6+.  The next section describes
-the different manuscript styles available and how they differ from past
-releases.  Section \ref{sec:floats} describes how tables and figures are
-placed in a \latex\ document. Specific examples of tables, Section
-\ref{subsec:tables}, and figures, Section \ref{subsec:figures}, are also
-provided.  Section \ref{sec:displaymath} discusses how to display math and
-incorporate equations in a manuscript while Section \ref{sec:highlight}
-discuss how to use the new revision mark up.  The last section,
-\ref{sec:cite}, shows how recognize software and external data as first
-class references in the manuscript bibliography.  An appendix is included
-to show how to construct one and provide some information on how article
-charges are calculated.  Additional information is available both embedded
-in the comments of this \latex\ file and in the online documentation at
-\url{http://journals.aas.org/authors/aastex.html}.
-
+It was the time of 1915 when Einstein published his paper on general theory of relativity which proposed a elegant and rigorous framework for a relativistic theory of gravity and was generalized version of gravity free theory - special relativity which he published earlier in 1905 and since then the whole physics community was against the bold ideas of the young genius and resisted in the beginning because all people were worried that if these hypothesis true would then completely change our notion of how we percieve space and time. But sooner they started to realize the true depth in the formalism of general relativity and its ability to explain the fundamental laws of nature. After so many years its well established now that general theory of relativity is the "theory of gravity" in classical regime and all the attempts to formulate quantum theory of gravity one way or the other borrow ideas from GR. The central problem then and now remains to be the solutions of the Einstein's field equation. Many times we can study the behaviour of solutions under high degree of symmetry considerations and could even be solved analytically for highly unrealistic systems but for solving it for problems relevant to astrophysical and gravitational physics research it still remains a big question on how to get around the problem of solving these field equations. This question is so profound that it has a separate research field which goes with the name of numerical relativity which attempts to use computer programmes to numerically obtain solutions of the equations (which would be the background geometry) for some turbulent region where most of the interesting dynamics is happening (as we can not solve for a infinitely large grid due to restrictions imposed on us by space and time complexity and computability).\\
+The interest of the community grew when the field found applications in areas of radio astronomy, cosmology, signal processing, data mining. After so many years the field of numerical relativity has grown up to be a mature research area with vast literature on algorithms, numerical methods and theoretical formulations (from basic 3+1 decomposition formulation to more sophisticated ones). Currently there exist some very robust and involved frameworks that provide a complete programming ecosystem and have proved to be essential tools for any numerical relativity researcher. Now on the other end of the research community are the theoretical physicists many of which have little or no programming experience and is really challenged by the fact that the usage of these frameworks demands heavy use of high level programming
+in languages like C and C++. As described above Python provides a vast room for abstractions and no library existed at that time that do numerical relativity in Python and hence the team was hooked by this very fact of need for a python library on general relativity. Since then EinsteinPy has seen a lot of contributions from people all over the world and many "good to go" functionalities are already provided in this and previous versions. Like any other numerical relativity library EinsteinPy is made to provide a set of tools which can make numerical computations for solving Einstein's field equations an easy job for anyone who does not want to dive deep into the nitty gitties of the subject along with few very basic but powerful functionalities that could be used by anyone who wants to learn the subject of general relativity in general\footnote{More details on this are given in further coming sections}. In further coming section we will discuss with some of the features of the current as well previous version and the future plans which are yet to be implemented in the upcoming version. Also we describe few code snippets to explain the usage of the library on which more details can be found on the organisation website\footnote{https://einsteinpy.org/}
 \section{Manuscript styles} \label{sec:style}
 
 The default style in \aastex\ v6.2 is a tight single column style, e.g.  10
@@ -843,11 +712,7 @@ Model 2 & IELs& -51000 &    2025$\pm      26$& 2494$\pm      32$&$<     37$&$<  
 
 %% The "ht!" tells LaTeX to put the figure "here" first, at the "top" next
 %% and to override the normal way of calculating a float position
-\begin{figure}[ht!]
-\plotone{cost-eps-converted-to.pdf}
-\caption{The subscription and author publication costs from 1991 to 2013.
-The data comes from Table \ref{tab:table}.\label{fig:general}}
-\end{figure}
+
 
 Authors can include a wide number of different graphics with their articles
 in  encapsulated postscript (EPS) or portable document format (PDF).  These
@@ -869,7 +734,7 @@ from Figures \ref{fig:f2} through \ref{fig:fig4} are taken from Table 2 of
 \citet{2011ApJS..197...31S}. 
 
 \begin{figure}
-\plottwo{RS_Oph-eps-converted-to.pdf}{U_Sco-eps-converted-to.pdf}
+
 \caption{Swift/XRT X-ray light curves of RS Oph and U Sco which represent
 the two canonical recurrent types, a long period system with a red giant
 secondary and a short period system with a dwarf/sub-dwarf secondary,
@@ -915,19 +780,7 @@ Figure \ref{fig:pyramid} shows an inverted pyramid of individual
 figure constructed with six individual EPS files using the
 {\tt\string\gridline} option.
 
-\begin{figure*}
-\gridline{\fig{V2491_Cyg-eps-converted-to.pdf}{0.3\textwidth}{(a)}
-          \fig{CSS081007-eps-converted-to.pdf}{0.3\textwidth}{(b)}
-          \fig{LMC_2009-eps-converted-to.pdf}{0.3\textwidth}{(c)}
-          }
-\gridline{\fig{RS_Oph-eps-converted-to.pdf}{0.3\textwidth}{(d)}
-          \fig{U_Sco-eps-converted-to.pdf}{0.3\textwidth}{(e)}
-          }
-\gridline{\fig{KT_Eri-eps-converted-to.pdf}{0.3\textwidth}{(f)}}
-\caption{Inverted pyramid figure of six individual files. The nova are
-(a) V2491 Cyg, (b) HV Cet, (c) LMC 2009, (d) RS Oph, (e) U Sco, and
-(f) KT Eri.\label{fig:pyramid}}
-\end{figure*}
+
 
 \subsection{Figure sets}
 
@@ -1016,7 +869,6 @@ outburst.}
 \figsetend
 
 \begin{figure}
-\plotone{KT_Eri-eps-converted-to.pdf}
 \caption{The Swift/XRT X-ray light curve for the first year after
 outburst of the suspected recurrent nova KT Eri. At a maximum count rate of 
 328 ct/s, KT Eri was the brightest nova in X-rays observed to date. All 
@@ -1035,7 +887,6 @@ The associated figure caption should indicate to the reader exactly what the
 animation shows and that the animation is available online.
 
 \begin{figure}
-\plotone{video3-eps-converted-to.pdf}
 \caption{Example image from the animation which is available in the electronic
 edition.}
 \end{figure}
