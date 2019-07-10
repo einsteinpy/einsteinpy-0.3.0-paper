@@ -140,6 +140,8 @@
 
 %% This is the end of the preamble.  Indicate the beginning of the
 %% manuscript itself with \begin{document}.
+\usepackage{listings}
+\usepackage{minted}
 \begin{document}
 
 \title{EinsteinPy: Python for General Relativity\footnote{Released on July, 15th, 2019}}
@@ -286,9 +288,16 @@ The interest of the community grew when the field found applications in areas of
 The heart of abstraction that EinsteinPy aims to provide is achieved by some set of data structures that are specifically designed to ease with varieties of gravitational physics problems. The most important and central quantity in all of the general relativity is the metric tensor $g_{\mu\nu}$ which defines the background geometry of spacetime on which all the dynamics happen. Informally the problem that packages of numerical relativity tend to solve is that we have a system (or matter field) defined by energy-momentum tensor $T_{\mu\nu}$ and we want to solve for the $g_{\mu\nu}$ such that it satifies the following Einstein's field equation
 \[
 R_{\mu\nu} - \frac{1}{2}Rg_{\mu\nu} + \Lambda g_{\mu\nu} = \frac{8\pi G}{c^4}T_{\mu\nu}
-\]where $R_{\mu\nu}$ is contracted Riemannian tensor or Ricci tensor, $R$ is Ricci scalar $\Lambda$ is cosmological constant. All the above quantities are derivatives of metric tensor\footnote{more on this can be refered from any standard general relativity text} so in simple terms, on the left hand side of the equation is terms involving $g_{\mu\nu}$ and on the right hand side is the matter field terms which only characterize the distribution of matter because of which the spacetime geometry is curved.\\
-EinsteinPy provides a core module: metric which has core data types of various metric tensors some which includes Schwarzschild, Kerr, Kerr-Newman spacetime geometries(which are exact solution of field equation for very specific matter distributions). The immediate functionalities which comes along with this module is solution of geodesic equations. The module has coupled integration with coordinates module which deals with different coordinate systems transformations\footnote{more on this in the 'coordinates' section}. Another core data types is in the plotting module which handles all the plotting, rendering, animation and simulation related methods and provides a user friendly interfacing of plots. One interesting feature of EinsteinPy is the support for symbolic tensor algebra which is extremly important in the formalism of general relativity and many begineers find it  
+\]where $R_{\mu\nu}$ is contracted Riemannian tensor or Ricci tensor, $R$ is Ricci scalar $\Lambda$ is cosmological constant. All the above quantities are derivatives of metric tensor\footnote{more on this can be refered from any standard general relativity text} so in simple terms, on the left hand side of the equation are terms involving $g_{\mu\nu}$ and on the right hand side are the matter field terms which only characterize the distribution of matter because of which the spacetime geometry is curved.\\
+EinsteinPy provides a core module: metric which has core data types of various metric tensors some which includes Schwarzschild, Kerr, Kerr-Newman spacetime geometries(which are exact solution of field equation for very specific matter distributions). The immediate functionalities which comes along with this module is solution of geodesic equations. The module has coupled integration with coordinates module which deals with different coordinate systems transformations\footnote{more on this in the 'coordinates' section}. Another core data types is in the plotting module which handles all the plotting, rendering, animation and simulation related methods and provides a user friendly interfacing of plots. One interesting feature of EinsteinPy is the support for symbolic tensor algebra which is extremly important in the formalism of general relativity and one of the first challenges faced by many beginners in their journey of learning the subject. EinsteinPy provides an excellent way to learn the math behind tensor manipulation and index gymnastics with the help of symbolic module: symbolic, on which more will be dicussed in its section ahead.\\
+Following sections will give a breif overview of every core module and some of their important functionalities. 
 \subsection{metric}
+metric module gives user the freedom to define metric object which can be further used in the computations related to spacetime geometry. Let's see an small example of solving geodesic equation in Schwarzschild spacetime and obtaining trajectories using EinsteinPy
+\begin{minted}[linenos]{python}
+from einsteinpy.metric import Schwarzschild
+mass = 
+metric_obj = Schwarzschild(mass)
+\end{minted}
 \subsection{plotting}
 \subsection{symbolic}
 \subsection{coordinates}
