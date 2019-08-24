@@ -282,16 +282,98 @@ simulations --- black holes --- gravitational waves}
 %% to the KEY in the \bibitem in the reference list below. 
 
 \section{Introduction} \label{sec:intro}
-It was the time of 1915 when Einstein published his paper on general theory of relativity which proposed a elegant and rigorous framework for a relativistic theory of gravity and was generalized version of gravity free theory - special relativity which he published earlier in 1905 and since then the whole physics community was against the bold ideas of the young genius and resisted in the beginning because all people were worried that if these hypothesis true would then completely change our notion of how we percieve space and time. But sooner they started to realize the true depth in the formalism of general relativity and its ability to explain the fundamental laws of nature. After so many years its well established now that general theory of relativity is the "theory of gravity" in classical regime and all the attempts to formulate quantum theory of gravity one way or the other borrow ideas from GR. The central problem then and now remains to be the solutions of the Einstein's field equation. Many times we can study the behaviour of solutions under high degree of symmetry considerations and could even solve analytically for highly unrealistic systems but solving it for problems relevant to astrophysical and gravitational physics research it still remains a big question on how to get around the problem of solving these field equations. This question is so profound that it has a separate research field which goes with the name of numerical relativity which attempts to use computer programmes to numerically obtain solutions of the equations (which would be the background geometry) for some turbulent region where most of the interesting dynamics is happening (as we can not solve for a infinitely large grid due to restrictions imposed on us by space and time complexity and computability).\\
-The interest of the community grew when the field found applications in areas of radio astronomy, cosmology, signal processing, data mining. After so many years the field of numerical relativity has grown up to be a mature research area with vast literature on algorithms, numerical methods and theoretical formulations (from basic 3+1 decomposition formulation to more sophisticated ones). Currently there exist some very robust and involved frameworks that provide a complete programming ecosystem and have proved to an be essential tools for any numerical relativity researcher. Now on the other end of the research community are the theoretical physicists many of which have little or no programming experience and is really challenged by the fact that the usage of these frameworks demand heavy use of high level programming languages like C and C++. As described above Python provides a vast room for abstractions and no library existed at that time that do numerical relativity in Python and hence the team was hooked by this very fact of need for a python library on general relativity. Since then EinsteinPy has seen a lot of contributions from people all over the world and many "good to go" functionalities are already provided in this and previous versions. Like any other numerical relativity library EinsteinPy is made to provide a set of tools which can make numerical computations for solving Einstein's field equations an easy job for anyone who does not want to dive deep into the nitty gitties of the subject along with few very basic but powerful functionalities that could be used by anyone who wants to learn the subject of general relativity in general\footnote{More details on this are given in further coming sections}. In further coming section we discuss with some of the features of the current as well previous version and the future plans which are yet to be implemented in the upcoming versions. Also we describe few code snippets to explain the usage of the library on which more details can be found on the organisation website\footnote{https://einsteinpy.org/}
+
+
+
+
+
+
+
+
+
+The relativistic theory of gravity paved its way to the ground in 1915, when Einstein published his paper on the general theory of relativity. This elegant and rigorous framework  was a generalized version of gravity-free theory - special relativity, which he published earlier in 1905 and since then the whole physics community was against the bold ideas of the young genius and resisted the same in the beginning, as all people were worried that if the hypothesis stood true, complete notion of how they perceived space and time would get altered. Sooner,  they started to realize and conceive the true depth in the formalism of general relativity and its ability to explain the fundamental laws of nature. It took a huge span of time for the acceptability of general theory of relativity as the "theory of gravity" in the classical regime. All the attempts to formulate a quantum theory of gravity in some way or the other borrow its ideas from General Relativity.
+Almost a hundred years after Einstein wrote down the equations of General Relativity, solutions of the Einstein equation remain extremely difficult to find beyond those which exhibit significant symmetries. The central problem then and now remains to be the solutions of Einstein's field equation. Many times we can study the behaviour of solutions under a high degree of symmetry considerations and could even solve analytically for highly unrealistic systems but solving it for problems relevant to astrophysical and gravitational physics research. It still remains a big daunting question on how to get around the problem of solving these field equations. This question is so profound that it has a separate profound field of research which goes with the name of numerical relativity which attempts to use computation science and programming to numerically obtain solutions of the equations (which would be the background geometry) for some turbulent region where most of the interesting dynamics are happening (as we can not solve for an infinitely large grid due to restrictions imposed on us by space and time complexity and computability).\\
+Numerical methods have been used to solve the Einstein equation for many decades, but the past decade has seen tremendous advances and adding to that, the interest of the community grew when the field found applications in areas of radio astronomy, cosmology, signal processing, data mining. The field of numerical relativity is growing rampantly with the vast literature on algorithms, numerical methods and theoretical formulations (from basic 3+1 decomposition formulation to more sophisticated ones) with the development of robust and involved frameworks that provide a complete programming ecosystem and have proved to be essential tools for any numerical relativity researcher. Reflecting the other end of the research community stands the major section of theoretical physicists which counts the majority as a novice in programming. The head challenge is the fact that the usage of these frameworks demands heavy use of high-level programming languages like C, C++, Python etc. Though Python provides a vast room for abstractions no library existed that focused towards numerical relativity, eventually, the need of python library dedicated to general relativity became the propellant for the team and thus they made dauntless efforts to cover the space for this Python library. Since then, EinsteinPy has seen a lot of contributions from people all over the world and many "good to go" functionalities are already provided in this and previous versions. Like any other numerical relativity library, EinsteinPy is made to provide a set of tools which can make numerical computations for solving Einstein's field equations an easy job for anyone who does not want to deal with intricacies of the subject along with few, very basic but powerful functionalities that could be used by anyone who wants to learn the subject of general relativity 
+with every minute detail .in general\footnote{More details on this are given in further coming sections}. In further coming section, we discuss with some of the features of the current as well previous version and the future plans which are yet to be implemented in the upcoming versions. Also, we describe few code snippets to explain the usage of the library on which more details can be found on the organisation website\footnote{https://einsteinpy.org/}
+Software development and tools form a significant part of research in astronomy and moreover, the field itself has long supported the development of software tools for astronomical tasks.. These packages therefore typically provide some level of documentation and user support or training.
+.
+The development of the EinsteinPy core package began as a community-driven effort to standardize core functionality for software in Python which renders a  user-friendly interface for supporting numerical relativity and relativistic astrophysics research. The library is as an attempt to provide programming and numerical environment for numerous numerical relativity problems like geodesics plotter, gravitational lensing and ray tracing, solving and simulating relativistic hydrodynamical equations, plotting of black hole event horizons, solving Einstein’s field equations and simulating various dynamical systems like binary merger etc.
+
+At the same time, the scientific community contributing to the package has grown tremendously and an ecosystem of packages supporting or affiliated with the EinsteinPycore has developed. 
+EinsteinPy provides an open-source and open-development core package and an ecosystem of affiliated 
+packages that support numeric relativity functionality in the Python programming language. "Open development" describes a process where anybody with an internet connection can suggest changes to the source code and contribute their opinion when new features, bug fixes or other code changes, governance, or any other aspect of the development process is discussed. EinsteinPy core package is now a feature-rich library of sufficiently general tools and classes that support the development of more specialized code
+
+In this paper, we describe the current status of the EinsteinPy core package and discuss goals for future development.
+We start by describing the way EinsteinPy functions followed by the main software efforts developed by the EinsteinPy itself with proper detailed documentation of the current version release.We end with a short vision for the future of EinsteinPy to its contribution in the field of computational methodology in gravitational and relativistic Astrophysics.
+
+
 \section{Units Handling}
-EinsteinPy has dependencies on Astropy for handling units and user have to use appropiate Astropy units\footnote{more on astropy units can be refered from their official website documentation} while declaring the input data to various methods which are further used in computation. 
+EinsteinPy has dependencies on Astropy for handling units and user have to use appropriate Astropy units\footnote{more on astropy units can be referred from their official website documentation} while declaring the input data to various methods which are further used in the computation. 
 \section{Data Types} \label{sec:style}
-The heart of abstraction that EinsteinPy aims to provide is achieved by some set of data structures that are specifically designed to ease with variety of gravitational physics problems. The most important and central quantity in all of the general relativity is the metric tensor $g_{\mu\nu}$ which defines the background geometry of spacetime on which all the dynamics happen. Informally the problem that packages of numerical relativity tend to solve is that we have a system (or matter field) defined by energy-momentum tensor $T_{\mu\nu}$ and we want to solve for the $g_{\mu\nu}$ such that it satifies the following Einstein's field equation
+Since its inception,  EinsteinPy has aimed to provide is achieved by some set of data structures that are specifically designed to ease with a variety of gravitational physics problems. The most important and central quantity in all of the general relativity is the metric tensor $g_{\mu\nu}$ which defines the background geometry of spacetime on which all the dynamics happen. Informally the problem that packages of numerical relativity tend to solve is that we have a system (or matter field) defined by energy-momentum tensor $T_{\mu\nu}$ and we want to solve for the $g_{\mu\nu}$ such that it satisfies the following Einstein's field equation
 \[
 R_{\mu\nu} - \frac{1}{2}Rg_{\mu\nu} + \Lambda g_{\mu\nu} = \frac{8\pi G}{c^4}T_{\mu\nu}
-\]where $R_{\mu\nu}$ is contracted Riemannian tensor or Ricci tensor, $R$ is Ricci scalar, $\Lambda$ is cosmological constant. All the above quantities are derivatives of metric tensor\footnote{more on this can be refered from any standard general relativity text} so in simple terms, on the left hand side of the equation are terms involving $g_{\mu\nu}$ and on the right hand side are the matter field terms which only characterize the distribution of matter.\\
-EinsteinPy provides a core module: \texttt{metric} which has core data types of various metric tensors some which includes Schwarzschild, Kerr, Kerr-Newman spacetime geometries(which are exact solution of field equation for very specific matter distributions). The immediate functionalities which comes along with this module is solution of geodesic equations. The module has coupled integration with \texttt{coordinates} module which deals with different coordinate system transformations\footnote{more on this in the 'coordinates' section}. Another core data types is in the \texttt{plotting} module which handles all the plotting, rendering, animation and simulation related methods and provides a user friendly interfacing of plots. One interesting feature of EinsteinPy is the support for symbolic tensor algebra which is extremly important in the formalism of general relativity and one of the first challenges faced by many beginners in their journey of learning the subject. EinsteinPy provides an excellent way to learn the math behind tensor manipulation and index gymnastics with the help of symbolic module: \texttt{symbolic}, on which more will be dicussed in its section ahead.\\
+\]where $R_{\mu\nu}$ is contracted Riemannian tensor or Ricci tensor, $R$ is Ricci scalar, $\Lambda$ is cosmological constant. All the above quantities are derivatives of metric tensor\footnote{more on this can be referred from any standard general relativity text} so in simple terms, on the left-hand side of the equation are terms involving $g_{\mu\nu}$ and on the right-hand side are the matter field terms which only characterize the distribution of matter.\\
+EinsteinPy provides a core module: \texttt{metric} which has core data types of various metric tensors some which include Schwarzschild, Kerr, Kerr-Newman spacetime geometries(which are the exact solution of field equation for very specific matter distributions). The immediate functionalities which come along with this module are the solutions of geodesic equations. The module has coupled integration with \texttt{coordinates} module which deals with different coordinate system transformations\footnote{more on this in the 'coordinates' section}. Another core data types are in the \texttt{plotting} module which handles all the plotting, rendering, animation and simulation related methods and provides user-friendly interfacing of plots. One interesting feature of EinsteinPy is the support for symbolic tensor algebra which is extremely important in the formalism of general relativity and one of the first challenges faced by many beginners in their journey of learning the subject. EinsteinPy provides an excellent way to learn the math behind tensor manipulation and index gymnastics with the help of symbolic module: \texttt{symbolic}, on which more will be discussed in its section ahead.\\
+
+Features of EinsteinPy and section division.
+\textbf{Paper organisation}
+
+
+
+			Organisation and Infrastructure
+EinsteinPy equations and notations:
+The purpose of this subsection is to clearly state the equations of motion that we have implemented and our conventions for completeness
+
+Evolution Equation
+
+
+
+
+
+
+EinsteinPy core package version 0.2
+Integrators
+
+
+Metric
+
+
+Utils
+
+
+Plotting
+
+
+Constant
+
+
+Coordinates
+
+
+
+Geodesic 
+
+
+
+Bodies
+
+
+
+Hypersurface
+
+
+
+
+symbolic
+Support of EinsteinPy
+The EinsteinPy Project, as of the version 0.2release, does not receive any direct financial support for the development of EinsteinPy. Development of the software, all supporting materials, and community support are provided by individuals who work on EinsteinPy in their own personal time, by individuals or groups contributing to EinsteinPy as part of a research project.  ( A list of organizations that have contributed to EinsteinPy in this manner can be found in the Acknowledgments)
+
+Release Cycle and Long-term Support
+The EinsteinPy package is updated with significant changes and bug fixes in every release. The major releases contain new features or any significant changes, whereas the bugfix releases only contain fixes to code or documentation but no new features. 
+
+
+
 Following sections will give a breif overview of every core module and some of their important functionalities.
 \subsection{tensor}
 \subsection{metric}
