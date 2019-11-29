@@ -140,8 +140,9 @@
 
 %% This is the end of the preamble.  Indicate the beginning of the
 %% manuscript itself with \begin{document}.
+%\usepackage{minted}
 \usepackage{listings}
-\usepackage{minted}
+
 \begin{document}
 
 \title{EinsteinPy: Python for General Relativity\footnote{Released on July, 15th, 2019}}
@@ -379,48 +380,48 @@ Following sections will give a breif overview of every core module and some of t
 \subsection{metric}
 \texttt{metric} module give users the freedom to define metric object which can be further used in the computations related to spacetime geometry. Let's see an small example of solving geodesic equation in Kerr spacetime and obtaining trajectories using EinsteinPy
 \subsection{coordinates}
-\begin{minted}[linenos]{python}
-# importing modules
+%\begin{minted}[linenos]{python}
+%# importing modules
 from astropy import units as u
 import numpy as np
 from einsteinpy.metric import Kerr
 from einsteinpy.coordinates import BoyerLindquistDifferential
 
-# initializing parameters and coordinate system
-M = 1.989e30 * u.kg
-a = 0.3 * u.m
-BL_obj = BoyerLindquistDifferential(50e5 * u.km, np.pi / 2 * u.rad, np.pi * u.rad,
-                                    0 * u.km / u.s, 0 * u.rad / u.s, 0 * u.rad / u.s,
-                                    a)
-end_lambda = ((1 * u.year).to(u.s)).value / 930
+%# initializing parameters and coordinate system
+%M = 1.989e30 * u.kg
+%a = 0.3 * u.m
+%BL_obj = BoyerLindquistDifferential(50e5 * u.km, np.pi / 2 * u.rad, np.pi * u.rad,
+     %                               0 * u.km / u.s, 0 * u.rad / u.s, 0 * u.rad / u.s,
+          %                          a)
+%end_lambda = ((1 * u.year).to(u.s)).value / 930
 
-# Choosing stepsize for ODE solver to be 0.02 minutes
-stepsize = ((0.02 * u.min).to(u.s)).value
+%# Choosing stepsize for ODE solver to be 0.02 minutes
+%stepsize = ((0.02 * u.min).to(u.s)).value
 
-# defining Kerr spacetime metric object
-obj = Kerr.from_coords(BL_obj, M)
+%# defining Kerr spacetime metric object
+%obj = Kerr.from_coords(BL_obj, M)
 
-# calculates the trajectory
-ans = obj.calculate_trajectory(
-    end_lambda=end_lambda, OdeMethodKwargs={"stepsize": stepsize}, return_cartesian=True
-)
-\end{minted}
+%# calculates the trajectory
+%ans = obj.calculate_trajectory(
+    %end_lambda=end_lambda, OdeMethodKwargs={"stepsize": stepsize}, return_cartesian=True
+%)
+%\end{minted}
 \subsection{plotting}
 \subsection{symbolic}
 \subsection{hypersurface}
 This module provides with basic computational functions which are essential for modelling the space-like hypersurface for any spacetime geometry. Currently module has implementation for Schwarzschild geometry with conversion functions from Schwarzschild coordinates to 3-D spherical coordinates and some plotting utilities. The whole module is expected to extend for providing a superclass for implementations related to gravitationl lensing simulations and numerical calculations of null geodesics on hypersurfaces and deviation angles for systems which are relevant to relativistic astrophysical problems. A small code snippet for plotting the hypersurface is as follows:
-\begin{minted}[linenos]{python}
-# importing the modules
+%\begin{minted}[linenos]{python}
+%# importing the modules
 from einsteinpy.hypersurface import SchwarzschildEmbedding
 from astropy import units as u
 
-# Declaring embedding object with specified mass of the body 
-surface_obj = SchwarzschildEmbedding(5.927e23 * u.kg)
-surface_obj.plot_hypersurface(plot_type='surface')
+%# Declaring embedding object with specified mass of the body 
+%surface_obj = SchwarzschildEmbedding(5.927e23 * u.kg)
+%surface_obj.plot_hypersurface(plot_type='surface')
 
-# plotting the embedding hypersurface for Schwarzschild spacetime
-surface_obj.show()
-\end{minted}
+%# plotting the embedding hypersurface for Schwarzschild spacetime
+%surface_obj.show()
+%\end{minted}
 \includegraphics[scale=0.5]{hypersurface_surface.png}
  
 \section{Displaying mathematics} \label{sec:displaymath}
