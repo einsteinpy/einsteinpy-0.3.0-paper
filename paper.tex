@@ -408,7 +408,102 @@ from einsteinpy.coordinates import BoyerLindquistDifferential
 %\end{minted}
 \subsection{plotting}
 \subsection{symbolic}
-General Relativity required heavy mathematical formulation to derive and describe various tensors attributing to various features essential for cogent description of a arbitrary space-time. We would describe the various quantities currently supported by this module while maintaining brevity. 
+General Relativity required heavy mathematical formulation to derive and describe various tensors attributing to various features essential for cogent description of a arbitrary space-time. We would describe the various quantities currently supported by this module while maintaining brevity. Each quantity has its own class, even scalars, which are treated as 0\textsuperscript{th} order tensors.
+
+\subsubsection{BaseRelativityTensor}
+This is a base class from which other tensors are derived. The user can use this class to create his/her own tensor while using the various in-built functions provided by this class. The class also maintains the indicial configuration of the tensor(contravariant and co-variant indices), calculates the free variables used in describing the tensor other than those which depicts the axis of space-time itself (e.g. t,x,y,z). The class has a function to convert the symbolic tensorial quantities into functions where actual numerical values can be substitued.
+
+This class along with its parent class contains the following functions/properties.
+\begin{itemize}
+\item \texttt{order} (Property) : Returns the order of the tensor. 
+\item \texttt{config} (Property) : Returns the arrangement of contravariant(upper)/covariant(lower) indices of the tensor. For example, 'ulll'.
+\item \texttt{parent\_metric} (Property) : Returns the metric tensor of the space-time associated with the tensor, if present. Else returns \texttt{None}.
+\item \texttt{tensor} (Function) : Returns the tensorial quantity contained within the class instance.
+\item \texttt{subs} (Function) : Returns a new tensor upon substitution of current variables with new variables/values.
+\item \texttt{simplify} (Function) : Returns a tensor contain simplified expressions from the current tensor.
+\item \texttt{symbols} (Function) : Returns the symbols denoting each axis of the space-time.
+\item \texttt{tensor\_lambdify} (Function) : Returns lambdified function of symbolic tensors. This means that the returned functions can accept numerical values and return numerical quantities.
+\end{itemize}
+
+\subsubsection{MetricTensor}
+Metric Tensor describes the differential length elements required to measure distance in a curved(also applies to flat) space-time. It is a second order tensor and is fundamental to describe any space-time geometry. The \texttt{MetricTensor} class, being inherited from \texttt{BaseRelativityTensor}, inherits all its functions and also have some functions and constraints of its own. For example, metric tensor is bound to be a second order tensor. 
+
+The defined class functions are :
+\begin{itemize}
+\item \texttt{change\_config} : returns a different instance of the same class with different index (contravariant or covariant) configuration. 
+\item \texttt{inv} : returns inverse of the metric
+\end{itemize}
+
+\subsubsection{ChristoffelSymbols}
+Although Christoffel Symbols are belong to class of pseudo-tensors, it is inherited from \texttt{BaseRelativityTensor} to maintain homogenity within the module. Bein inherited from \texttt{BaseRelativityTensor}, it already supports the functions of its parent class and imposes some restrictions of its own, such as order of the tensor should be 3.
+
+Instance of the class can be made by directly passing a 3\textsuperscript{rd} order tensor or can be obtained using the following classmethods
+\begin{itemize}
+\item \texttt{from\_metric} : Calculates christoffel symbols from a given instance of \texttt{MetricTensor} class.
+\end{itemize}
+
+The defined class function(s) are : 
+\begin{itemize}
+\item \texttt{change\_config} : returns a different instance of the same class with different index (contravariant or covariant) configuration. 
+\end{itemize}
+
+\subsubsection{RiemannCurvatureTensor}
+This quantity is the most extensive measure of curvature of a sapce-time. It is inherited from \texttt{BaseRelativityTensor} and supports all the functions of its parent class. 
+
+Instance of the class can be made by directly passing a 4\textsuperscript{th} order tensor or can be obtained using the following classmethods
+\begin{itemize}
+\item \texttt{from\_metric} : Calculates Riemann Tensor from a given instance of \texttt{MetricTensor} class.
+\item \texttt{from\_christoffels} : Calculates Riemann Tensor from a given instance of \texttt{ChristoffelSymbols} class.
+\end{itemize}
+
+The defined class function(s) are : 
+\begin{itemize}
+\item \texttt{change\_config} : returns a different instance of the same class with different index (contravariant or covariant) configuration. 
+\end{itemize}
+
+\subsubsection{RicciTensor}
+This tensor is used in solving Eintein's  equation and basically contraction of Riemann Curvature Tensor.  It is inherited from \texttt{BaseRelativityTensor} and supports all the functions of its parent class. 
+
+Instance of the class can be made by directly passing a 2\textsuperscript{nd} order tensor or can be obtained using the following classmethods
+\begin{itemize}
+\item \texttt{from\_metric} : Calculates Ricci Tensor from a given instance of \texttt{MetricTensor} class.
+\item \texttt{from\_christoffels} : Calculates Ricci Tensor from a given instance of \texttt{ChristoffelSymbols} class.
+\item \texttt{from\_riemann} : Calculates Ricci Tensor from a given instance of \texttt{RiemannCurvatureTensor} class.
+\end{itemize}
+
+The defined class function(s) are : 
+\begin{itemize}
+\item \texttt{change\_config} : returns a different instance of the same class with different index (contravariant or covariant) configuration. 
+\end{itemize}
+
+\subsubsection{RicciScalar}
+It is a scalar quantity obtained by contracting a given Ricci Tensor. It is inherited from \texttt{BaseRelativityTensor} and supports all the functions of its parent class. Being a scalar quantity, it does not support \texttt{change\_config} unlike other tensors as discussed above.
+
+Instance of the class can be made by directly passing a symbolic expression or can be obtained using the following classmethods
+\begin{itemize}
+\item \texttt{from\_metric} : Calculates Ricci Scalar from a given instance of \texttt{MetricTensor} class.
+\item \texttt{from\_christoffels} : Calculates Ricci Scalar from a given instance of \texttt{ChristoffelSymbols} class.
+\item \texttt{from\_riemann} : Calculates Ricci Scalar from a given instance of \texttt{RiemannCurvatureTensor} class.
+\item \texttt{from\_riccitensor} : Calculates Ricci Scalar from a given instance of \texttt{RicciTensor} class.
+\end{itemize}
+
+The defined class properties are : 
+\begin{itemize}
+\item \texttt{expr} : returns the scalar symbolic expression contained in the class. 
+\end{itemize}
+
+\subsubsection{Other Defined Quantities}
+As the library is in heavy development, new quantities are being added as and when required. Some other quantities currently supported are listed below. The quantities are all inherited from \texttt{BaseRelativityTensor}, and a similar API (same as that of discussed above) has been implemented to maintain compatiblity and homegenity. The class names denote usual quantities relevant to General Relativity.
+
+\begin{itemize}
+\item \texttt{EinsteinTensor}
+\item \texttt{StressEnergyMomentumTensor}
+\item \texttt{WeylTensor}
+\item \texttt{SchoutenTensor}
+\end{itemize}
+
+Further, various constants like $c$(speed of light), $G$(Gravitational constant) are defined in their symbolic forms, for use within the symbolic module.
+
 \subsection{hypersurface}
 This module provides with basic computational functions which are essential for modelling the space-like hypersurface for any spacetime geometry. Currently module has implementation for Schwarzschild geometry with conversion functions from Schwarzschild coordinates to 3-D spherical coordinates and some plotting utilities. The whole module is expected to extend for providing a superclass for implementations related to gravitationl lensing simulations and numerical calculations of null geodesics on hypersurfaces and deviation angles for systems which are relevant to relativistic astrophysical problems. A small code snippet for plotting the hypersurface is as follows:
 %\begin{minted}[linenos]{python}
