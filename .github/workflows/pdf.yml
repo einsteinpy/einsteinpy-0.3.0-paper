@@ -1,0 +1,2 @@
+- name: Github Actions for build LaTeX and release pdf
+  uses: MaineK00n/latex-actions@v0.0.1
