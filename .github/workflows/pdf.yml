@@ -1,2 +1,2 @@
-- name: Github Actions for build LaTeX and release pdf
-  uses: MaineK00n/latex-actions@v0.0.1
+- name: paper-maker
+  uses: andycasey/paper-maker@0.10
