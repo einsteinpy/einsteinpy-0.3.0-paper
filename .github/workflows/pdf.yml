@@ -20,7 +20,6 @@ jobs:
                              texlive-fonts-extra
     - name: Build paper
       run: |
-        cd ${MANUSCRIPT_PATH%/*}
         ${LATEX} ${MANUSCRIPT_PATH##*/}.tex
         ${BIBTEX} ${MANUSCRIPT_PATH##*/}.aux
         ${LATEX} ${MANUSCRIPT_PATH##*/}.tex
@@ -29,7 +28,6 @@ jobs:
       run: |
         git checkout --orphan ${GITHUB_REF##*/}-pdf
         git rm -rf .github/
-        cd ${MANUSCRIPT_PATH%/*}
         git rm -rf . 
         git add -f ${MANUSCRIPT_PATH##*/}.pdf
         git -c user.name='paper-maker' -c user.email='paper-maker' commit -m "update pdf"
