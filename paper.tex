@@ -26,6 +26,8 @@
 \documentclass{aastex63}
 \usepackage{amsmath}
 \usepackage[utf8]{inputenc}
+\usepackage{listings}  % for code in latex
+\usepackage{color}
 
 %% The default is a single spaced, 10 point font, single spaced article.
 %% There are 5 other style options available via an optional argument. They
@@ -93,6 +95,7 @@
 \newcommand{\vdag}{(v)^\dagger}
 \newcommand\aastex{AAS\TeX}
 \newcommand\latex{La\TeX}
+
 
 %% Reintroduced the \received and \accepted commands from AASTeX v5.2
 \received{June 1, 2019}
@@ -332,7 +335,7 @@ EinsteinPy only supports the latest bleeding-edge Python, Numpy and Astropy vers
 
 
 
-\section{The EinsteinPy Core Package}
+\section{The EinsteinPy Core Package} \label{sec:CORE}
 This section explains in detail, the modules available within EinsteinPy core pacakge, their API and the purpose they serve.
 \subsection{METRIC}
 This module captures all the geometric and causal structure of specific spacetimes, and being able to calculate trajectories in a given space-time. 
@@ -343,7 +346,7 @@ Karl Schwarzchild pioneered the analysis of the relation between the size of bla
 The metric equation corrosponding to a space-time centred around a body in the above described conditions is given by,
 
 \begin{align}
-& ds^2 = -d\tau ^2 = - (1 - \frac{r_s}{r})c^2 dt^2  + \frac{1}{(1 - \frac{r_s}{r})}dr^2 + r^2 d\theta ^2 + r^2 sin^2 \theta d\phi ^2
+& ds^2 = -c^2 d\tau ^2 = - (1 - \frac{r_s}{r})c^2 dt^2  + \frac{1}{(1 - \frac{r_s}{r})}dr^2 + r^2 d\theta ^2 + r^2 sin^2 \theta d\phi ^2
 \end{align}
 
 The same equation can be written in a tensorial form as follows,
@@ -361,6 +364,64 @@ r_s = \frac{2GM}{c^2}
 \end{gather}
 
 $G$, $M$, and $c$ are gravitational constant, mass of the body and speed of light in vacuum respectively.
+
+Schwarzschild Radius is a limit below which the degree of space-time curvature causes the partcle to undergo irreversible gravitational collapse wherein the partcle would need a speed greater than speed of light ot escape singularity.
+
+As $r \to \infty$, the metric defined above starts to approximate flat Minkowski space-time, thus showing that Schwarzschild geometry is asymptotically flat. 
+
+If supplied with initial position and velocity of a particle with negligible mass(in comparision to the central body), we can obtain the geodesics of the particle for a given range of proper time $\tau$, as it boils down to a set of eight differential equations numerically solvable by a class of Runge-Kutta methods.
+
+The file \textbf{schwarzschild.py} contains the class \textit{Schwarzschild} for defining Schwarzschild geometry methods.
+
+Here is a working code describing the motion of particle revolving around a black hole of mass approximately equal to mass of the Earth. As the trajectory starts from a mere $130m$ from the black hole, we obtain some interesting observations.
+
+\begin{lstlisting}[language=Python, caption=Importing the required modules]
+>>> import numpy as np
+>>> import astropy.units as u
+>>> from einsteinpy.plotting import GeodesicPlotter
+>>> from einsteinpy.coordinates import SphericalDifferential
+>>> from einsteinpy.bodies import Body
+>>> from einsteinpy.geodesic import Geodesic
+>>> from einsteinpy.metric import Schwarzschild
+\end{lstlisting}
+
+\begin{lstlisting}[language=Python, caption=Defining the attractor and the particle and calculating geodesics]
+>>> Attractor = Body(name="BH", mass=6e24 * u.kg)
+>>> init_conditions = SphericalDifferential(130*u.m, np.pi/2*u.rad, -np.pi/8*u.rad,
+...                                         0*u.m/u.s, 0*u.rad/u.s, 1900*u.rad/u.s)
+>>> Particle = Body(differential=init_conditions, parent=Attractor)
+>>> geodesic = Geodesic(body=Particle, time=0 * u.s, end_lambda=0.00205, step_size=5e-8)
+>>> goedesic.trajectory
+array([[ 0.00000000e+00,  1.20104339e+02, -4.97488462e+01, ...,
+         9.45228078e+04,  2.28198245e+05,  0.00000000e+00],
+       [ 3.99986427e-08,  1.20108103e+02, -4.97397110e+01, ...,
+         9.36472607e+04,  2.28560869e+05, -5.80280784e-14],
+       ...,
+       [ 2.04962579e-03,  1.04114904e+02,  1.08255773e+01, ...,
+        -1.23245830e+06,  1.80261847e+05, -9.67931265e-09],
+       [ 2.05002578e-03,  1.03619005e+02,  1.08973776e+01, ...,
+        -1.24706334e+06,  1.78734562e+05, -9.79337222e-09]])
+>>> geodesic.trajectory.shape
+(6567, 8)
+\end{lstlisting}
+We can see that for each timestep, we obtain eight values : $t$, $r$, $\theta$, $\phi$, $v_t$, $v_r$, $v_\theta$ and $v_\phi$ corrosponding to coordinate time, radial distance from the centre, polar angle, azimuth angle and their respective velocities w.r.t proper time $\tau$.
+
+Further, we plot the trajectory in 2D for vizualization purposes.
+\begin{lstlisting}[language=Python, caption=Plotting the trajectory]
+>>> obj = GeodesicPlotter()
+>>> obj.plot(geodesic)
+>>> obj.show()
+\end{lstlisting}
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.7]{images/perihelion_cropped.png}
+	%\centerline{\includegraphics{ftcbuild2.pdf}}
+	\caption{Plot obtained from the above code showing the phenomenon of perihelion advance}
+	\label{fig:schwarzschild}
+\end{figure}
+
+We observe the phenomenon of perihelion advance of a particle around a heavy body due to spacetime curavture. The orbit would have been purely eliptical if plotted in accordance with Newtonian Mechanics, however, the curvature of space-time around the heavy mass shifts the orbit with each revolution. In practicality, this phenomenon is not so pronounced as no particle approaches a heavy mass this closely. For instance, Mercury advances its perihelion at a rate of $42.98\pm 0.04$ arcsec/century.
 
 \subsubsection{Kerr Metric}
 \subsubsection{Kerr-Newman Metric}
