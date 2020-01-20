@@ -337,11 +337,11 @@ EinsteinPy only supports the latest bleeding-edge Python, Numpy and Astropy vers
 
 \section{The EinsteinPy Core Package} \label{sec:CORE}
 This section explains in detail, the modules available within EinsteinPy core pacakge, their API and the purpose they serve.
-\subsection{METRIC}
+\subsection{METRIC} \label{subsec:metric}
 This module captures all the geometric and causal structure of specific spacetimes, and being able to calculate trajectories in a given space-time. 
 The module derives its name from Metric Tensor, a tensorial quantity used to describe differential lengths, especially in a curved space-time. 
 However, this module serves more than its usual definition and ultimately leads us to obtain geodesics of particles in a spacetime with high curvature, where notions of newtonian physics fail.
-\subsubsection{Schwarzschild Metric}
+\subsubsection{Schwarzschild Metric} \label{subsubsec:sch}
 Karl Schwarzchild pioneered the analysis of the relation between the size of black hole and its mass and this work paved the way for the first exact solution of Einstein's Field Equation under the limited case of single spherical non-rotating, non-charged body. 
 The metric equation corrosponding to a space-time centred around a body in the above described conditions is given by,
 
@@ -424,7 +424,7 @@ Further, we plot the trajectory in 2D for vizualization purposes.
 
 We observe the phenomenon of perihelion advance of a particle around a heavy body due to spacetime curavture. The orbit would have been purely eliptical if plotted in accordance with Newtonian Mechanics, however, the curvature of space-time around the heavy mass shifts the orbit with each revolution. In practicality, this phenomenon is not so pronounced as no particle approaches a heavy mass this closely. For instance, Mercury advances its perihelion at a rate of $42.98\pm 0.04$ arcsec/century.
 
-\subsubsection{Kerr Metric}
+\subsubsection{Kerr Metric}\label{subsubsec:kerr}
 Kerr metric is a further generalization of Schwarzschild metric and a specific case of Kerr-Newman geometry. A spacetime is defined as a "Kerr" spacetime as and when the massive central body posseses an angular momentum. The corresponding metric equation which defines the space-time is,
 
 \begin{gather}
@@ -435,12 +435,12 @@ ds^2 = g_{\mu \nu} dx^\mu dx^\nu
 
 where,
 \begin{gather}
-a = \frac{J}{Mc} \\
-\Sigma = r^2 + a^2 cos^2 \theta \\
-\Delta  = r^2 - r_s r + a^2
+a = \frac{J}{Mc}, \nonumber \\
+\Sigma = r^2 + a^2 cos^2, \nonumber \theta \\
+\Delta  = r^2 - r_s r + a^2 \nonumber
 \end{gather}
 
-$J$ is the angular momentum of the body and all the other symbols hold their usual meanings as discussed in Schwarzschild Metric. The coordinate system used to describe the metric is Boyer-Lindquist coordinate system.
+$J$ is the angular momentum of the body and all the other symbols hold their usual meanings as discussed in \ref{subsubsec:sch}. The coordinate system used to describe the metric is Boyer-Lindquist coordinate system.
 
 The file \textbf{kerr.py} contains the class \textit{Kerr} for defining Schwarzschild geometry methods.
 
@@ -471,7 +471,23 @@ As a rotating black hole drags the space-time around it, a freely falling object
 \end{figure}
 
 
-\subsubsection{Kerr-Newman Metric}
+\subsubsection{Kerr-Newman Metric}\label{subsubsec:kerrnewman}
+Kerr-Newman metric presents the most general case within single-body vacuum solutions of Einstein Field Equation. It generalizes all the quantities used to describe a black hole, as affirmed by "no hair" theoram, i.e. Charge $Q$, Angular Momentum $J$ and Mass $M$. The metric equation is given by,
+
+\begin{gather}
+-ds^2 = c^2 d\tau^2 = -(\frac{dr^2}{\Delta}+d\theta^2)\rho^2 + (c dt - a sin^2 \theta d\phi)^2 \frac{\Delta}{\rho^2} - ((r^2 + a^2)d\phi - ac dt)^2 \frac{sin^2 \theta}{\rho^2}
+\end{gather}
+
+where,
+
+\begin{gather}
+a = \frac{J}{Mc}, \nonumber \\
+\Sigma = r^2 + a^2 cos^2 \theta , \nonumber  \\
+\Delta  = r^2 - r_s r + a^2 + r_Q ^ 2, \nonumber \\
+r_Q ^ 2 = \frac{Q^2 G}{4\pi\epsilon_0 c^4} \nonumber
+\end{gather}
+
+All the other symbols convey their usual meanings, as discussed in the previous two sections \ref{subsubsec:sch} and \ref{subsubsec:kerr}. For the sake of brevity, we would not go into the specifics of this class as the classes within \textit{Metric} module share very similar APIs as inferred in \ref{subsubsec:kerr}.
 
 \subsection{COORDINATES}
 \subsection{SYMBOLIC}
