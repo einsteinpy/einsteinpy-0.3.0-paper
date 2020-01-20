@@ -390,8 +390,9 @@ Here is a working code describing the motion of particle revolving around a blac
 >>> init_conditions = SphericalDifferential(130*u.m, np.pi/2*u.rad, -np.pi/8*u.rad,
 ...                                         0*u.m/u.s, 0*u.rad/u.s, 1900*u.rad/u.s)
 >>> Particle = Body(differential=init_conditions, parent=Attractor)
->>> geodesic = Geodesic(body=Particle, time=0 * u.s, end_lambda=0.00205, step_size=5e-8)
->>> goedesic.trajectory
+>>> geodesic = Geodesic(body=Particle, time=0 * u.s, end_lambda=0.00205, step_size=5e-8,
+...                     metric=Schwarzschild)
+>>> geodesic.trajectory
 array([[ 0.00000000e+00,  1.20104339e+02, -4.97488462e+01, ...,
          9.45228078e+04,  2.28198245e+05,  0.00000000e+00],
        [ 3.99986427e-08,  1.20108103e+02, -4.97397110e+01, ...,
@@ -424,6 +425,52 @@ Further, we plot the trajectory in 2D for vizualization purposes.
 We observe the phenomenon of perihelion advance of a particle around a heavy body due to spacetime curavture. The orbit would have been purely eliptical if plotted in accordance with Newtonian Mechanics, however, the curvature of space-time around the heavy mass shifts the orbit with each revolution. In practicality, this phenomenon is not so pronounced as no particle approaches a heavy mass this closely. For instance, Mercury advances its perihelion at a rate of $42.98\pm 0.04$ arcsec/century.
 
 \subsubsection{Kerr Metric}
+Kerr metric is a further generalization of Schwarzschild metric and a specific case of Kerr-Newman geometry. A spacetime is defined as a "Kerr" spacetime as and when the massive central body posseses an angular momentum. The corresponding metric equation which defines the space-time is,
+
+\begin{gather}
+g_{\mu \nu} = \begin{bmatrix} - (1 - \frac{r_s r}{\Sigma})c^2 & 0 & 0 & -\frac{r_s r a sin^2 \theta}{\Sigma}c \\ 0 & \frac{\Sigma}{\Delta} & 0 & 0 \\ 0 & 0 & \Sigma & 0 \\ -\frac{r_s r a sin^2 \theta}{\Sigma}c & 0 & 0 &  (r^2 + a^2 + \frac{r_s r a^2}{\Sigma}sin^2 \theta) sin^2 \theta \end{bmatrix} \\ 
+\nonumber \\
+ds^2 = g_{\mu \nu} dx^\mu dx^\nu
+\end{gather}
+
+where,
+\begin{gather}
+a = \frac{J}{Mc} \\
+\Sigma = r^2 + a^2 cos^2 \theta \\
+\Delta  = r^2 - r_s r + a^2
+\end{gather}
+
+$J$ is the angular momentum of the body and all the other symbols hold their usual meanings as discussed in Schwarzschild Metric. The coordinate system used to describe the metric is Boyer-Lindquist coordinate system.
+
+The file \textbf{kerr.py} contains the class \textit{Kerr} for defining Schwarzschild geometry methods.
+
+APIs for \textit{Schwarzschild}, \textit{Kerr} and \textit{KerrNewman} are consistent and code structure remains same for the sake for clarity and intuitiveness. For example,
+
+\begin{lstlisting}[language=Python, caption=Defining the Kerr Body and the particle and calculating geodesics]
+>>> a = 0.3 * u.m
+>>> Attractor = Body(name="BH", mass=1.989e30 * u.kg, a=a)
+>>> init_conditions = BoyerLindquistDifferential(49.95e5 * u.km, np.pi / 2 * u.rad, 
+...                                              np.pi * u.rad, 0 * u.km / u.s, 
+...                                              0 * u.rad / u.s, 0 * u.rad / u.s,
+...                                              a)
+>>> Particle = Body(differential=init_conditions, parent=Attractor)
+>>> geodesic = Geodesic(body=Particle, time=0 * u.s, end_lambda=33932.90,
+...                     step_size=1.2, metric=Kerr)
+\end{lstlisting}
+
+As evident from the code, API across different classes are made to be as homegenous as possible.
+
+As a rotating black hole drags the space-time around it, a freely falling object acquires a angular velocity around the coordinate centre, i.e centre of the black hole. This effect is evident from the plot obatined from the above geodesics, in the same way as obtained one in the Schwarzschild example.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.1]{images/blank.jpg} %replace this when the actual plot becomes available
+	%\centerline{\includegraphics{ftcbuild2.pdf}}
+	\caption{Plot obtained from the above geodesics showing the phenomenon of frame dragging}
+	\label{fig:kerr}
+\end{figure}
+
+
 \subsubsection{Kerr-Newman Metric}
 
 \subsection{COORDINATES}
