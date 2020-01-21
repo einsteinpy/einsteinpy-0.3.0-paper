@@ -28,6 +28,7 @@
 \usepackage[utf8]{inputenc}
 \usepackage{listings}  % for code in latex
 \usepackage{color}
+% \usepackage{caption}
 
 %% The default is a single spaced, 10 point font, single spaced article.
 %% There are 5 other style options available via an optional argument. They
@@ -302,7 +303,9 @@ The Body data type helps define the central black-hole or the heavy massed objec
 The Body data type helps define the central black-hole or the heavy massed object and the objects revolving around it. A new body can be defined by some of the very basic constraints:
 
 \subsection{BaseRelativityTensor} \label{subsec:BaseRelativityTensor}
-The Body data type helps define the central black-hole or the heavy massed object and the objects revolving around it. A new body can be defined by some of the very basic constraints:
+This is a base class from which other tensors in \textit{symbolic} module are derived. The user can use this class to create his/her own tensor while using the various in-built functions provided by this class. The class also maintains the indicial configuration of the tensor(contravariant and covariant indices), calculates the free variables used in describing the tensor other than those which depicts the axis of space-time itself (e.g. $t, x, y, z$). The class has a function to convert the symbolic tensorial quantities into functions where actual numerical values can be substitued.
+
+This class along with its parent class \textit{Tensor} have the following functions/properties,
 \begin{itemize}
 \item \texttt{order} (Property) : Returns the order of the tensor. 
 \item \texttt{config} (Property) : Returns the arrangement of contravariant(upper)/covariant(lower) indices of the tensor. For example, 'ulll'.
@@ -312,6 +315,7 @@ The Body data type helps define the central black-hole or the heavy massed objec
 \item \texttt{simplify} (Function) : Returns a tensor contain simplified expressions from the current tensor.
 \item \texttt{symbols} (Function) : Returns the symbols denoting each axis of the space-time.
 \item \texttt{tensor\_lambdify} (Function) : Returns lambdified function of symbolic tensors. This means that the returned functions can accept numerical values and return numerical quantities.
+\item \texttt{lorentz\_transform} (Function) : Returns a lorentz-transformed tensor when supplied with a transformation matrix. This function also considers the contravariance and covariance of tensors during transformation.
 \end{itemize}
 
 
@@ -335,13 +339,13 @@ EinsteinPy only supports the latest bleeding-edge Python, Numpy and Astropy vers
 
 
 
-\section{The EinsteinPy Core Package} \label{sec:CORE}
+\section{The EinsteinPy Core Package} \label{sec:core}
 This section explains in detail, the modules available within EinsteinPy core pacakge, their API and the purpose they serve.
-\subsection{METRIC}
+\subsection{METRIC} \label{subsec:metric}
 This module captures all the geometric and causal structure of specific spacetimes, and being able to calculate trajectories in a given space-time. 
 The module derives its name from Metric Tensor, a tensorial quantity used to describe differential lengths, especially in a curved space-time. 
 However, this module serves more than its usual definition and ultimately leads us to obtain geodesics of particles in a spacetime with high curvature, where notions of newtonian physics fail.
-\subsubsection{Schwarzschild Metric}
+\subsubsection{Schwarzschild Metric} \label{subsubsec:sch}
 Karl Schwarzchild pioneered the analysis of the relation between the size of black hole and its mass and this work paved the way for the first exact solution of Einstein's Field Equation under the limited case of single spherical non-rotating, non-charged body. 
 The metric equation corrosponding to a space-time centred around a body in the above described conditions is given by,
 
@@ -424,7 +428,7 @@ Further, we plot the trajectory in 2D for vizualization purposes.
 
 We observe the phenomenon of perihelion advance of a particle around a heavy body due to spacetime curavture. The orbit would have been purely eliptical if plotted in accordance with Newtonian Mechanics, however, the curvature of space-time around the heavy mass shifts the orbit with each revolution. In practicality, this phenomenon is not so pronounced as no particle approaches a heavy mass this closely. For instance, Mercury advances its perihelion at a rate of $42.98\pm 0.04$ arcsec/century.
 
-\subsubsection{Kerr Metric}
+\subsubsection{Kerr Metric}\label{subsubsec:kerr}
 Kerr metric is a further generalization of Schwarzschild metric and a specific case of Kerr-Newman geometry. A spacetime is defined as a "Kerr" spacetime as and when the massive central body posseses an angular momentum. The corresponding metric equation which defines the space-time is,
 
 \begin{gather}
@@ -435,12 +439,12 @@ ds^2 = g_{\mu \nu} dx^\mu dx^\nu
 
 where,
 \begin{gather}
-a = \frac{J}{Mc} \\
-\Sigma = r^2 + a^2 cos^2 \theta \\
-\Delta  = r^2 - r_s r + a^2
+a = \frac{J}{Mc}, \nonumber \\
+\Sigma = r^2 + a^2 cos^2, \nonumber \theta \\
+\Delta  = r^2 - r_s r + a^2 \nonumber
 \end{gather}
 
-$J$ is the angular momentum of the body and all the other symbols hold their usual meanings as discussed in Schwarzschild Metric. The coordinate system used to describe the metric is Boyer-Lindquist coordinate system.
+$J$ is the angular momentum of the body and all the other symbols hold their usual meanings as discussed in \ref{subsubsec:sch}. The coordinate system used to describe the metric is Boyer-Lindquist coordinate system.
 
 The file \textbf{kerr.py} contains the class \textit{Kerr} for defining Schwarzschild geometry methods.
 
@@ -471,20 +475,75 @@ As a rotating black hole drags the space-time around it, a freely falling object
 \end{figure}
 
 
-\subsubsection{Kerr-Newman Metric}
+\subsubsection{Kerr-Newman Metric}\label{subsubsec:kerrnewman}
+Kerr-Newman metric presents the most general case within single-body vacuum solutions of Einstein Field Equation. It generalizes all the quantities used to describe a black hole, as affirmed by "no hair" theoram, i.e. Charge $Q$, Angular Momentum $J$ and Mass $M$. The metric equation is given by,
+
+\begin{gather}
+-ds^2 = c^2 d\tau^2 = -(\frac{dr^2}{\Delta}+d\theta^2)\rho^2 + (c dt - a sin^2 \theta d\phi)^2 \frac{\Delta}{\rho^2} - ((r^2 + a^2)d\phi - ac dt)^2 \frac{sin^2 \theta}{\rho^2}
+\end{gather}
+
+where,
+
+\begin{gather}
+a = \frac{J}{Mc}, \nonumber \\
+\Sigma = r^2 + a^2 cos^2 \theta , \nonumber  \\
+\Delta  = r^2 - r_s r + a^2 + r_Q ^ 2, \nonumber \\
+r_Q ^ 2 = \frac{Q^2 G}{4\pi\epsilon_0 c^4} \nonumber
+\end{gather}
+
+All the other symbols convey their usual meanings, as discussed in the previous two sections \ref{subsubsec:sch} and \ref{subsubsec:kerr}. For the sake of brevity, we would not go into the specifics of this class as the classes within \textit{Metric} module share very similar APIs as inferred in \ref{subsubsec:kerr}.
 
 \subsection{COORDINATES}
 \subsection{SYMBOLIC}
+General Relativity required heavy mathematical formulation to derive and describe various tensors attributing to various features essential for cogent description of a arbitrary space-time. We would describe the various quantities currently supported by this module while maintaining brevity. Each quantity has its own class, even scalars, which are treated as 0\textsuperscript{th} order tensors.
+
+All the mathematical quantities build upon \textit{BaseRelativityTensor} as derived classes, which is discussed in detail in \ref{subsec:BaseRelativityTensor}. 
+
+\subsubsection{MetricTensor}\label{subsubsec:metric}
+Metric Tensor describes the differential length elements required to measure distance in a curved(also applies to flat) space-time. It is a second order tensor and is fundamental to describe any space-time geometry. The \textit{MetricTensor} class, being inherited from \textit{BaseRelativityTensor} (\ref{subsec:BaseRelativityTensor}) , inherits all its functions and also have some functions and constraints of its own. For example, metric tensor is bound to be a second order tensor.
+
+The defined class functions are :
+\begin{itemize}
+\item \texttt{change\_config} : returns a different instance of the same class with different index (contravariant or covariant) configuration. 
+\item \texttt{inv} : returns inverse of the metric
+\end{itemize}
+
+Also, the library maintains an ever expanding predefined metrics for direct use. Here's an code snippet for a better dive into the specificities of the class.
+
+\begin{lstlisting}[language=Python, caption=Importing a predefined metric]
+>>> from einsteinpy.symbolic.predefined import CMetric
+>>> metric = CMetric
+>>> metric.tensor()
+\end{lstlisting}
+
+\begin{center}
+$\displaystyle \left[\begin{matrix}- \frac{h{\left(y \right)}}{\left(x + y\right)^{2}} & 0 & 0 & 0\\0 & \frac{1}{\left(x + y\right)^{2} f{\left(x \right)}} & 0 & 0\\0 & 0 & \frac{1}{\left(x + y\right)^{2} h{\left(y \right)}} & 0\\0 & 0 & 0 & \frac{f{\left(x \right)}}{\left(x + y\right)^{2}}\end{matrix}\right]$
+\end{center}
+
+\begin{lstlisting}[language=Python, caption=Displaying the contravarint configuration of metric]
+>>> metric.change_config("uu").tensor()
+\end{lstlisting}
+
+\begin{center}
+ $\displaystyle \left[\begin{matrix}- \frac{\left(x + y\right)^{2}}{h{\left(y \right)}} & 0 & 0 & 0\\0 & \left(x + y\right)^{2} f{\left(x \right)} & 0 & 0\\0 & 0 & \left(x + y\right)^{2} h{\left(y \right)} & 0\\0 & 0 & 0 & \frac{\left(x + y\right)^{2}}{f{\left(x \right)}}\end{matrix}\right]$ \\
+\end{center}
+
+\subsubsection{ChristoffelSymbols}\label{subsubsec:chl}
+\subsubsection{RiemannCurvatureTensor}\label{subsubsec:riemann}
+\subsubsection{RicciTensor}\label{subsubsec:riccitensor}
+\subsubsection{RicciScalar}\label{subsubsec:ricciscalar}
+\subsubsection{Other Defined Quantities}\label{subsubsec:other}
+
 \subsection{HYPERSURFACE}
 \subsection{PLOTTING}
 
-\section{INFRASTRUCTURE} \label{sec:INFRASTRUCTURE}
-\subsection{ Testing} \label{subsec: Testing}
+\section{INFRASTRUCTURE} \label{sec:infra}
+\subsection{ Testing} \label{subsec:testing}
 The EinsteinPy Project maintains a very high bar in accepting changes and introducing new features. Every patch of code that is accepted in the codebase through any pull request has to be well tested using some unit tests unless given an exception after discussion with both the lead developers. Currently the coverage of unit tests, which means the total fraction of codebase run by at least one unit test is 94\% and we hope to improve it in the future. The 100\% code coverage for this software at this level is not possible because of lack of accurate data to test the code against. We deliberately leave some parts of the codebase out of the testing loop because testing those modules is not possible with the current knowledge level and expertise. However, 94\% code coverage is good enough when we consider other packages in scientific Python community who face the similar problem.  
 
 The test suite can be run manually as well as it runs in an automated fashion on every commit as well as pull request to maintain the code standards, and make it easier for contributors to understand the implications and impact of their changes. The EinsteinPy Project uses many continuous-integration services which provide services to create automated pipelines for code inspection, unit testing, coverage publishing etc. All the contributions trigger these free services (Codecov, CircleCI, Appveyor, GitHub Actions, Codefactor, Codeclimate, Hound, WIP) which are integrated with GitHub repository. All the pull requests are checked for code linting by a pep8speaks bot, which suggests the lines of code which violate the PEP8 standard to the contributor in a human readable way. All these services run on three types of operating systems (Windows, MacOS and Linux). The unit tests run on various versions of Python. They test the documentation builds, test coverage, check whether the pull request author has indicated that it is a work in progress (WIP).They also run several code linting checks which further triggers the unit test build.
 
-\subsection{ Documentation and gallery} \label{subsec:  Documentation and gallery}
+\subsection{ Documentation and gallery} \label{subsec:doc}
 
 \section{COMMUNITY} \label{sec:COMMUNITY}
 EinsteinPy is being developed as an open source community inside the wide and diverse general scientific python community. Our code is freely available, and we have seen a lot of people contributing and joining us since over the past year.
