@@ -28,6 +28,7 @@
 \usepackage[utf8]{inputenc}
 \usepackage{listings}  % for code in latex
 \usepackage{color}
+\usepackage{hyperref}
 % \usepackage{caption}
 
 %% The default is a single spaced, 10 point font, single spaced article.
@@ -495,12 +496,12 @@ All the other symbols convey their usual meanings, as discussed in the previous 
 
 \subsection{COORDINATES}
 \subsection{SYMBOLIC}
-General Relativity required heavy mathematical formulation to derive and describe various tensors attributing to various features essential for cogent description of a arbitrary space-time. We would describe the various quantities currently supported by this module while maintaining brevity. Each quantity has its own class, even scalars, which are treated as 0\textsuperscript{th} order tensors.
+General Relativity required heavy mathematical formulation to derive and describe various tensors attributing to various features essential for cogent description of an arbitrary space-time. We would describe the various quantities currently supported by this module while maintaining brevity. Each quantity has its own class, even scalars, which are treated as 0\textsuperscript{th} order tensors.
 
-All the mathematical quantities build upon \textit{BaseRelativityTensor} as derived classes, which is discussed in detail in \ref{subsec:BaseRelativityTensor}. 
+All the mathematical quantities build upon \hyperref[subsec:BaseRelativityTensor]{\textit{BaseRelativityTensor}} as derived classes, which is discussed in detail in \ref{subsec:BaseRelativityTensor}. 
 
 \subsubsection{MetricTensor}\label{subsubsec:metric}
-Metric Tensor describes the differential length elements required to measure distance in a curved(also applies to flat) space-time. It is a second order tensor and is fundamental to describe any space-time geometry. The \textit{MetricTensor} class, being inherited from \textit{BaseRelativityTensor} (\ref{subsec:BaseRelativityTensor}) , inherits all its functions and also have some functions and constraints of its own. For example, metric tensor is bound to be a second order tensor.
+Metric Tensor describes the differential length elements required to measure distance in a curved(also applies to flat) space-time. It is a second order tensor and is fundamental to describe any space-time geometry. The \textit{MetricTensor} class, being inherited from \hyperref[subsec:BaseRelativityTensor]{\textit{BaseRelativityTensor}} , inherits all its functions and also have some functions and constraints of its own. For example, metric tensor is bound to be a second order tensor.
 
 The defined class functions are :
 \begin{itemize}
@@ -528,11 +529,118 @@ $\displaystyle \left[\begin{matrix}- \frac{h{\left(y \right)}}{\left(x + y\right
  $\displaystyle \left[\begin{matrix}- \frac{\left(x + y\right)^{2}}{h{\left(y \right)}} & 0 & 0 & 0\\0 & \left(x + y\right)^{2} f{\left(x \right)} & 0 & 0\\0 & 0 & \left(x + y\right)^{2} h{\left(y \right)} & 0\\0 & 0 & 0 & \frac{\left(x + y\right)^{2}}{f{\left(x \right)}}\end{matrix}\right]$ \\
 \end{center}
 
+
 \subsubsection{ChristoffelSymbols}\label{subsubsec:chl}
+
+Although Christoffel Symbols are belong to class of pseudo-tensors, it is inherited from \hyperref[subsec:BaseRelativityTensor]{\textit{BaseRelativityTensor}} to maintain homogenity within the module. Being inherited from  \hyperref[subsec:BaseRelativityTensor]{\textit{BaseRelativityTensor}}, it already supports the functions of its parent class and imposes some restrictions of its own, such as order of the tensor should be 3.
+
+Instance of the class can be made by directly passing a 3\textsuperscript{rd} order tensor or can be obtained using the following classmethods,
+\begin{itemize}
+\item \texttt{from\_metric} : Calculates christoffel symbols from a given instance of \hyperref[subsubsec:metric]{\textit{MetricTensor}} class.
+\end{itemize}
+
+The defined class function(s) are : 
+\begin{itemize}
+\item \texttt{change\_config} : returns a different instance of the same class with different index (contravariant or covariant) configuration. 
+\end{itemize}
+
+
 \subsubsection{RiemannCurvatureTensor}\label{subsubsec:riemann}
+
+This quantity is the most extensive measure of curvature of a sapce-time. It is inherited from \hyperref[subsec:BaseRelativityTensor]{\textit{BaseRelativityTensor}} and supports all the functions of its parent class. 
+
+Instance of the class can be made by directly passing a 4\textsuperscript{th} order tensor or can be obtained using the following classmethods
+\begin{itemize}
+\item \texttt{from\_metric} : Calculates Riemann Tensor from a given instance of \hyperref[subsubsec:metric]{\textit{MetricTensor}} class.
+\item \texttt{from\_christoffels} : Calculates Riemann Tensor from a given instance of \hyperref[subsubsec:chl]{\textit{ChristoffelSymbols}} class.
+\end{itemize}
+
+The defined class function(s) are : 
+\begin{itemize}
+\item \texttt{change\_config} : returns a different instance of the same class with different index (contravariant or covariant) configuration. 
+\end{itemize}
+
+
 \subsubsection{RicciTensor}\label{subsubsec:riccitensor}
+
+This tensor is used in solving Eintein's  equation and basically contraction of Riemann Curvature Tensor.  It is inherited from \hyperref[subsec:BaseRelativityTensor]{\textit{BaseRelativityTensor}} and supports all the functions of its parent class. 
+
+Instance of the class can be made by directly passing a 2\textsuperscript{nd} order tensor or can be obtained using the following classmethods
+\begin{itemize}
+\item \texttt{from\_metric} : Calculates Ricci Tensor from a given instance of \hyperref[subsubsec:metric]{\textit{MetricTensor}} class.
+\item \texttt{from\_christoffels} : Calculates Ricci Tensor from a given instance of \hyperref[subsubsec:chl]{\textit{ChristoffelSymbols}} class.
+\item \texttt{from\_riemann} : Calculates Ricci Tensor from a given instance of \hyperref[subsubsec:riemann]{\textit{RiemannCurvatureTensor}} class.
+\end{itemize}
+
+The defined class function(s) are : 
+\begin{itemize}
+\item \texttt{change\_config} : returns a different instance of the same class with different index (contravariant or covariant) configuration. 
+\end{itemize}
+
+
+
 \subsubsection{RicciScalar}\label{subsubsec:ricciscalar}
+
+It is a scalar quantity obtained by contracting a given Ricci Tensor. It is inherited from \hyperref[subsec:BaseRelativityTensor]{\textit{BaseRelativityTensor}} and supports all the functions of its parent class. Being a scalar quantity, it does not support \texttt{change\_config} unlike other tensors as discussed above.
+
+Instance of the class can be made by directly passing a symbolic expression or can be obtained using the following classmethods
+\begin{itemize}
+\item \texttt{from\_metric} : Calculates Ricci Scalar from a given instance of \hyperref[subsubsec:metric]{\textit{MetricTensor}} class.
+\item \texttt{from\_christoffels} : Calculates Ricci Scalar from a given instance of \hyperref[subsubsec:chl]{\textit{ChristoffelSymbols}} class.
+\item \texttt{from\_riemann} : Calculates Ricci Scalar from a given instance of \hyperref[subsubsec:riemann]{\textit{RiemannCurvatureTensor}} class.
+\item \texttt{from\_riccitensor} : Calculates Ricci Scalar from a given instance of \hyperref[subsubsec:riccitensor]{\textit{RicciTensor}} class.
+\end{itemize}
+
+The defined class properties are : 
+\begin{itemize}
+\item \texttt{expr} : returns the scalar symbolic expression contained in the class. 
+\end{itemize}
+
+Here is a sample code snippet, using the above discussed Classes
+
+
+\begin{lstlisting}[language=Python, caption=Importing Anti De-Sitter metric]
+>>> from einsteinpy.symbolic.predefined import AntiDeSitter
+>>> from einsteinpy.symbolic import RicciTensor, RicciScalar
+>>> import sympy
+\end{lstlisting}
+
+\begin{lstlisting}[language=Python, caption=Obtaining Ricci Tensor from the metric]
+>>> RT = RicciTensor.from_metric(AntiDeSitter())
+>>> RT.tensor()
+\end{lstlisting}
+
+\begin{center}
+$\displaystyle \left[\begin{matrix}3 & 0 & 0 & 0\\0 & - 3 \cos^{2}{\left(t \right)} & 0 & 0\\0 & 0 & \left(\sin^{2}{\left(t \right)} - 1\right) \sinh^{2}{\left(\chi \right)} - 2 \cos^{2}{\left(t \right)} \sinh^{2}{\left(\chi \right)} & 0\\0 & 0 & 0 & \left(\sin^{2}{\left(t \right)} - 1\right) \sin^{2}{\left(\theta \right)} \sinh^{2}{\left(\chi \right)} - 2 \sin^{2}{\left(\theta \right)} \cos^{2}{\left(t \right)} \sinh^{2}{\left(\chi \right)}\end{matrix}\right]$
+\end{center}
+
+\begin{lstlisting}[language=Python, caption=Deriving Ricci(Curvature) Scalar from Ricci Tensor]
+>>> RS = RicciScalar.from_riccitensor(RT)
+>>> sympy.simplify(RS.expr)  # simplifying the expression
+\end{lstlisting}
+
+\begin{center}
+$\displaystyle -12$
+\end{center}
+
+In congruence to theoretical results, the code outputs a constant negetive scalar curvature for Anti De-Sitter spacetime. All the above discussed classes are called in this snippet as \hyperref[subsubsec:riccitensor]{\textit{RicciTensor}} internally calls \hyperref[subsubsec:riemann]{\textit{RiemannCurvatureTensor}}, which in turn calls \hyperref[subsubsec:chl]{\textit{ChristoffelSymbols}}.
+
+
 \subsubsection{Other Defined Quantities}\label{subsubsec:other}
+
+As the library is in heavy development, new quantities are being added as and when required. Some other quantities currently supported are listed below. The quantities are all inherited from \hyperref[subsec:BaseRelativityTensor]{\textit{BaseRelativityTensor}}, and a similar API (same as that of discussed above) has been implemented to maintain compatiblity and homegenity. The class names denote usual quantities relevant to General Relativity.
+
+\begin{itemize}
+\item \textit{EinsteinTensor}
+\item \textit{StressEnergyMomentumTensor}
+\item \textit{WeylTensor}
+\item \textit{SchoutenTensor}
+\end{itemize}
+
+
+
+
+
 
 \subsection{HYPERSURFACE}
 \subsection{PLOTTING}
