@@ -1,4 +1,3 @@
-
 %% Beginning of file 'sample63.tex'
 %%
 %% Modified 2019 June
@@ -171,7 +170,7 @@
 
 \begin{document}
 
-\title{EinsteinPy: Python for General Relativity\footnote{Released on July, 15th, 2019}}
+\title{EinsteinPy: Python for General Relativity}
 
 %% LaTeX will automatically break titles if they run longer than
 %% one line. However, you may use \\ to force a line break if
@@ -287,37 +286,39 @@ We start this paper by describing the way EinsteinPy functions followed by the m
 The EinsteinPy package provides some core data types for calculating, operating on, visualizing geodesics and black holes. There are some data types created for symbolic manipulations and calculations of relativistic tensors. The most important data types for EinsteinPy are \texttt{Body}, \texttt{Geodesic} and \texttt{BaseRelativityTensor} objects that support defining and creating new bodies, storing and calculating geodesic for bodies, and handling respectively. The main purpose of these core classes is to standardize the way calculations and visualizations are done for various kinds of heavy cosmic bodies and black holes. The classes always maintain the consistency in units of measurement wherever applicable, and create a consistent and clean API for any non-programmer to understand. The classes are designed such that it resembles the flow of physics and are  as intuitional as possible. These core classes also include a rigid architecture for data manipulation and visualizations wherever applicable. Following sections provide deep insight into the above mentioned three code data types of EinsteinPy:
 
 \subsection{Body} \label{subsec:Body}
-The Body data type helps define the central black-hole or the heavy massed object and the objects revolving around it. A new body can be defined by some of the very basic constraints:
+The Body data type helps define the central black-hole or the heavy massed object and the objects revolving around it. 
+% A new body can be defined by some of the very basic constraints:
 
-\begin{itemize}
-\item \texttt{name}: Body Name,
-\item \texttt{mass}: Mass of the body with attached astropy units 
-\item \texttt{R}: Radius of the body with attached astropy units
-\item \texttt{differential}: Complete position and velocity vector of the body in form of a Cartesian / Spherical / BoyerLindquist data class object from einsteinpy coordinates (optional)
-\item \texttt{a}: Spin factor (a) of the body for Kerr Solutions with attached astropy units (optional)
-\item \texttt{q}: Charge of the body with attached astropy units (optional)
-\item \texttt{is\_attractor}: A boolean variable concerned with if the body is to be supposed as a central attractor. (optional)
-\item \texttt{parent}: Parent body for the body, object of the same data class (optional)
-\end{itemize}
+% \begin{itemize}
+% \item \texttt{name}: Body Name,
+% \item \texttt{mass}: Mass of the body with attached astropy units 
+% \item \texttt{R}: Radius of the body with attached astropy units
+% \item \texttt{differential}: Complete position and velocity vector of the body in form of a Cartesian / Spherical / BoyerLindquist data class object from einsteinpy coordinates (optional)
+% \item \texttt{a}: Spin factor (a) of the body for Kerr Solutions with attached astropy units (optional)
+% \item \texttt{q}: Charge of the body with attached astropy units (optional)
+% \item \texttt{is\_attractor}: A boolean variable concerned with if the body is to be supposed as a central attractor. (optional)
+% \item \texttt{parent}: Parent body for the body, object of the same data class (optional)
+% \end{itemize}
 
 \subsection{Geodesic} \label{subsec:Geodesic}
-The Body data type helps define the central black-hole or the heavy massed object and the objects revolving around it. A new body can be defined by some of the very basic constraints:
+The Body data type helps define the central black-hole or the heavy massed object and the objects revolving around it. 
+% A new body can be defined by some of the very basic constraints:
 
 \subsection{BaseRelativityTensor} \label{subsec:BaseRelativityTensor}
 This is a base class from which other tensors in \textit{symbolic} module are derived. The user can use this class to create his/her own tensor while using the various in-built functions provided by this class. The class also maintains the indicial configuration of the tensor(contravariant and covariant indices), calculates the free variables used in describing the tensor other than those which depicts the axis of space-time itself (e.g. $t, x, y, z$). The class has a function to convert the symbolic tensorial quantities into functions where actual numerical values can be substitued.
 
-This class along with its parent class \textit{Tensor} have the following functions/properties,
-\begin{itemize}
-\item \texttt{order} (Property) : Returns the order of the tensor. 
-\item \texttt{config} (Property) : Returns the arrangement of contravariant(upper)/covariant(lower) indices of the tensor. For example, 'ulll'.
-\item \texttt{parent\_metric} (Property) : Returns the metric tensor of the space-time associated with the tensor, if present. Else returns \texttt{None}.
-\item \texttt{tensor} (Function) : Returns the tensorial quantity contained within the class instance.
-\item \texttt{subs} (Function) : Returns a new tensor upon substitution of current variables with new variables/values.
-\item \texttt{simplify} (Function) : Returns a tensor contain simplified expressions from the current tensor.
-\item \texttt{symbols} (Function) : Returns the symbols denoting each axis of the space-time.
-\item \texttt{tensor\_lambdify} (Function) : Returns lambdified function of symbolic tensors. This means that the returned functions can accept numerical values and return numerical quantities.
-\item \texttt{lorentz\_transform} (Function) : Returns a lorentz-transformed tensor when supplied with a transformation matrix. This function also considers the contravariance and covariance of tensors during transformation.
-\end{itemize}
+% This class along with its parent class \textit{Tensor} have the following functions/properties,
+% \begin{itemize}
+% \item \texttt{order} (Property) : Returns the order of the tensor. 
+% \item \texttt{config} (Property) : Returns the arrangement of contravariant(upper)/covariant(lower) indices of the tensor. For example, 'ulll'.
+% \item \texttt{parent\_metric} (Property) : Returns the metric tensor of the space-time associated with the tensor, if present. Else returns \texttt{None}.
+% \item \texttt{tensor} (Function) : Returns the tensorial quantity contained within the class instance.
+% \item \texttt{subs} (Function) : Returns a new tensor upon substitution of current variables with new variables/values.
+% \item \texttt{simplify} (Function) : Returns a tensor contain simplified expressions from the current tensor.
+% \item \texttt{symbols} (Function) : Returns the symbols denoting each axis of the space-time.
+% \item \texttt{tensor\_lambdify} (Function) : Returns lambdified function of symbolic tensors. This means that the returned functions can accept numerical values and return numerical quantities.
+% \item \texttt{lorentz\_transform} (Function) : Returns a lorentz-transformed tensor when supplied with a transformation matrix. This function also considers the contravariance and covariance of tensors during transformation.
+% \end{itemize}
 
 
 \section{UNIT HANDLING} \label{sec:unithandle}
@@ -354,80 +355,65 @@ The metric equation corrosponding to a space-time centred around a body in the a
 & ds^2 = -c^2 d\tau ^2 = - (1 - \frac{r_s}{r})c^2 dt^2  + \frac{1}{(1 - \frac{r_s}{r})}dr^2 + r^2 d\theta ^2 + r^2 sin^2 \theta d\phi ^2
 \end{align}
 
-The same equation can be written in a tensorial form as follows,
+%The same equation can be written in a tensorial form as follows,
 
-\begin{gather}
-g_{\mu \nu} = \begin{bmatrix} - (1 - \frac{r_s}{r})c^2 & 0 & 0 & 0 \\ 0 & \frac{1}{(1 - \frac{r_s}{r})} & 0 & 0 \\ 0 & 0 & r^2 & 0 \\ 0 & 0 & 0 &  r^2 sin^2 \theta \end{bmatrix} \\ 
-\nonumber \\
-ds^2 = g_{\mu \nu} dx^\mu dx^\nu
-\end{gather}
+%\begin{gather}
+%g_{\mu \nu} = \begin{bmatrix} - (1 - \frac{r_s}{r})c^2 & 0 & 0 & 0 \\ 0 & \frac{1}{(1 - \frac{r_s}{r})} & 0 & 0 \\ 0 & 0 & r^2 & 0 \\ 0 & 0 & 0 &  r^2 sin^2 \theta \end{bmatrix} \\ 
+%\nonumber \\
+%ds^2 = g_{\mu \nu} dx^\mu dx^\nu
+%\end{gather}
 
-where $r_s$ is the schwarzschild radius of a given heavy body and is given by the equation,
+%where $r_s$ is the schwarzschild radius of a given heavy body and is given by the equation,
 
-\begin{gather}
-r_s = \frac{2GM}{c^2}
-\end{gather}
+%\begin{gather}
+%r_s = \frac{2GM}{c^2}
+%\end{gather}
 
-$G$, $M$, and $c$ are gravitational constant, mass of the body and speed of light in vacuum respectively.
+%$G$, $M$, and $c$ are gravitational constant, mass of the body and speed of light in vacuum respectively.
 
-Schwarzschild Radius is a limit below which the degree of space-time curvature causes the partcle to undergo irreversible gravitational collapse wherein the partcle would need a speed greater than speed of light ot escape singularity.
+Schwarzschild Radius is a limit below which the degree of space-time curvature causes the particle to undergo irreversible gravitational collapse wherein the particle would need a speed greater than speed of light ot escape singularity.
 
 As $r \to \infty$, the metric defined above starts to approximate flat Minkowski space-time, thus showing that Schwarzschild geometry is asymptotically flat. 
 
 If supplied with initial position and velocity of a particle with negligible mass(in comparision to the central body), we can obtain the geodesics of the particle for a given range of proper time $\tau$, as it boils down to a set of eight differential equations numerically solvable by a class of Runge-Kutta methods.
 
-The file \textbf{schwarzschild.py} contains the class \textit{Schwarzschild} for defining Schwarzschild geometry methods.
+%Here is a working code describing the motion of particle revolving around a black hole of mass approximately equal to mass of the Earth. As the trajectory starts from a mere $130m$ from the black hole, we obtain some interesting observations.
 
-Here is a working code describing the motion of particle revolving around a black hole of mass approximately equal to mass of the Earth. As the trajectory starts from a mere $130m$ from the black hole, we obtain some interesting observations.
+% \begin{lstlisting}[language=Python, caption=Importing the required modules]
+% >>> import numpy as np
+% >>> import astropy.units as u
+% >>> from einsteinpy.plotting import GeodesicPlotter
+% >>> from einsteinpy.coordinates import SphericalDifferential
+% >>> from einsteinpy.bodies import Body
+% >>> from einsteinpy.geodesic import Geodesic
+% \end{lstlisting}
 
-\begin{lstlisting}[language=Python, caption=Importing the required modules]
->>> import numpy as np
->>> import astropy.units as u
->>> from einsteinpy.plotting import GeodesicPlotter
->>> from einsteinpy.coordinates import SphericalDifferential
->>> from einsteinpy.bodies import Body
->>> from einsteinpy.geodesic import Geodesic
->>> from einsteinpy.metric import Schwarzschild
-\end{lstlisting}
+% \begin{lstlisting}[language=Python, caption=Defining the attractor and the particle and calculating geodesics]
+% >>> Attractor = Body(name="BH", mass=6e24 * u.kg)
+% >>> init_conditions = SphericalDifferential(130*u.m, np.pi/2*u.rad, -np.pi/8*u.rad,
+% ...                                         0*u.m/u.s, 0*u.rad/u.s, 1900*u.rad/u.s)
+% >>> Particle = Body(differential=init_conditions, parent=Attractor)
+% >>> geodesic = Geodesic(body=Particle, end_lambda=0.00205, step_size=5e-8)
 
-\begin{lstlisting}[language=Python, caption=Defining the attractor and the particle and calculating geodesics]
->>> Attractor = Body(name="BH", mass=6e24 * u.kg)
->>> init_conditions = SphericalDifferential(130*u.m, np.pi/2*u.rad, -np.pi/8*u.rad,
-...                                         0*u.m/u.s, 0*u.rad/u.s, 1900*u.rad/u.s)
->>> Particle = Body(differential=init_conditions, parent=Attractor)
->>> geodesic = Geodesic(body=Particle, time=0 * u.s, end_lambda=0.00205, step_size=5e-8,
-...                     metric=Schwarzschild)
->>> geodesic.trajectory
-array([[ 0.00000000e+00,  1.20104339e+02, -4.97488462e+01, ...,
-         9.45228078e+04,  2.28198245e+05,  0.00000000e+00],
-       [ 3.99986427e-08,  1.20108103e+02, -4.97397110e+01, ...,
-         9.36472607e+04,  2.28560869e+05, -5.80280784e-14],
-       ...,
-       [ 2.04962579e-03,  1.04114904e+02,  1.08255773e+01, ...,
-        -1.23245830e+06,  1.80261847e+05, -9.67931265e-09],
-       [ 2.05002578e-03,  1.03619005e+02,  1.08973776e+01, ...,
-        -1.24706334e+06,  1.78734562e+05, -9.79337222e-09]])
->>> geodesic.trajectory.shape
-(6567, 8)
-\end{lstlisting}
-We can see that for each timestep, we obtain eight values : $t$, $r$, $\theta$, $\phi$, $v_t$, $v_r$, $v_\theta$ and $v_\phi$ corrosponding to coordinate time, radial distance from the centre, polar angle, azimuth angle and their respective velocities w.r.t proper time $\tau$.
+% \end{lstlisting}
+% We can see that for each timestep, we obtain eight values : $t$, $r$, $\theta$, $\phi$, $v_t$, $v_r$, $v_\theta$ and $v_\phi$ corrosponding to coordinate time, radial distance from the centre, polar angle, azimuth angle and their respective velocities w.r.t proper time $\tau$.
 
-Further, we plot the trajectory in 2D for vizualization purposes.
-\begin{lstlisting}[language=Python, caption=Plotting the trajectory]
->>> obj = GeodesicPlotter()
->>> obj.plot(geodesic)
->>> obj.show()
-\end{lstlisting}
+% Further, we plot the trajectory in 2D for vizualization purposes.
+% \begin{lstlisting}[language=Python, caption=Plotting the trajectory]
+% >>> obj = GeodesicPlotter()
+% >>> obj.plot(geodesic)
+% >>> obj.show()
+% \end{lstlisting}
 
-\begin{figure}[h]
-	\centering
-	\includegraphics[scale=0.7]{images/perihelion_cropped.png}
-	%\centerline{\includegraphics{ftcbuild2.pdf}}
-	\caption{Plot obtained from the above code showing the phenomenon of perihelion advance}
-	\label{fig:schwarzschild}
-\end{figure}
+% \begin{figure}[h]
+% 	\centering
+% 	\includegraphics[scale=0.7]{figures/perihelion_cropped.png}
+% 	%\centerline{\includegraphics{ftcbuild2.pdf}}
+% 	\caption{Plot obtained from the above code showing the phenomenon of perihelion advance}
+% 	\label{fig:schwarzschild}
+% \end{figure}
 
-We observe the phenomenon of perihelion advance of a particle around a heavy body due to spacetime curavture. The orbit would have been purely eliptical if plotted in accordance with Newtonian Mechanics, however, the curvature of space-time around the heavy mass shifts the orbit with each revolution. In practicality, this phenomenon is not so pronounced as no particle approaches a heavy mass this closely. For instance, Mercury advances its perihelion at a rate of $42.98\pm 0.04$ arcsec/century.
+% We observe the phenomenon of perihelion advance of a particle around a heavy body due to spacetime curavture. The orbit would have been purely eliptical if plotted in accordance with Newtonian Mechanics, however, the curvature of space-time around the heavy mass shifts the orbit with each revolution. In practicality, this phenomenon is not so pronounced as no particle approaches a heavy mass this closely. For instance, Mercury advances its perihelion at a rate of $42.98\pm 0.04$ arcsec/century.
 
 \subsubsection{Kerr Metric}\label{subsubsec:kerr}
 Kerr metric is a further generalization of Schwarzschild metric and a specific case of Kerr-Newman geometry. A spacetime is defined as a "Kerr" spacetime as and when the massive central body posseses an angular momentum. The corresponding metric equation which defines the space-time is,
@@ -447,37 +433,30 @@ a = \frac{J}{Mc}, \nonumber \\
 
 $J$ is the angular momentum of the body and all the other symbols hold their usual meanings as discussed in \ref{subsubsec:sch}. The coordinate system used to describe the metric is Boyer-Lindquist coordinate system.
 
-The file \textbf{kerr.py} contains the class \textit{Kerr} for defining Schwarzschild geometry methods.
-
 APIs for \textit{Schwarzschild}, \textit{Kerr} and \textit{KerrNewman} are consistent and code structure remains same for the sake for clarity and intuitiveness. For example,
 
-\begin{lstlisting}[language=Python, caption=Defining the Kerr Body and the particle and calculating geodesics]
->>> a = 0.3 * u.m
->>> Attractor = Body(name="BH", mass=1.989e30 * u.kg, a=a)
->>> init_conditions = BoyerLindquistDifferential(49.95e5 * u.km, np.pi / 2 * u.rad, 
-...                                              np.pi * u.rad, 0 * u.km / u.s, 
-...                                              0 * u.rad / u.s, 0 * u.rad / u.s,
-...                                              a)
->>> Particle = Body(differential=init_conditions, parent=Attractor)
->>> geodesic = Geodesic(body=Particle, time=0 * u.s, end_lambda=33932.90,
-...                     step_size=1.2, metric=Kerr)
-\end{lstlisting}
+% \begin{lstlisting}[language=Python, caption=Defining the Kerr Body and the particle and calculating geodesics]
+% >>> a = 0.3 * u.m
+% >>> attractor = Body(name="BH", mass=1.989e30 * u.kg, a=a)
+% >>> coordinates = BoyerLindquistDifferential(49.95e5 * u.km, np.pi / 2 * u.rad, np.pi * u.rad, a=a)
+% >>> particle = Body(differential=init_conditions, parent=attractor)
+% >>> geodesic = Geodesic(body=particle, end_lambda=33932.90, step_size=1.2, metric=Kerr)
+% \end{lstlisting}
+% As evident from the code, API across different classes are made to be as homogeneous as possible.
 
-As evident from the code, API across different classes are made to be as homegenous as possible.
+% As a rotating black hole drags the space-time around it, a freely falling object acquires a angular velocity around the coordinate centre, i.e centre of the black hole. This effect is evident from the plot obtained from the above geodesics, in the same way as obtained one in the Schwarzschild example.
 
-As a rotating black hole drags the space-time around it, a freely falling object acquires a angular velocity around the coordinate centre, i.e centre of the black hole. This effect is evident from the plot obatined from the above geodesics, in the same way as obtained one in the Schwarzschild example.
-
-\begin{figure}[h]
-	\centering
-	\includegraphics[scale=0.1]{images/blank.jpg} %replace this when the actual plot becomes available
+% \begin{figure}[h]
+% 	\centering
+% 	\includegraphics[scale=0.1]{figures/blank.jpg} %replace this when the actual plot becomes available
 	%\centerline{\includegraphics{ftcbuild2.pdf}}
-	\caption{Plot obtained from the above geodesics showing the phenomenon of frame dragging}
-	\label{fig:kerr}
-\end{figure}
+% 	\caption{Plot obtained from the above geodesics showing the phenomenon of frame dragging}
+% 	\label{fig:kerr}
+% \end{figure}
 
 
 \subsubsection{Kerr-Newman Metric}\label{subsubsec:kerrnewman}
-Kerr-Newman metric presents the most general case within single-body vacuum solutions of Einstein Field Equation. It generalizes all the quantities used to describe a black hole, as affirmed by "no hair" theoram, i.e. Charge $Q$, Angular Momentum $J$ and Mass $M$. The metric equation is given by,
+Kerr-Newman metric presents the most general case within single-body vacuum solutions of Einstein Field Equation. It generalizes all the quantities used to describe a black hole, as affirmed by "no hair" theorem, i.e. Charge $Q$, Angular Momentum $J$ and Mass $M$. The metric equation is given by,
 
 \begin{gather}
 -ds^2 = c^2 d\tau^2 = -(\frac{dr^2}{\Delta}+d\theta^2)\rho^2 + (c dt - a sin^2 \theta d\phi)^2 \frac{\Delta}{\rho^2} - ((r^2 + a^2)d\phi - ac dt)^2 \frac{sin^2 \theta}{\rho^2}
@@ -495,6 +474,8 @@ r_Q ^ 2 = \frac{Q^2 G}{4\pi\epsilon_0 c^4} \nonumber
 All the other symbols convey their usual meanings, as discussed in the previous two sections \ref{subsubsec:sch} and \ref{subsubsec:kerr}. For the sake of brevity, we would not go into the specifics of this class as the classes within \textit{Metric} module share very similar APIs as inferred in \ref{subsubsec:kerr}.
 
 \subsection{COORDINATES}
+The coordinates subpackage provides support for representing and transforming coordinates. Cartesian, Spherical and BoyerLindquist coordinate system can be accessed while using einsteinpy.
+
 \subsection{SYMBOLIC}
 General Relativity required heavy mathematical formulation to derive and describe various tensors attributing to various features essential for cogent description of an arbitrary space-time. We would describe the various quantities currently supported by this module while maintaining brevity. Each quantity has its own class, even scalars, which are treated as 0\textsuperscript{th} order tensors.
 
@@ -503,98 +484,96 @@ All the mathematical quantities build upon \hyperref[subsec:BaseRelativityTensor
 \subsubsection{MetricTensor}\label{subsubsec:metric}
 Metric Tensor describes the differential length elements required to measure distance in a curved(also applies to flat) space-time. It is a second order tensor and is fundamental to describe any space-time geometry. The \textit{MetricTensor} class, being inherited from \hyperref[subsec:BaseRelativityTensor]{\textit{BaseRelativityTensor}} , inherits all its functions and also have some functions and constraints of its own. For example, metric tensor is bound to be a second order tensor.
 
-The defined class functions are :
-\begin{itemize}
-\item \texttt{change\_config} : returns a different instance of the same class with different index (contravariant or covariant) configuration. 
-\item \texttt{inv} : returns inverse of the metric
-\end{itemize}
+% The defined class functions are :
+% \begin{itemize}
+% \item \texttt{change\_config} : returns a different instance of the same class with different index (contravariant or covariant) configuration. 
+% \item \texttt{inv} : returns inverse of the metric
+% \end{itemize}
 
-Also, the library maintains an ever expanding predefined metrics for direct use. Here's an code snippet for a better dive into the specificities of the class.
+Also, the library maintains an ever expanding predefined metrics for direct use in research purposes.
 
-\begin{lstlisting}[language=Python, caption=Importing a predefined metric]
->>> from einsteinpy.symbolic.predefined import CMetric
->>> metric = CMetric
->>> metric.tensor()
-\end{lstlisting}
+%\begin{lstlisting}[language=Python, caption=Importing a predefined metric]
+%>>> from einsteinpy.symbolic.predefined import CMetric
+%>>> metric = CMetric
+% >>> metric.tensor()
+% \end{lstlisting}
 
-\begin{center}
-$\displaystyle \left[\begin{matrix}- \frac{h{\left(y \right)}}{\left(x + y\right)^{2}} & 0 & 0 & 0\\0 & \frac{1}{\left(x + y\right)^{2} f{\left(x \right)}} & 0 & 0\\0 & 0 & \frac{1}{\left(x + y\right)^{2} h{\left(y \right)}} & 0\\0 & 0 & 0 & \frac{f{\left(x \right)}}{\left(x + y\right)^{2}}\end{matrix}\right]$
-\end{center}
+% \begin{center}
+% $\displaystyle \left[\begin{matrix}- \frac{h{\left(y \right)}}{\left(x + y\right)^{2}} & 0 & 0 & 0\\0 & \frac{1}{\left(x + y\right)^{2} f{\left(x \right)}} & 0 & 0\\0 & 0 & \frac{1}{\left(x + y\right)^{2} h{\left(y \right)}} & 0\\0 & 0 & 0 & \frac{f{\left(x \right)}}{\left(x + y\right)^{2}}\end{matrix}\right]$
+% \end{center}
 
-\begin{lstlisting}[language=Python, caption=Displaying the contravarint configuration of metric]
->>> metric.change_config("uu").tensor()
-\end{lstlisting}
+% \begin{lstlisting}[language=Python, caption=Displaying the contravarint configuration of metric]
+% >>> metric.change_config("uu").tensor()
+% \end{lstlisting}
 
-\begin{center}
- $\displaystyle \left[\begin{matrix}- \frac{\left(x + y\right)^{2}}{h{\left(y \right)}} & 0 & 0 & 0\\0 & \left(x + y\right)^{2} f{\left(x \right)} & 0 & 0\\0 & 0 & \left(x + y\right)^{2} h{\left(y \right)} & 0\\0 & 0 & 0 & \frac{\left(x + y\right)^{2}}{f{\left(x \right)}}\end{matrix}\right]$ \\
-\end{center}
+% \begin{center}
+%  $\displaystyle \left[\begin{matrix}- \frac{\left(x + y\right)^{2}}{h{\left(y \right)}} & 0 & 0 & 0\\0 & \left(x + y\right)^{2} f{\left(x \right)} & 0 & 0\\0 & 0 & \left(x + y\right)^{2} h{\left(y \right)} & 0\\0 & 0 & 0 & \frac{\left(x + y\right)^{2}}{f{\left(x \right)}}\end{matrix}\right]$ \\
+% \end{center}
 
 
 \subsubsection{ChristoffelSymbols}\label{subsubsec:chl}
 
 Although Christoffel Symbols are belong to class of pseudo-tensors, it is inherited from \hyperref[subsec:BaseRelativityTensor]{\textit{BaseRelativityTensor}} to maintain homogenity within the module. Being inherited from  \hyperref[subsec:BaseRelativityTensor]{\textit{BaseRelativityTensor}}, it already supports the functions of its parent class and imposes some restrictions of its own, such as order of the tensor should be 3.
 
-Instance of the class can be made by directly passing a 3\textsuperscript{rd} order tensor or can be obtained using the following classmethods,
-\begin{itemize}
-\item \texttt{from\_metric} : Calculates christoffel symbols from a given instance of \hyperref[subsubsec:metric]{\textit{MetricTensor}} class.
-\end{itemize}
+% Instance of the class can be made by directly passing a 3\textsuperscript{rd} order tensor or can be obtained using the following classmethods,
+% \begin{itemize}
+% \item \texttt{from\_metric} : Calculates christoffel symbols from a given instance of \hyperref[subsubsec:metric]{\textit{MetricTensor}} class.
+% \end{itemize}
 
-The defined class function(s) are : 
-\begin{itemize}
-\item \texttt{change\_config} : returns a different instance of the same class with different index (contravariant or covariant) configuration. 
-\end{itemize}
+% The defined class function(s) are : 
+% \begin{itemize}
+% \item \texttt{change\_config} : returns a different instance of the same class with different index (contravariant or covariant) configuration. 
+% \end{itemize}
 
 
 \subsubsection{RiemannCurvatureTensor}\label{subsubsec:riemann}
 
 This quantity is the most extensive measure of curvature of a sapce-time. It is inherited from \hyperref[subsec:BaseRelativityTensor]{\textit{BaseRelativityTensor}} and supports all the functions of its parent class. 
 
-Instance of the class can be made by directly passing a 4\textsuperscript{th} order tensor or can be obtained using the following classmethods
-\begin{itemize}
-\item \texttt{from\_metric} : Calculates Riemann Tensor from a given instance of \hyperref[subsubsec:metric]{\textit{MetricTensor}} class.
-\item \texttt{from\_christoffels} : Calculates Riemann Tensor from a given instance of \hyperref[subsubsec:chl]{\textit{ChristoffelSymbols}} class.
-\end{itemize}
+% Instance of the class can be made by directly passing a 4\textsuperscript{th} order tensor or can be obtained using the following classmethods
+% \begin{itemize}
+% \item \texttt{from\_metric} : Calculates Riemann Tensor from a given instance of \hyperref[subsubsec:metric]{\textit{MetricTensor}} class.
+% \item \texttt{from\_christoffels} : Calculates Riemann Tensor from a given instance of \hyperref[subsubsec:chl]{\textit{ChristoffelSymbols}} class.
+% \end{itemize}
 
-The defined class function(s) are : 
-\begin{itemize}
-\item \texttt{change\_config} : returns a different instance of the same class with different index (contravariant or covariant) configuration. 
-\end{itemize}
+% The defined class function(s) are : 
+% \begin{itemize}
+% \item \texttt{change\_config} : returns a different instance of the same class with different index (contravariant or covariant) configuration. 
+% \end{itemize}
 
 
 \subsubsection{RicciTensor}\label{subsubsec:riccitensor}
 
 This tensor is used in solving Eintein's  equation and basically contraction of Riemann Curvature Tensor.  It is inherited from \hyperref[subsec:BaseRelativityTensor]{\textit{BaseRelativityTensor}} and supports all the functions of its parent class. 
 
-Instance of the class can be made by directly passing a 2\textsuperscript{nd} order tensor or can be obtained using the following classmethods
-\begin{itemize}
-\item \texttt{from\_metric} : Calculates Ricci Tensor from a given instance of \hyperref[subsubsec:metric]{\textit{MetricTensor}} class.
-\item \texttt{from\_christoffels} : Calculates Ricci Tensor from a given instance of \hyperref[subsubsec:chl]{\textit{ChristoffelSymbols}} class.
-\item \texttt{from\_riemann} : Calculates Ricci Tensor from a given instance of \hyperref[subsubsec:riemann]{\textit{RiemannCurvatureTensor}} class.
-\end{itemize}
+% Instance of the class can be made by directly passing a 2\textsuperscript{nd} order tensor or can be obtained using the following classmethods
+% \begin{itemize}
+% \item \texttt{from\_metric} : Calculates Ricci Tensor from a given instance of \hyperref[subsubsec:metric]{\textit{MetricTensor}} class.
+% \item \texttt{from\_christoffels} : Calculates Ricci Tensor from a given instance of \hyperref[subsubsec:chl]{\textit{ChristoffelSymbols}} class.
+% \item \texttt{from\_riemann} : Calculates Ricci Tensor from a given instance of \hyperref[subsubsec:riemann]{\textit{RiemannCurvatureTensor}} class.
+% \end{itemize}
 
-The defined class function(s) are : 
-\begin{itemize}
-\item \texttt{change\_config} : returns a different instance of the same class with different index (contravariant or covariant) configuration. 
-\end{itemize}
-
-
+% The defined class function(s) are : 
+% \begin{itemize}
+% \item \texttt{change\_config} : returns a different instance of the same class with different index (contravariant or covariant) configuration. 
+% \end{itemize}
 
 \subsubsection{RicciScalar}\label{subsubsec:ricciscalar}
 
 It is a scalar quantity obtained by contracting a given Ricci Tensor. It is inherited from \hyperref[subsec:BaseRelativityTensor]{\textit{BaseRelativityTensor}} and supports all the functions of its parent class. Being a scalar quantity, it does not support \texttt{change\_config} unlike other tensors as discussed above.
 
-Instance of the class can be made by directly passing a symbolic expression or can be obtained using the following classmethods
-\begin{itemize}
-\item \texttt{from\_metric} : Calculates Ricci Scalar from a given instance of \hyperref[subsubsec:metric]{\textit{MetricTensor}} class.
-\item \texttt{from\_christoffels} : Calculates Ricci Scalar from a given instance of \hyperref[subsubsec:chl]{\textit{ChristoffelSymbols}} class.
-\item \texttt{from\_riemann} : Calculates Ricci Scalar from a given instance of \hyperref[subsubsec:riemann]{\textit{RiemannCurvatureTensor}} class.
-\item \texttt{from\_riccitensor} : Calculates Ricci Scalar from a given instance of \hyperref[subsubsec:riccitensor]{\textit{RicciTensor}} class.
-\end{itemize}
+% Instance of the class can be made by directly passing a symbolic expression or can be obtained using the following classmethods
+% \begin{itemize}
+% \item \texttt{from\_metric} : Calculates Ricci Scalar from a given instance of \hyperref[subsubsec:metric]{\textit{MetricTensor}} class.
+% \item \texttt{from\_christoffels} : Calculates Ricci Scalar from a given instance of \hyperref[subsubsec:chl]{\textit{ChristoffelSymbols}} class.
+% \item \texttt{from\_riemann} : Calculates Ricci Scalar from a given instance of \hyperref[subsubsec:riemann]{\textit{RiemannCurvatureTensor}} class.
+% \item \texttt{from\_riccitensor} : Calculates Ricci Scalar from a given instance of \hyperref[subsubsec:riccitensor]{\textit{RicciTensor}} class.
+% \end{itemize}
 
-The defined class properties are : 
-\begin{itemize}
-\item \texttt{expr} : returns the scalar symbolic expression contained in the class. 
-\end{itemize}
+% The defined class properties are : 
+% \begin{itemize}
+% \item \texttt{expr} : returns the scalar symbolic expression contained in the class. 
+% \end{itemize}
 
 Here is a sample code snippet, using the above discussed Classes
 
@@ -643,7 +622,23 @@ As the library is in heavy development, new quantities are being added as and wh
 
 
 \subsection{HYPERSURFACE}
+This module provides basic computational functions which are essential for modelling the space-like hypersurface for any space-time geometry. Currently module has implementation for Schwarzschild geometry with conversion functions from Schwarzschild coordinates to 3-D spherical coordinates and some plotting utilities. The whole module is expected to extend for providing a super-class for implementations related to gravitational lensing simulations and numerical calculations of null geodesics on hypersurfaces and deviation angles for systems which are relevant to relativistic astrophysical problems. A small code snippet for plotting the hypersurface is as follows:
+\begin{lstlisting}[language=Python, caption=Schwarzschild Embedding]
+>>> surface_obj = SchwarzschildEmbedding(5.927e23 * u.kg)
+>>> surface = HypersurfacePlotter(embedding=surface_obj, plot_type='surface')
+>>> surface.plot()
+>>> surface.show()
+\end{lstlisting}
+
 \subsection{PLOTTING}
+The plotting ecosystem in EinsteinPy has two back-ends for two type of users. A static, matplotlib based plotter for publication quality plots and an interactive plotly based plotter for analysis and interpretation. \\
+The plotting module is specifically designed keeping in mind the variety of IDEs and tools people working with Python use, for example python scripts, jupyter notebooks, spyder, pycharm etc. As plotly plots need JavasScript to render plots, it becomes difficult for the first time user to decide which backend to use. \texttt{StaticGeodesicPlotter} and \texttt{InteractiveGeodesicPlotter} undergo an internal switching depending on the environment variables and the appropriate environment aware plot is shown to the user for a better user experience and interface.\\
+The plotting module throughout the applications follow a very consistent API. \begin{lstlisting}[language=Python, caption=Plotting Module API]
+>>> data = Plotter()
+>>> data.plot()
+>>> data.show()
+\end{lstlisting}
+
 
 \section{INFRASTRUCTURE} \label{sec:infra}
 \subsection{ Testing} \label{subsec:testing}
@@ -652,7 +647,8 @@ The EinsteinPy Project maintains a very high bar in accepting changes and introd
 The test suite can be run manually as well as it runs in an automated fashion on every commit as well as pull request to maintain the code standards, and make it easier for contributors to understand the implications and impact of their changes. The EinsteinPy Project uses many continuous-integration services which provide services to create automated pipelines for code inspection, unit testing, coverage publishing etc. All the contributions trigger these free services (Codecov, CircleCI, Appveyor, GitHub Actions, Codefactor, Codeclimate, Hound, WIP) which are integrated with GitHub repository. All the pull requests are checked for code linting by a pep8speaks bot, which suggests the lines of code which violate the PEP8 standard to the contributor in a human readable way. All these services run on three types of operating systems (Windows, MacOS and Linux). The unit tests run on various versions of Python. They test the documentation builds, test coverage, check whether the pull request author has indicated that it is a work in progress (WIP).They also run several code linting checks which further triggers the unit test build.
 
 \subsection{ Documentation and gallery} \label{subsec:doc}
-
+The EinsteinPy Project strives to provide high quality, up-to-date and accurate documentation of the software. The documentation is highly approachable with easy and intuitive user interface. The documentation is self-updating with every change in the codebase, and is rendered automatically from the docstrings written for each function and classes. Along with the main API, new example codes for different functionalities is added to the repository frequently in the form of jupyter notebooks. Many sections like User Guide and Developer Guide has been written for easy on-boarding of new users and contributors.
+	
 \section{COMMUNITY} \label{sec:COMMUNITY}
 EinsteinPy is being developed as an open source community inside the wide and diverse general scientific python community. Our code is freely available, and we have seen a lot of people contributing and joining us since over the past year.
 We touched the landmark of 30 members recently. EinsteinPy is dedicated to problems arising in General Relativity and gravitational physics as well as encouraging open source development. EinsteinPy has benefited greatly from summer of code schemes. Last year EinsteinPy participated in the ESA Summer of Code In Space (SOCIS). This program is inspired by Google Summer Of Code (GSOC) and aims to raise the awareness of open source projects related to space, promote the European Space Agency. The symbolic module in EinsteinPy project was developed during this program.
@@ -670,40 +666,12 @@ We have an open community where suggestions from people to add functionalities a
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 \acknowledgments
 
-We thank all the people that have made this AASTeX what it is today.  This
-includes but not limited to Bob Hanisch, Chris Biemesderfer, Lee Brotzman,
-Pierre Landau, Arthur Ogawa, Maxim Markevitch, Alexey Vikhlinin and Amy
-Hendrickson. Also special thanks to David Hogg and Daniel Foreman-Mackey
-for the new "modern" style design. Considerable help was provided via bug
-reports and hacks from numerous people including Patricio Cubillos, Alex
-Drlica-Wagner, Sean Lake, Michele Bannister, Peter Williams, and Jonathan
-Gagne.
+We thank all the people that have made EinsteinPy what it is today.  
+The organisations ESA, Poliastro and Indian institute of Technology, Mandi provided us with significant support and have our deepest thanks.
+We would specially like to thank Dr.Abhay Ashtekar and  Dr. Timothy A. Gonsalves for their constant motivation.
+Lastly, thanks to all our contributors who contrubuted towards building EinsteinPy.
 
 %% To help institutions obtain information on the effectiveness of their 
 %% telescopes the AAS Journals has created a group of keywords for telescope 
@@ -715,9 +683,6 @@ Gagne.
 %% list during copy editing.  Individual instruments can be provided in 
 %% parentheses, after the keyword, but they are not verified.
 
-\vspace{5mm}
-\facilities{HST(STIS), Swift(XRT and UVOT), AAVSO, CTIO:1.3m,
-CTIO:1.5m,CXO}
 
 %% Similar to \facility{}, there is the optional \software command to allow 
 %% authors a place to specify which programs were used during the creation of 
@@ -738,22 +703,8 @@ CTIO:1.5m,CXO}
 %% command and will number appendix equations (A1), (A2), etc. The
 %% Figure and Table counter will not reset.
 
-\appendix
-
-\section{Appendix information}
-
-Appendices can be broken into separate sections just like in the main text.
-The only difference is that each appendix section is indexed by a letter
-(A, B, C, etc.) instead of a number.  Likewise numbered equations have
-the section letter appended.  Here is an equation as an example.
-
-\begin{equation}
-I = \frac{1}{1 + d_{1}^{P (1 + d_{2} )}}
-\end{equation}
-
-Appendix tables and figures should not be numbered like equations. Instead
-they should continue the sequence from the main article body.
-
+% \appendix
+% \section{Appendix information}
 
 %% For this sample we use BibTeX plus aasjournals.bst to generate the
 %% the bibliography. The sample63.bib file was populated from ADS. To
@@ -767,6 +718,7 @@ they should continue the sequence from the main article body.
 \bibliography{sample63}{}
 \bibliographystyle{aasjournal}
 
+
 %% This command is needed to show the entire author+affiliation list when
 %% the collaboration and author truncation commands are used.  It has to
 %% go at the end of the manuscript.
@@ -776,4 +728,3 @@ they should continue the sequence from the main article body.
 %% commands to see a summary list of all changes at the end of the article.
 %\listofchanges
 \end{document}
-
