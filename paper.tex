@@ -270,7 +270,7 @@ simulations --- black holes --- gravitational waves}
 
 
 \section{Introduction} \label{sec:intro}
-The relativistic theory of gravity paved its way to the ground in 1915?, when Prof. Albert Einstein published his paper on the general theory of relativity. This elegant and rigorous framework was a generalized version of gravity-free theory - special relativity, which he published earlier in 1905. Almost a hundred years after Einstein wrote down the equations of General Relativity, solutions of the Einstein field equations remain extremely difficult to find beyond those which exhibit significant symmetries.\\
+The relativistic theory of gravity paved its way to the ground in 1916, when Prof. Albert Einstein published his paper on the general theory of relativity \citep{Einstein:1916vd}. This elegant and rigorous framework was a generalized version of gravity-free theory - special relativity, which he published earlier in 1905. Even after almost a hundred years after Einstein wrote down the equations of General Relativity, solutions of the Einstein field equations remain extremely difficult to find beyond those which exhibit significant symmetries.\\
 We can study the behavior of solutions under a high degree of symmetry considerations and could even solve analytically for highly unrealistic systems. In case of problems relevant to astrophysical and gravitational physics research, it still remains a big daunting question on how to get around the problem of solving these field equations. This question is so profound that it has a separate profound field of research which goes with the name of numerical relativity which attempts to use computation science and programming to numerically obtain solutions of the equations (which would be the background geometry) for some turbulent region where most of the interesting dynamics are happening (as we can not solve for an infinitely large grid due to restrictions imposed on us by space and time complexity and computability).\\
 Numerical methods have been used to solve the Einstein equation for many decades, but the past decade has seen tremendous advances and adding to that, the interest of the community grew when the field found applications in areas of radio astronomy, cosmology, signal processing, data mining. The field of numerical relativity is growing rampantly with the vast literature on algorithms, numerical methods and theoretical formulations (from basic 3+1 decomposition formulation to more sophisticated ones) with the development of robust and involved frameworks that provide a complete programming ecosystem and have proved to be essential tools for any numerical relativity researcher.\\
 Reflecting the other end of the research community stands the major section of theoretical physicists which counts the majority as a novice in programming. The head challenge is the fact that the usage of these frameworks demands heavy use of high-level programming languages like C, C++, Python, etc. Though Python provides a vast room for abstractions no library existed that focused towards numerical relativity, eventually, the need of python library dedicated to general relativity became the propellant for the team and thus they made dauntless efforts to cover the space for this Python library. Since then, EinsteinPy has seen a lot of contributions from people all over the world and many ”good to go” functionalities are already provided in this and previous versions.\\
@@ -336,26 +336,26 @@ The code quality is maintained at the highest standards with strong control on t
 \item \texttt The changelog is populated at release-time by the lead developer and the releasing developer
 \end{itemize}
 EinsteinPy further follows a trunk-based development model, which ensures a new branch for every minor release and new patch release made using the minor release branch. All the latest changes are kept on the master branch on GitHub and the relevant issues are closed as soon as the pull request solving it merges onto the master. A release having the changes is made at a later date. 
-EinsteinPy only supports the latest bleeding-edge Python, Numpy and Astropy versions.  All the stable Python versions after Python 3.5 are supported. All the code snippets written follow the guidelines of numba in order to accelerate the Python code and make the simulations faster. 
+EinsteinPy only supports the latest bleeding-edge Python, Numpy\citep{numpy} and Astropy\citep{astropy:2018} versions.  All the stable Python versions after Python 3.5 are supported. All the code snippets written follow the guidelines of numba\citep{Lam2015NumbaAL} in order to accelerate the Python code and make the simulations faster. 
 
 
 
 
 \section{The EinsteinPy Core Package} \label{sec:core}
-This section explains in detail, the modules available within EinsteinPy core pacakge, their API and the purpose they serve.
+This section explains in detail, the modules available within EinsteinPy core package, their API and the purpose they serve.
 \subsection{METRIC} \label{subsec:metric}
-This module captures all the geometric and causal structure of specific spacetimes, and being able to calculate trajectories in a given space-time. 
+This module captures all the geometric and causal structure of specific space-times, and being able to calculate trajectories in a given space-time. 
 The module derives its name from Metric Tensor, a tensorial quantity used to describe differential lengths, especially in a curved space-time. 
-However, this module serves more than its usual definition and ultimately leads us to obtain geodesics of particles in a spacetime with high curvature, where notions of newtonian physics fail.
-\subsubsection{Schwarzschild Metric} \label{subsubsec:sch}
-Karl Schwarzchild pioneered the analysis of the relation between the size of black hole and its mass and this work paved the way for the first exact solution of Einstein's Field Equation under the limited case of single spherical non-rotating, non-charged body. 
-The metric equation corrosponding to a space-time centred around a body in the above described conditions is given by,
+However, this module serves more than its usual definition and ultimately leads us to obtain geodesics of particles in a spacetime with high curvature, where notions of Newtonian physics fail.
+\subsubsection{Schwarzschild Metric \citep{Schwarzschild:1916uq}} \label{subsubsec:sch}
+Karl Schwarzschild pioneered the analysis of the relation between the size of black hole and its mass and this work paved the way for the first exact solution of Einstein's Field Equation under the limited case of single spherical non-rotating, non-charged body. 
+The metric equation corresponding to a space-time centred around a body in the above described conditions is given by,
 
 \begin{align}
 & ds^2 = -c^2 d\tau ^2 = - (1 - \frac{r_s}{r})c^2 dt^2  + \frac{1}{(1 - \frac{r_s}{r})}dr^2 + r^2 d\theta ^2 + r^2 sin^2 \theta d\phi ^2
 \end{align}
 
-%The same equation can be written in a tensorial form as follows,
+%The same equation can be written in a tonsorial form as follows,
 
 %\begin{gather}
 %g_{\mu \nu} = \begin{bmatrix} - (1 - \frac{r_s}{r})c^2 & 0 & 0 & 0 \\ 0 & \frac{1}{(1 - \frac{r_s}{r})} & 0 & 0 \\ 0 & 0 & r^2 & 0 \\ 0 & 0 & 0 &  r^2 sin^2 \theta \end{bmatrix} \\ 
@@ -669,9 +669,9 @@ We have an open community where suggestions from people to add functionalities a
 \acknowledgments
 
 We thank all the people that have made EinsteinPy what it is today.  
-The organisations ESA, Poliastro and Indian institute of Technology, Mandi provided us with significant support and have our deepest thanks.
-We would specially like to thank Dr.Abhay Ashtekar and  Dr. Timothy A. Gonsalves for their constant motivation.
-Lastly, thanks to all our contributors who contrubuted towards building EinsteinPy.
+The generous sponsorship by European Space Agency during Summer of Code in Space really helped us with the betterment of code. We would like to thank the awesome poliastro \citep{juan_luis_cano_rodriguez_2019_3588160} for always motivating us and for being the first sponsor for the project. We would also like to thank our host university, Indian institute of Technology, Mandi who provided us with significant support and have our deepest thanks.
+We would specially like to thank Prof.Abhay Ashtekar for his motivational email and  Prof. Timothy A. Gonsalves for his constant motivation and support.
+Lastly, we thank all our contributors who contributed selflessly for building this amazing software called EinsteinPy.
 
 %% To help institutions obtain information on the effectiveness of their 
 %% telescopes the AAS Journals has created a group of keywords for telescope 
@@ -689,9 +689,11 @@ Lastly, thanks to all our contributors who contrubuted towards building Einstein
 %% the manuscript. Authors should list each code and include either a
 %% citation or url to the code inside ()s when available.
 
-\software{astropy \citep{2013A&A...558A..33A},  
-          Cloudy \citep{2013RMxAA..49..137F}, 
-          SExtractor \citep{1996A&AS..117..393B}
+\software{astropy \citep{astropy:2013} \citep{astropy:2018},  
+          Numpy \citep{numpy}, 
+          scipy \citep{2019arXiv190710121V},
+          numba \citep{Lam2015NumbaAL},
+          matplotlib \citep{matplotlib}
           }
 
 %% Appendix material should be preceded with a single \appendix command.
@@ -715,7 +717,7 @@ Lastly, thanks to all our contributors who contrubuted towards building Einstein
 %% pdflatex sample63.tex
 %% pdflatex sample63.tex
 
-\bibliography{sample63}{}
+\bibliography{bibliography}{}
 \bibliographystyle{aasjournal}
 
 
