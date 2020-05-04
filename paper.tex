@@ -116,6 +116,20 @@ Shreyas Kalvankar\inst{\ref{inst:wagh}}
 Ganesh Tarone\inst{\ref{inst:vish}}
 \and
 Atul Mangat\inst{\ref{inst:iitree}}
+\and
+Suyog Garg\inst{\ref{inst:iiitdm}}
+\and
+Bibek Gautam\inst{\ref{inst:xav}}
+\and
+Sitara Srinivasan\inst{\ref{inst:nax}}
+\and
+Aayush Gautam\inst{\ref{inst:tribhu}}
+\and
+Swaastick Kumar Singh\inst{\ref{inst:amity}}
+\and
+Suyash Salampuria\inst{\ref{inst:iitrce}}
+\and
+Zac Yauney\inst{\ref{inst:bri}}
 }
    \institute{
   School of Computing and Electrical Engineering, Indian Institute of Technology Mandi, Mandi, Himachal Pradesh, India
@@ -172,7 +186,7 @@ Atul Mangat\inst{\ref{inst:iitree}}
    Hiranandani Foundation, Powai, Mumbai, Maharashtra, India
    \label{inst:hira}
    \and
-   Dyal Singh College, University of Delhi, New Delhi, India  
+   Department of Physics, Dyal Singh College, University of Delhi, New Delhi, India  
    \label{inst:du} 
    \and
    K. K. Wagh Institute of Engineering Education and Research, Nashik, Maharashtra, India  
@@ -183,6 +197,27 @@ Atul Mangat\inst{\ref{inst:iitree}}
    \and
   Department of Electrical Engineering, Indian Institute of Technology Roorkee, Roorkee, Uttarakhand, India
   \label{inst:iitree}
+  \and
+  Indian Institute of Information Technology, Design and Manufacturing, Kancheepuram, Off Vandalur-Kelambakkam Road, Melakottaiyur, Chennai, Tamil Nadu, India 600127
+  \label{inst:iiitdm}
+  \and
+  Naxxatra Sciences and Collaborative Research, Bangalore, Karnataka, India 
+  \label{inst:nax}
+  \and
+  St. Xavier's College, Maitighar, Kathmandu, Nepal
+  \label{inst:xav}
+  \and
+  Amity University Kolkata, West Bengal, India 
+  \label{inst:amity}
+  \and
+  Department of Physics, Birendra Multiple Campus, Tribhuwan University, Kathmandu, Nepal
+  \label{inst:tribhu}
+  \and
+  Department of Chemical Engineering, Indian Institute of Technology Roorkee, Roorkee, Uttarakhand, India
+  \label{inst:iitrce}
+  \and
+  Brigham Young University, Provo, UT 84602, United States
+  \label{inst:bri}
 }
 
    \date{Received May 04, 2020; accepted May 04, 2020}
@@ -602,11 +637,9 @@ The plotting module throughout the applications follow a very consistent API. \b
 
 \subsection{Rays}
 The rays module of EinsteinPy tries to focus on how light behaves around heavy mass objects and the 
-The plotting module throughout the applications follow a very consistent API. \begin{lstlisting}[language=Python, caption=Plotting Module API]
->>> data = Plotter()
->>> data.plot()
->>> data.show()
-\end{lstlisting}
+The plotting module throughout the applications follow a very consistent API. 
+The major functionality this module provides is the utility functions for carrying out shadow related computations for different black hole spacetime. The module has natural data types to efficiently store impact parameters and use them in further computations related to wavelength shifts, turning point etc. The specific assumptions about the accretion process and the emission mechanisms are in accordance with that given in \citep{Bambi_2013}.
+The module also provide functionalities related to intensities of blue shifted and red shifted rays above and below the critical impact parameters. For mathematical formalism of the above computations refer to the \citep{Bambi_2013} and \citep{Shaikh_2018}.
 
 
 \section{Infrastructure} \label{sec:infra}
@@ -637,14 +670,24 @@ We have an open community where we welcome suggestions from people to add functi
 
 
 \section{Conclusions}
+The paper outlines the package EinsteinPy, a community and open effort for solving problems in general relativity. We discussed all the modules of the library:
+\begin{itemize}
+\item Metric Module
+\item Coordinates Module
+\item Plotting Module
+\item Symbolic Module
+\item Rays Module
+\item Hypersurface Module
+\end{itemize}
 
+We discuss the basic development practices that EinsteinPy follows, and the future goals.
 
 
 
 \begin{acknowledgements}
       We thank all the people that have made EinsteinPy what it is today.  
 The generous sponsorship by European Space Agency during Summer of Code in Space really helped us with the betterment of code. We would like to thank the awesome poliastro \citep{juan_luis_cano_rodriguez_2019_3588160} for always motivating us and for being the first sponsor for the project. We would also like to thank our host university, Indian Institute of Technology, Mandi who provided us with significant support and have our deepest thanks.
-We would especially like to thank Prof.Abhay Ashtekar for his motivational email and  Prof. Timothy A. Gonsalves for his constant motivation and support.
+We would especially like to thank Prof.Abhay Ashtekar for his motivational email and  Prof. Timothy A. Gonsalves for his constant motivation and support. We would also like to thank Prof. Arnav Bhavsar for his constant support.
 Lastly, we thank all our contributors who contributed selflessly for building this amazing software called EinsteinPy.
       
 \end{acknowledgements}
