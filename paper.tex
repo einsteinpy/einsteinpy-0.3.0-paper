@@ -1,422 +1,269 @@
-%% Beginning of file 'sample63.tex'
-%%
-%% Modified 2019 June
-%%
-%% This is a sample manuscript marked up using the
-%% AASTeX v6.3 LaTeX 2e macros.
-%%
-%% AASTeX is now based on Alexey Vikhlinin's emulateapj.cls 
-%% (Copyright 2000-2015).  See the classfile for details.
-
-%% AASTeX requires revtex4-1.cls (http://publish.aps.org/revtex4/) and
-%% other external packages (latexsym, graphicx, amssymb, longtable, and epsf).
-%% All of these external packages should already be present in the modern TeX 
-%% distributions.  If not they can also be obtained at www.ctan.org.
-
-%% The first piece of markup in an AASTeX v6.x document is the \documentclass
-%% command. LaTeX will ignore any data that comes before this command. The 
-%% documentclass can take an optional argument to modify the output style.
-%% The command below calls the preprint style which will produce a tightly 
-%% typeset, one-column, single-spaced document.  It is the default and thus
-%% does not need to be explicitly stated.
-%%
-%%
-%% using aastex version 6.3
-\documentclass{aastex63}
-\usepackage{amsmath}
-\usepackage[utf8]{inputenc}
-\usepackage{listings}  % for code in latex
-\usepackage{color}
-\usepackage{hyperref}
-% \usepackage{caption}
-
-%% The default is a single spaced, 10 point font, single spaced article.
-%% There are 5 other style options available via an optional argument. They
-%% can be invoked like this:
-%%
-%% \documentclass[arguments]{aastex63}
-%% 
-%% where the layout options are:
-%%
-%%  twocolumn   : two text columns, 10 point font, single spaced article.
-%%                This is the most compact and represent the final published
-%%                derived PDF copy of the accepted manuscript from the publisher
-%%  manuscript  : one text column, 12 point font, double spaced article.
-%%  preprint    : one text column, 12 point font, single spaced article.  
-%%  preprint2   : two text columns, 12 point font, single spaced article.
-%%  modern      : a stylish, single text column, 12 point font, article with
-%% 		  wider left and right margins. This uses the Daniel
-%% 		  Foreman-Mackey and David Hogg design.
-%%  RNAAS       : Preferred style for Research Notes which are by design 
-%%                lacking an abstract and brief. DO NOT use \begin{abstract}
-%%                and \end{abstract} with this style.
-%%
-%% Note that you can submit to the AAS Journals in any of these 6 styles.
-%%
-%% There are other optional arguments one can invoke to allow other stylistic
-%% actions. The available options are:
-%%
-%%   astrosymb    : Loads Astrosymb font and define \astrocommands. 
-%%   tighten      : Makes baselineskip slightly smaller, only works with 
-%%                  the twocolumn substyle.
-%%   times        : uses times font instead of the default
-%%   linenumbers  : turn on lineno package.
-%%   trackchanges : required to see the revision mark up and print its output
-%%   longauthor   : Do not use the more compressed footnote style (default) for 
-%%                  the author/collaboration/affiliations. Instead print all
-%%                  affiliation information after each name. Creates a much 
-%%                  longer author list but may be desirable for short 
-%%                  author papers.
-%% twocolappendix : make 2 column appendix.
-%%   anonymous    : Do not show the authors, affiliations and acknowledgments 
-%%                  for dual anonymous review.
-%%
-%% these can be used in any combination, e.g.
-%%
-%% \documentclass[twocolumn,linenumbers,trackchanges]{aastex63}
-%%
-%% AASTeX v6.* now includes \hyperref support. While we have built in specific
-%% defaults into the classfile you can manually override them with the
-%% \hypersetup command. For example,
-%%
-%% \hypersetup{linkcolor=red,citecolor=green,filecolor=cyan,urlcolor=magenta}
-%%
-%% will change the color of the internal links to red, the links to the
-%% bibliography to green, the file links to cyan, and the external links to
-%% magenta. Additional information on \hyperref options can be found here:
-%% https://www.tug.org/applications/hyperref/manual.html#x1-40003
-%%
-%% Note that in v6.3 "bookmarks" has been changed to "true" in hyperref
-%% to improve the accessibility of the compiled pdf file.
-%%
-%% If you want to create your own macros, you can do so
-%% using \newcommand. Your macros should appear before
-%% the \begin{document} command.
-%%
-\newcommand{\vdag}{(v)^\dagger}
-\newcommand\aastex{AAS\TeX}
-\newcommand\latex{La\TeX}
-
-
-%% Reintroduced the \received and \accepted commands from AASTeX v5.2
-\received{June 1, 2019}
-\revised{January 10, 2019}
-\accepted{\today}
-%% Command to document which AAS Journal the manuscript was submitted to.
-%% Adds "Submitted to " the argument.
-\submitjournal{ApJ}
-
-%% For manuscript that include authors in collaborations, AASTeX v6.3
-%% builds on the \collaboration command to allow greater freedom to 
-%% keep the traditional author+affiliation information but only show
-%% subsets. The \collaboration command now must appear AFTER the group
-%% of authors in the collaboration and it takes TWO arguments. The last
-%% is still the collaboration identifier. The text given in this
-%% argument is what will be shown in the manuscript. The first argument
-%% is the number of author above the \collaboration command to show with
-%% the collaboration text. If there are authors that are not part of any
-%% collaboration the \nocollaboration command is used. This command takes
-%% one argument which is also the number of authors above to show. A
-%% dashed line is shown to indicate no collaboration. This example manuscript
-%% shows how these commands work to display specific set of authors 
-%% on the front page.
-%%
-%% For manuscript without any need to use \collaboration the 
-%% \AuthorCollaborationLimit command from v6.2 can still be used to 
-%% show a subset of authors.
+%                                                                 aa.dem
+% AA vers. 9.1, LaTeX class for Astronomy & Astrophysics
+% demonstration file
+%                                                       (c) EDP Sciences
+%-----------------------------------------------------------------------
 %
-%\AuthorCollaborationLimit=2
+%\documentclass[referee]{aa} % for a referee version
+%\documentclass[onecolumn]{aa} % for a paper on 1 column  
+%\documentclass[longauth]{aa} % for the long lists of affiliations 
+%\documentclass[letter]{aa} % for the letters 
+%\documentclass[bibyear]{aa} % if the references are not structured 
+%                              according to the author-year natbib style
+
 %
-%% will only show Schwarz & Muench on the front page of the manuscript
-%% (assuming the \collaboration and \nocollaboration commands are
-%% commented out).
-%%
-%% Note that all of the author will be shown in the published article.
-%% This feature is meant to be used prior to acceptance to make the
-%% front end of a long author article more manageable. Please do not use
-%% this functionality for manuscripts with less than 20 authors. Conversely,
-%% please do use this when the number of authors exceeds 40.
-%%
-%% Use \allauthors at the manuscript end to show the full author list.
-%% This command should only be used with \AuthorCollaborationLimit is used.
-
-%% The following command can be used to set the latex table counters.  It
-%% is needed in this document because it uses a mix of latex tabular and
-%% AASTeX deluxetables.  In general it should not be needed.
-%\setcounter{table}{1}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%
-%% The following section outlines numerous optional output that
-%% can be displayed in the front matter or as running meta-data.
-%%
-%% If you wish, you may supply running head information, although
-%% this information may be modified by the editorial offices.
-\shorttitle{EinsteinPy: Python for General Relativity}
-\shortauthors{The EinsteinPy Community}
-%%
-%% You can add a light gray and diagonal water-mark to the first page 
-%% with this command:
-%% \watermark{text}
-%% where "text", e.g. DRAFT, is the text to appear.  If the text is 
-%% long you can control the water-mark size with:
-%% \setwatermarkfontsize{dimension}
-%% where dimension is any recognized LaTeX dimension, e.g. pt, in, etc.
-%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\graphicspath{{./}{figures/}}
-%% This is the end of the preamble.  Indicate the beginning of the
-%% manuscript itself with \begin{document}.
-
-\begin{document}
-
-\title{EinsteinPy: Python for General Relativity}
-
-%% LaTeX will automatically break titles if they run longer than
-%% one line. However, you may use \\ to force a line break if
-%% you desire. In v6.3 you can include a footnote in the title.
-
-%% A significant change from earlier AASTEX versions is in the structure for 
-%% calling author and affiliations. The change was necessary to implement 
-%% auto-indexing of affiliations which prior was a manual process that could 
-%% easily be tedious in large author manuscripts.
-%%
-%% The \author command is the same as before except it now takes an optional
-%% argument which is the 16 digit ORCID. The syntax is:
-%% \author[xxxx-xxxx-xxxx-xxxx]{Author Name}
-%%
-%% This will hyperlink the author name to the author's ORCID page. Note that
-%% during compilation, LaTeX will do some limited checking of the format of
-%% the ID to make sure it is valid. If the "orcid-ID.png" image file is 
-%% present or in the LaTeX pathway, the OrcID icon will appear next to
-%% the authors name.
-%%
-%% Use \affiliation for affiliation information. The old \affil is now aliased
-%% to \affiliation. AASTeX v6.3 will automatically index these in the header.
-%% When a duplicate is found its index will be the same as its previous entry.
-%%
-%% Note that \altaffilmark and \altaffiltext have been removed and thus 
-%% can not be used to document secondary affiliations. If they are used latex
-%% will issue a specific error message and quit. Please use multiple 
-%% \affiliation calls for to document more than one affiliation.
-%%
-%% The new \altaffiliation can be used to indicate some secondary information
-%% such as fellowships. This command produces a non-numeric footnote that is
-%% set away from the numeric \affiliation footnotes.  NOTE that if an
-%% \altaffiliation command is used it must come BEFORE the \affiliation call,
-%% right after the \author command, in order to place the footnotes in
-%% the proper location.
-%%
-%% Use \email to set provide email addresses. Each \email will appear on its
-%% own line so you can put multiple email address in one \email call. A new
-%% \correspondingauthor command is available in V6.3 to identify the
-%% corresponding author of the manuscript. It is the author's responsibility
-%% to make sure this name is also in the author list.
-%%
-%% While authors can be grouped inside the same \author and \affiliation
-%% commands it is better to have a single author for each. This allows for
-%% one to exploit all the new benefits and should make book-keeping easier.
-%%
-%% If done correctly the peer review system will be able to
-%% automatically put the author and affiliation information from the manuscript
-%% and save the corresponding author the trouble of entering it by hand.
-\input{authors.tex}
+\documentclass[onecolumn]{aa}  
+%\documentclass[bibyear]{aa}
+%\documentclass[onecolumn]{aa}  
+\usepackage{graphicx}
+\usepackage{listings}
+\usepackage{xspace}
+\usepackage{natbib}
+\usepackage{url}
+\usepackage[xindy, toc, hyperfirst=false, nolist, nostyles, sanitize={name=false,description=false,symbol=false}]{glossaries}
+\bibpunct{(}{)}{;}{a}{}{,} % to follow the A&A style
+%
+\usepackage{graphicx}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{txfonts}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\usepackage[options]{hyperref}
+% To add links in your PDF file, use the package "hyperref"
+% with options according to your LaTeX or PDFLaTeX drivers.
+%
+\begin{document} 
 
 
-%% Note that the \and command from previous versions of AASTeX is now
-%% depreciated in this version as it is no longer necessary. AASTeX 
-%% automatically takes care of all commas and "and"s between authors names.
+   \title{EinsteinPy: A Community Python Package for General Relativity}
 
-%% AASTeX 6.3 has the new \collaboration and \nocollaboration commands to
-%% provide the collaboration status of a group of authors. These commands 
-%% can be used either before or after the list of corresponding authors. The
-%% argument for \collaboration is the collaboration identifier. Authors are
-%% encouraged to surround collaboration identifiers with ()s. The 
-%% \nocollaboration command takes no argument and exists to indicate that
-%% the nearby authors are not part of surrounding collaborations.
+   \subtitle{}
 
-%% Mark off the abstract in the ``abstract'' environment. 
-\begin{abstract}
+   \author{
+Shreyas Bapat\inst{\ref{inst:iitm}}  % confirmed
+  \and
+Ritwik Saha\inst{\ref{inst:iitm}}  % confirmed
+  \and
+Bhavya Bhatt\inst{\ref{inst:iitm}}  % confirmed
+\and
+Shilpi Jain\inst{\ref{inst:iitr}}
+\and
+Akshita Jain\inst{\ref{inst:iitm}}
+\and
+Sofía Ortín Vela\inst{\ref{inst:uz}}
+\and
+Priyanshu Khandelwal\inst{\ref{inst:gatech}}
+\and
+Jyotirmaya Shivottam\inst{\ref{inst:niser}}
+\and
+Jialin Ma\inst{\ref{inst:gatech}}
+}
+   \institute{
+  School of Computing and Electrical Engineering, Indian Institute of Technology Mandi, Mandi, Himachal Pradesh, India
+  \label{inst:iitm}
+    \and
+  Department of Earth Sciences, Indian Institute of Technology Roorkee, Roorkee, Uttarakhand, India
+  \label{inst:iitr}
+    \and
+  University of Zaragoza, Calle de Pedro Cerbuna, 12, 50009 Zaragoza, Spain
+  \label{inst:uz}
+    \and
+  Georgia Institute of Technology, USA
+  \label{inst:gatech}
+    \and
+   School of Physical Sciences, National Institute of Science Education and Research, Jatni, Khurdha, Odisha, India
+   \label{inst:niser}
+}
 
-This paper presents EinsteinPy (version 0.3), a community-developed Python
-package for gravitational and relativistic astrophysics. Python is a free, easy to use high level programming language which has seen a huge expansion in the number of its users and developers in recent years. Specifically, a lot of recent studies show that the use of Python in Astrophysics and in general physics has increased exponentially. Many great frameworks came as Python packages which provide a very high level of abstraction over the dirty nitty-gritty of complex algorithms and provide an easy to use interfaceand pleasing user experience. One such example is Keras - framework for deep learning which has made deep learning so easy that a person with zero programming knowledge can also train a neural network classifier. This example really demonstrates the power of abstraction which is achievable in Python. The aim of the EinsteinPy is no different and is developed keeping in mind the state of a theoretical gravitational physicist with a little or no background in computer programming and trying to work in the field of numerical relativity or trying to use simulations in their research. Currently EinsteinPy supports simulation of time-like and null geodesics and calculate trajectories in different background geometries some of which are Schwarzschild, Kerr and KerrNewmann along with coordinate inter-conversion pipeline. It has a partially developed pipeline for plotting and visualization with dependencies on libraries like plotly, matplotlib etc. One of the unique feature of EinsteinPy is a sufficiently developed symbolic tensor manipulation utilites which is a great tool in itself for teaching yourself tensor algebra which for many beginner students can be overwhelmingly tricky. Currently EinsteinPy also provide few utility functions for hypersurface embedding of Schwarzschild spacetime which further will be extended to model gravitational lensing simulation. The current version of the library is in a state that can be used by any serious student of general relativity trying to get essence of this beautiful subject but is somewhere lost in the heavy mathematical formalism of the subject. EinsteinPy provides such students to really see through the equations and visualize whats really happening.
+   \date{Received May 04, 2020; accepted May 04, 2020}
 
+ 
+  \abstract
+{This paper presents EinsteinPy (version 0.3), a community-developed Python package for gravitational and relativistic astrophysics. Python is a free, easy to use a high-level programming language which has seen a huge expansion in the number of its users and developers in recent years. Specifically, a lot of recent studies show that the use of Python in Astrophysics and general physics has increased exponentially. Many great frameworks came as Python packages which provide a very high level of abstraction over the dirty nitty-gritty of complex algorithms and provide an easy to use interface and pleasing user experience. One such example is Keras - a framework for deep learning which has made deep learning so easy that a person with zero programming knowledge can also train a neural network classifier. This example demonstrates the power of abstraction which is achievable in Python. The aim of the EinsteinPy is no different and is developed keeping in mind the state of a theoretical gravitational physicist with little or no background in computer programming and trying to work in the field of numerical relativity or trying to use simulations in their research. Currently, EinsteinPy supports simulation of time-like and null geodesics and calculates trajectories in different background geometries some of which are Schwarzschild, Kerr, and KerrNewmann along with coordinate inter-conversion pipeline. It has a partially developed pipeline for plotting and visualization with dependencies on libraries like Plotly, matplotlib, etc. One of the unique features of EinsteinPy is a sufficiently developed symbolic tensor manipulation utilities which are a great tool in itself for teaching yourself tensor algebra which for many beginner students can be overwhelmingly tricky. EinsteinPy also provides few utility functions for hypersurface embedding of Schwarzschild spacetime which further will be extended to model gravitational lensing simulation. The current version of the library is in a state that can be used by any serious student of general relativity trying to get the essence of this beautiful subject but is somewhere lost in the heavy mathematical formalism of the subject. EinsteinPy provides such students to really see through the equations and visualize what's really happening.}
 
+   \keywords{
+    gravitational physics --
+    astrophysics --
+    simulations --
+    black holes --
+    astropy
+    }
 
-\end{abstract}
+   \maketitle
+%
+%-------------------------------------------------------------------
 
-%% Keywords should appear after the \end{abstract} command. 
-%% See the online documentation for the full list of available subject
-%% keywords and the rules for their use.
-\keywords{gravitational physics, astrophysics --- 
-simulations --- black holes --- gravitational waves}
+\section{Introduction}
 
+   The relativistic theory of gravity paved its way to the ground in 1916, 
+   when Prof. Albert Einstein published his paper on the general theory of 
+   relativity \citeyear{Einstein:1916vd}. This elegant and rigorous framework 
+   was a generalized version of gravity-free theory - special relativity, 
+   which he published earlier in 1905. Even after almost a hundred years 
+   after Einstein wrote down the equations of General Relativity, solutions 
+   of the Einstein field equations remain extremely difficult to find beyond 
+   those which exhibit significant symmetries.
 
-%% From the front matter, we move on to the body of the paper.
-%% Sections are demarcated by \section and \subsection, respectively.
-%% Observe the use of the LaTeX \label
-%% command after the \subsection to give a symbolic KEY to the
-%% subsection for cross-referencing in a \ref command.
-%% You can use LaTeX's \ref and \label commands to keep track of
-%% cross-references to sections, equations, tables, and figures.
-%% That way, if you change the order of any elements, LaTeX will
-%% automatically renumber them.
-%%
-%% We recommend that authors also use the natbib \citep
-%% and \citet commands to identify citations.  The citations are
-%% tied to the reference list via symbolic KEYs. The KEY corresponds
-%% to the KEY in the \bibitem in the reference list below. 
+   We can study the behaviour of solutions under a high degree of symmetry 
+   considerations and could even solve analytically for highly unrealistic 
+   systems. In case of problems relevant to astrophysical and gravitational 
+   physics research, it remains a big daunting question on how to get around 
+   the problem of solving these field equations. This question is so profound 
+   that it has a separate field of research which goes with the name of numerical  
+   relativity and attempts to use computation science and programming to numerically 
+   obtain solutions of the equations (which would be the background geometry) 
+   for some turbulent region where most of the interesting dynamics are happening 
+   (as we can not solve for an infinitely large grid due to restrictions imposed 
+   on us by space and time complexity and computation power). 
 
+   The field of numerical relativity is growing rampantly with the vast literature 
+   on algorithms, numerical methods and theoretical formulations (from basic 3+1 
+   decomposition formulation to more sophisticated ones) with the development of 
+   robust and involved frameworks that provide a complete programming ecosystem 
+   and have proved to be essential tools for any numerical relativity researcher.
+   
+   Reflecting the other end of the research community stands the major section 
+   of theoretical physicists which counts the majority as a novice in programming. 
+   The head challenge is the fact that the usage of these frameworks demands 
+   heavy use of high-level programming languages like C, C++, Python, etc. 
+   Though Python provides a vast room for abstractions, no library existed that  
+   focused towards numerical relativity, eventually, the need of python library  
+   dedicated to general relativity became the propellant for the team and thus 
+   they made dauntless efforts to cover the space for this Python library. 
+   Since then, EinsteinPy has seen a lot of contributions from people all over 
+   the world and many ”good to go” functionalities are already provided in 
+   this and previous versions.
+   
+   EinsteinPy is made to provide a set of tools which can make numerical 
+   computations for solving Einstein’s field equations an easy job for anyone 
+   who does not want to deal with intricacies of the subject along with few, 
+   very basic but powerful functionalities that could be used by anyone who 
+   wants to learn the subject of general relativity with every minute detail.
+   
+   The library is as an attempt to provide programming and numerical environment 
+   for numerous numerical relativity problems like geodesics plotter, gravitational 
+   lensing and ray tracing, solving and simulating relativistic hydrodynamical  
+   equations, plotting of black hole event horizons, solving Einstein’s 
+   field equations and simulating various dynamical systems like binary merger etc.
+   
+   EinsteinPy provides an open-source and open-development core package and 
+   aims to build an ecosystem of affiliated packages that support numeric 
+   relativity functionality in the Python programming language. EinsteinPy 
+   core package is now a feature-rich library of sufficiently general tools 
+   and classes that support the development of more specialized code.
+   
+   In the further coming section, we discuss with some of the features of the 
+   current as well previous version and the plans which are yet to be implemented 
+   in the upcoming versions. Also, we describe a few code snippets to explain 
+   the usage of the library on which more details can be found on the 
+   project website. We start this paper by describing the way EinsteinPy functions 
+   followed by the main software efforts developed by the EinsteinPy itself 
+   with proper detailed documentation of the current version release. We end 
+   with a short vision for the future of EinsteinPy to its contribution in 
+   the field of computational methodology in gravitational and 
+   relativistic Astrophysics.
 
+%--------------------------------------------------------------------
+\section{Data Types}
 
-\section{Introduction} \label{sec:intro}
-The relativistic theory of gravity paved its way to the ground in 1916, when Prof. Albert Einstein published his paper on the general theory of relativity \citep{Einstein:1916vd}. This elegant and rigorous framework was a generalized version of gravity-free theory - special relativity, which he published earlier in 1905. Even after almost a hundred years after Einstein wrote down the equations of General Relativity, solutions of the Einstein field equations remain extremely difficult to find beyond those which exhibit significant symmetries.\\
-We can study the behavior of solutions under a high degree of symmetry considerations and could even solve analytically for highly unrealistic systems. In case of problems relevant to astrophysical and gravitational physics research, it still remains a big daunting question on how to get around the problem of solving these field equations. This question is so profound that it has a separate profound field of research which goes with the name of numerical relativity which attempts to use computation science and programming to numerically obtain solutions of the equations (which would be the background geometry) for some turbulent region where most of the interesting dynamics are happening (as we can not solve for an infinitely large grid due to restrictions imposed on us by space and time complexity and computability).\\
-Numerical methods have been used to solve the Einstein equation for many decades, but the past decade has seen tremendous advances and adding to that, the interest of the community grew when the field found applications in areas of radio astronomy, cosmology, signal processing, data mining. The field of numerical relativity is growing rampantly with the vast literature on algorithms, numerical methods and theoretical formulations (from basic 3+1 decomposition formulation to more sophisticated ones) with the development of robust and involved frameworks that provide a complete programming ecosystem and have proved to be essential tools for any numerical relativity researcher.\\
-Reflecting the other end of the research community stands the major section of theoretical physicists which counts the majority as a novice in programming. The head challenge is the fact that the usage of these frameworks demands heavy use of high-level programming languages like C, C++, Python, etc. Though Python provides a vast room for abstractions no library existed that focused towards numerical relativity, eventually, the need of python library dedicated to general relativity became the propellant for the team and thus they made dauntless efforts to cover the space for this Python library. Since then, EinsteinPy has seen a lot of contributions from people all over the world and many ”good to go” functionalities are already provided in this and previous versions.\\
-EinsteinPy is made to provide a set of tools which can make numerical computations for solving Einstein’s field equations an easy job for anyone who does not want to deal with intricacies of the subject along with few, very basic but powerful functionalities that could be used by anyone who wants to learn the subject of general relativity with every minute detail.
-The library is as an attempt to provide programming and numerical environment for numerous numerical relativity problems like geodesics plotter, gravitational lensing and ray tracing, solving and simulating relativistic hydrodynamical equations, plotting of black hole event horizons, solving Einstein’s field equations and simulating various dynamical systems like binary merger etc.\\
-EinsteinPy provides an open-source and open-development core package and aims to build an ecosystem of affiliated packages that support numeric relativity functionality in the Python programming language. ”Open development” describes a process where anybody with an internet connection can suggest changes to the source code and contribute their opinion when new features, bug fixes or other code changes, governance, or any other aspect of the development process is discussed. EinsteinPy core package is now a feature-rich library of sufficiently general tools and classes that support the development of more specialized code\\
-In the further coming section, we discuss with some of the features of the current as well previous version and the future plans which are yet to be implemented in the upcoming versions.Also, we describe a few code snippets to explain the usage of the library on which more details can be found on the organization website. The development of the EinsteinPy core package began as a community-driven effort to standardize core functionality for software in Python which renders a user-friendly interface for supporting numerical relativity and relativistic astrophysics research.\\
-We start this paper by describing the way EinsteinPy functions followed by the main software efforts developed by the EinsteinPy itself with proper detailed documentation of the current version release. We end with a short vision for the future of EinsteinPy to its contribution in the field of computational methodology in gravitational and relativistic Astrophysics.
+%-------------------------------------- Two column figure (place early!)
+  The EinsteinPy package provides some core data types for calculating, 
+  operating, visualizing geodesics and black holes. There are some data 
+  types created for symbolic manipulations and calculations of relativistic 
+  tensors. The most important data types for EinsteinPy are \texttt{Body}, 
+  \texttt{Geodesic} and \texttt{BaseRelativityTensor} objects that support 
+  defining and creating new bodies, storing and calculating geodesic for 
+  bodies, and handling respectively. The main purpose of these core classes 
+  is to standardize the way calculations and visualizations are done for 
+  various kinds of heavy cosmic bodies and black holes. The classes always 
+  maintain the consistency in units of measurement wherever applicable, and 
+  create a consistent and clean API for any non-programmer to understand. 
+  The classes are designed such that it resembles the flow of physics and 
+  are as intuitional as possible. These core classes also include a rigid 
+  architecture for data manipulation and visualizations wherever applicable. 
+  Following sections provide deep insight into the above mentioned three 
+  core data types of EinsteinPy:
+  
+  \subsection{Body}
+  The Body data type helps define an attractor i.e. the central black-hole 
+  or the heavy mass object and later the objects under its influence. 
+  The bodies can have their characteristics defined then and there thus 
+  helping the user create the system easily. 
+  
+  \subsection{Geodesic}
+  A geodesic is the path that an-accelerating particle would follow. 
+  In the plane, the geodesics are straight lines. On the sphere, the 
+  geodesics are great circles. The Geodesic data type helps define the 
+  geodesic of a body in the presence of an attractor or more aptly, 
+  according to the system user created. These \texttt{Geodesic} objects 
+  can be defined for any configuration and metric. 
+  
+  \subsection{BaseRelativityTensor}
+  This is a base class from which other tensors in \textit{symbolic} 
+  module are derived. The user can use this class to create his/her 
+  own tensor while using the various in-built functions provided by this 
+  class. The class also maintains the indicial configuration of 
+  the tensor(contravariant and covariant indices), calculates the 
+  free variables used in describing the tensor other than those which 
+  depicts the axis of space-time itself (e.g. $t, x, y, z$). The class 
+  has a function to convert the symbolic tensorial quantities into 
+  functions where actual numerical values can be substituted.
 
+\section{Unit Handling}
 
-\section{Data Types} \label{sec:datatypes}
+All user-facing functionality provided by EinsteinPy make use of Astropy \citet{astropy:2013} units. All functions and objects must have their input 
+constrained to the appropriate type of unit (e.g., length, mass or energy). 
+Inputs can then be provided with any units that match the required type 
+(e.g., millimeters and inches are both valid units for length) and conversions 
+occur automatically without user intervention. The einsteinpy.constant 
+subpackage contains a few standard constants.
 
-The EinsteinPy package provides some core data types for calculating, operating on, visualizing geodesics and black holes. There are some data types created for symbolic manipulations and calculations of relativistic tensors. The most important data types for EinsteinPy are \texttt{Body}, \texttt{Geodesic} and \texttt{BaseRelativityTensor} objects that support defining and creating new bodies, storing and calculating geodesic for bodies, and handling respectively. The main purpose of these core classes is to standardize the way calculations and visualizations are done for various kinds of heavy cosmic bodies and black holes. The classes always maintain the consistency in units of measurement wherever applicable, and create a consistent and clean API for any non-programmer to understand. The classes are designed such that it resembles the flow of physics and are  as intuitional as possible. These core classes also include a rigid architecture for data manipulation and visualizations wherever applicable. Following sections provide deep insight into the above mentioned three code data types of EinsteinPy:
+\section{Development Model}
+The EinsteinPy Project follows an open development model, which is widely used in the scientific Python community and other computational astrophysics packages. The project is hosted on GitHub as a public repository with restricted write access to some key people. However, anyone is welcomed and is encouraged to make code contributions and suggest changes using pull requests. Since the repository containing the codebase is licensed under an open and permissive MIT licence,  the project allows commercial use, modification, sub licensing, distribution and private use as long as the copyright notice and license are redistributed. The project uses git for distributed version control and relies on CircleCI, Codefactor, GitHub Actions etc. for running the unit tests and other CI checks for every pull request.
+The code quality is maintained at the highest standards with a strong control on the cyclomatic complexity, code linting, imports ordering and a proper docstring wherever necessary. Every contribution is reviewed to further see if it fulfils the following requirements: 
 
-\subsection{Body} \label{subsec:Body}
-The Body data type helps define the central black-hole or the heavy massed object and the objects revolving around it. 
-% A new body can be defined by some of the very basic constraints:
-
-% \begin{itemize}
-% \item \texttt{name}: Body Name,
-% \item \texttt{mass}: Mass of the body with attached astropy units 
-% \item \texttt{R}: Radius of the body with attached astropy units
-% \item \texttt{differential}: Complete position and velocity vector of the body in form of a Cartesian / Spherical / BoyerLindquist data class object from einsteinpy coordinates (optional)
-% \item \texttt{a}: Spin factor (a) of the body for Kerr Solutions with attached astropy units (optional)
-% \item \texttt{q}: Charge of the body with attached astropy units (optional)
-% \item \texttt{is\_attractor}: A boolean variable concerned with if the body is to be supposed as a central attractor. (optional)
-% \item \texttt{parent}: Parent body for the body, object of the same data class (optional)
-% \end{itemize}
-
-\subsection{Geodesic} \label{subsec:Geodesic}
-The Body data type helps define the central black-hole or the heavy massed object and the objects revolving around it. 
-% A new body can be defined by some of the very basic constraints:
-
-\subsection{BaseRelativityTensor} \label{subsec:BaseRelativityTensor}
-This is a base class from which other tensors in \textit{symbolic} module are derived. The user can use this class to create his/her own tensor while using the various in-built functions provided by this class. The class also maintains the indicial configuration of the tensor(contravariant and covariant indices), calculates the free variables used in describing the tensor other than those which depicts the axis of space-time itself (e.g. $t, x, y, z$). The class has a function to convert the symbolic tensorial quantities into functions where actual numerical values can be substitued.
-
-% This class along with its parent class \textit{Tensor} have the following functions/properties,
-% \begin{itemize}
-% \item \texttt{order} (Property) : Returns the order of the tensor. 
-% \item \texttt{config} (Property) : Returns the arrangement of contravariant(upper)/covariant(lower) indices of the tensor. For example, 'ulll'.
-% \item \texttt{parent\_metric} (Property) : Returns the metric tensor of the space-time associated with the tensor, if present. Else returns \texttt{None}.
-% \item \texttt{tensor} (Function) : Returns the tensorial quantity contained within the class instance.
-% \item \texttt{subs} (Function) : Returns a new tensor upon substitution of current variables with new variables/values.
-% \item \texttt{simplify} (Function) : Returns a tensor contain simplified expressions from the current tensor.
-% \item \texttt{symbols} (Function) : Returns the symbols denoting each axis of the space-time.
-% \item \texttt{tensor\_lambdify} (Function) : Returns lambdified function of symbolic tensors. This means that the returned functions can accept numerical values and return numerical quantities.
-% \item \texttt{lorentz\_transform} (Function) : Returns a lorentz-transformed tensor when supplied with a transformation matrix. This function also considers the contravariance and covariance of tensors during transformation.
-% \end{itemize}
-
-
-\section{UNIT HANDLING} \label{sec:unithandle}
-All user-facing functionality provided by einsteinpy make use of astropy.units. 
-All functions and objects must have their input constrained to the appropriate type of unit (e.g., length, mass or energy). Inputs can then be provided with any units that match the required type (e.g., millimeters and inches are both valid units for length) and conversions occur automatically without user intervention. The einsteinpy.constant subpackage contains a few standard constants.
-
-\section{Development Model} \label{sec:devmodels}
-The EinsteinPy Project follows an open development model, which is widely used in the scientific Python community and other computational astrophysics packages. The project is hosted on GitHub as a public repository with restricted write access to some key people. Anyone, however is welcome and encouraged to make code contributions and suggest changes using pull requests. Since the repository containing the codebase is licenced under an open and permissive MIT licence,  the project allows commercial use, modification, sublicensing, distribution and private use as long as the copyright notice and licence is redistributed. The project uses git for distributed version control and relies on CircleCI, Codefactor, GitHub Actions etc. for running the unit tests and other CI checks for every pull request.
-The code quality is maintained at the highest standards with strong control on the cyclomatic complexity, code linting, imports ordering and a proper docstring wherever necessary. Every contribution is reviewed and it must meet the following requirements: 
 
 \begin{itemize}
-\item \texttt The code must strictly adhere to the PEP8 Standards, on the top of it, the code must be linted with black to save the reviewer’s time identifying the changes made and reduce the diff generated because of the patch.
+\item \texttt The code must strictly adhere to the PEP8 Standards, on the top of it, the code must be lined with black to save the reviewer’s time identifying the changes made and reduce the diff generated because of the patch.
 \item \texttt The imports in the code must be sorted using tools such as isort. 
 \item \texttt The documentation follows numpy like docstrings, and a proper reStructured Text syntax is followed for writing the documentation.
 \item \texttt The changelog is populated at release-time by the lead developer and the releasing developer
 \end{itemize}
 EinsteinPy further follows a trunk-based development model, which ensures a new branch for every minor release and new patch release made using the minor release branch. All the latest changes are kept on the master branch on GitHub and the relevant issues are closed as soon as the pull request solving it merges onto the master. A release having the changes is made at a later date. 
-EinsteinPy only supports the latest bleeding-edge Python, Numpy\citep{numpy} and Astropy\citep{astropy:2018} versions.  All the stable Python versions after Python 3.5 are supported. All the code snippets written follow the guidelines of numba\citep{Lam2015NumbaAL} in order to accelerate the Python code and make the simulations faster. 
+EinsteinPy only supports the latest bleeding-edge Python, Numpy\citep{numpy} and Astropy \citep{2019arXiv190710121V}{astropy:2018} versions.  All the stable Python versions after Python 3.5 are supported. All the code snippets written follow the guidelines of numba \citep{Lam2015NumbaAL} to accelerate the Python code and make the simulations faster. 
 
-
-
-
-\section{The EinsteinPy Core Package} \label{sec:core}
+\section{The EinsteinPy Core Package} 
 This section explains in detail, the modules available within EinsteinPy core package, their API and the purpose they serve.
-\subsection{METRIC} \label{subsec:metric}
-This module captures all the geometric and causal structure of specific space-times, and being able to calculate trajectories in a given space-time. 
-The module derives its name from Metric Tensor, a tensorial quantity used to describe differential lengths, especially in a curved space-time. 
-However, this module serves more than its usual definition and ultimately leads us to obtain geodesics of particles in a spacetime with high curvature, where notions of Newtonian physics fail.
-\subsubsection{Schwarzschild Metric \citep{Schwarzschild:1916uq}} \label{subsubsec:sch}
+\subsection{Metric}
+This module captures all the geometric and causal structure of specific space-times, and can calculate trajectories in a given space-time. 
+The module derives its name from Metric Tensor, a tensorial quantity used to describe differential lengths, especially in curved space-time. 
+However, this module serves more than its usual definition and ultimately leads us to obtain geodesics of particles in a space-time with high curvature, where notions of Newtonian physics fail.
+\subsubsection{Schwarzschild Metric} 
 Karl Schwarzschild pioneered the analysis of the relation between the size of black hole and its mass and this work paved the way for the first exact solution of Einstein's Field Equation under the limited case of single spherical non-rotating, non-charged body. 
-The metric equation corresponding to a space-time centred around a body in the above described conditions is given by,
+The metric equation \citep{Schwarzschild:1916uq} corresponding to a space-time centred around a body in the above described conditions is given by,
 
 \begin{align}
 & ds^2 = -c^2 d\tau ^2 = - (1 - \frac{r_s}{r})c^2 dt^2  + \frac{1}{(1 - \frac{r_s}{r})}dr^2 + r^2 d\theta ^2 + r^2 sin^2 \theta d\phi ^2
 \end{align}
 
-%The same equation can be written in a tonsorial form as follows,
-
-%\begin{gather}
-%g_{\mu \nu} = \begin{bmatrix} - (1 - \frac{r_s}{r})c^2 & 0 & 0 & 0 \\ 0 & \frac{1}{(1 - \frac{r_s}{r})} & 0 & 0 \\ 0 & 0 & r^2 & 0 \\ 0 & 0 & 0 &  r^2 sin^2 \theta \end{bmatrix} \\ 
-%\nonumber \\
-%ds^2 = g_{\mu \nu} dx^\mu dx^\nu
-%\end{gather}
-
-%where $r_s$ is the schwarzschild radius of a given heavy body and is given by the equation,
-
-%\begin{gather}
-%r_s = \frac{2GM}{c^2}
-%\end{gather}
-
-%$G$, $M$, and $c$ are gravitational constant, mass of the body and speed of light in vacuum respectively.
-
-Schwarzschild Radius is a limit below which the degree of space-time curvature causes the particle to undergo irreversible gravitational collapse wherein the particle would need a speed greater than speed of light ot escape singularity.
+Schwarzschild Radius is a limit below which the degree of space-time curvature causes the particle to undergo irreversible gravitational collapse wherein the particle would need a speed greater than speed of light to escape singularity.
 
 As $r \to \infty$, the metric defined above starts to approximate flat Minkowski space-time, thus showing that Schwarzschild geometry is asymptotically flat. 
 
-If supplied with initial position and velocity of a particle with negligible mass(in comparision to the central body), we can obtain the geodesics of the particle for a given range of proper time $\tau$, as it boils down to a set of eight differential equations numerically solvable by a class of Runge-Kutta methods.
+If supplied with initial position and velocity of a particle with negligible mass(in comparison to the central body), we can obtain the geodesics of the particle for a given range of proper time $\tau$, as it boils down to a set of eight differential equations numerically solvable by a class of Runge-Kutta methods.
 
-%Here is a working code describing the motion of particle revolving around a black hole of mass approximately equal to mass of the Earth. As the trajectory starts from a mere $130m$ from the black hole, we obtain some interesting observations.
 
-% \begin{lstlisting}[language=Python, caption=Importing the required modules]
-% >>> import numpy as np
-% >>> import astropy.units as u
-% >>> from einsteinpy.plotting import GeodesicPlotter
-% >>> from einsteinpy.coordinates import SphericalDifferential
-% >>> from einsteinpy.bodies import Body
-% >>> from einsteinpy.geodesic import Geodesic
-% \end{lstlisting}
+\begin{figure}[ht]
+	\centering
+	\includegraphics[scale=0.7]{figures/perihelion_cropped.png}
+	%\centerline{\includegraphics{ftcbuild2.pdf}}
+	\caption{Plot obtained from the above code showing the phenomenon of perihelion advance}
+	\label{fig:schwarzschild}
+\end{figure}
 
-% \begin{lstlisting}[language=Python, caption=Defining the attractor and the particle and calculating geodesics]
-% >>> Attractor = Body(name="BH", mass=6e24 * u.kg)
-% >>> init_conditions = SphericalDifferential(130*u.m, np.pi/2*u.rad, -np.pi/8*u.rad,
-% ...                                         0*u.m/u.s, 0*u.rad/u.s, 1900*u.rad/u.s)
-% >>> Particle = Body(differential=init_conditions, parent=Attractor)
-% >>> geodesic = Geodesic(body=Particle, end_lambda=0.00205, step_size=5e-8)
+We observe the phenomenon of perihelion advance of a particle around a heavy body due to spacetime curavture. The orbit would have been purely eliptical if plotted in accordance with Newtonian Mechanics, however, the curvature of space-time around the heavy mass shifts the orbit with each revolution. In practicality, this phenomenon is not so pronounced as no particle approaches a heavy mass this closely. For instance, Mercury advances its perihelion at a rate of $42.98\pm 0.04$ arcsec/century.
 
-% \end{lstlisting}
-% We can see that for each timestep, we obtain eight values : $t$, $r$, $\theta$, $\phi$, $v_t$, $v_r$, $v_\theta$ and $v_\phi$ corrosponding to coordinate time, radial distance from the centre, polar angle, azimuth angle and their respective velocities w.r.t proper time $\tau$.
-
-% Further, we plot the trajectory in 2D for vizualization purposes.
-% \begin{lstlisting}[language=Python, caption=Plotting the trajectory]
-% >>> obj = GeodesicPlotter()
-% >>> obj.plot(geodesic)
-% >>> obj.show()
-% \end{lstlisting}
-
-% \begin{figure}[h]
-% 	\centering
-% 	\includegraphics[scale=0.7]{figures/perihelion_cropped.png}
-% 	%\centerline{\includegraphics{ftcbuild2.pdf}}
-% 	\caption{Plot obtained from the above code showing the phenomenon of perihelion advance}
-% 	\label{fig:schwarzschild}
-% \end{figure}
-
-% We observe the phenomenon of perihelion advance of a particle around a heavy body due to spacetime curavture. The orbit would have been purely eliptical if plotted in accordance with Newtonian Mechanics, however, the curvature of space-time around the heavy mass shifts the orbit with each revolution. In practicality, this phenomenon is not so pronounced as no particle approaches a heavy mass this closely. For instance, Mercury advances its perihelion at a rate of $42.98\pm 0.04$ arcsec/century.
-
-\subsubsection{Kerr Metric}\label{subsubsec:kerr}
-Kerr metric is a further generalization of Schwarzschild metric and a specific case of Kerr-Newman geometry. A spacetime is defined as a "Kerr" spacetime as and when the massive central body posseses an angular momentum. The corresponding metric equation which defines the space-time is,
+\subsubsection{Kerr Metric}
+Kerr metric \citep{Kerr:1963ud} is a further generalization of Schwarzschild metric and a specific case of Kerr-Newman geometry. A space-time is defined as a "Kerr" space-time as and when the massive central body possesses an angular momentum. The corresponding metric equation which defines the space-time is,
 
 \begin{gather}
 g_{\mu \nu} = \begin{bmatrix} - (1 - \frac{r_s r}{\Sigma})c^2 & 0 & 0 & -\frac{r_s r a sin^2 \theta}{\Sigma}c \\ 0 & \frac{\Sigma}{\Delta} & 0 & 0 \\ 0 & 0 & \Sigma & 0 \\ -\frac{r_s r a sin^2 \theta}{\Sigma}c & 0 & 0 &  (r^2 + a^2 + \frac{r_s r a^2}{\Sigma}sin^2 \theta) sin^2 \theta \end{bmatrix} \\ 
@@ -435,28 +282,19 @@ $J$ is the angular momentum of the body and all the other symbols hold their usu
 
 APIs for \textit{Schwarzschild}, \textit{Kerr} and \textit{KerrNewman} are consistent and code structure remains same for the sake for clarity and intuitiveness. For example,
 
-% \begin{lstlisting}[language=Python, caption=Defining the Kerr Body and the particle and calculating geodesics]
-% >>> a = 0.3 * u.m
-% >>> attractor = Body(name="BH", mass=1.989e30 * u.kg, a=a)
-% >>> coordinates = BoyerLindquistDifferential(49.95e5 * u.km, np.pi / 2 * u.rad, np.pi * u.rad, a=a)
-% >>> particle = Body(differential=init_conditions, parent=attractor)
-% >>> geodesic = Geodesic(body=particle, end_lambda=33932.90, step_size=1.2, metric=Kerr)
-% \end{lstlisting}
-% As evident from the code, API across different classes are made to be as homogeneous as possible.
-
-% As a rotating black hole drags the space-time around it, a freely falling object acquires a angular velocity around the coordinate centre, i.e centre of the black hole. This effect is evident from the plot obtained from the above geodesics, in the same way as obtained one in the Schwarzschild example.
-
-% \begin{figure}[h]
-% 	\centering
-% 	\includegraphics[scale=0.1]{figures/blank.jpg} %replace this when the actual plot becomes available
-	%\centerline{\includegraphics{ftcbuild2.pdf}}
-% 	\caption{Plot obtained from the above geodesics showing the phenomenon of frame dragging}
-% 	\label{fig:kerr}
-% \end{figure}
 
 
-\subsubsection{Kerr-Newman Metric}\label{subsubsec:kerrnewman}
-Kerr-Newman metric presents the most general case within single-body vacuum solutions of Einstein Field Equation. It generalizes all the quantities used to describe a black hole, as affirmed by "no hair" theorem, i.e. Charge $Q$, Angular Momentum $J$ and Mass $M$. The metric equation is given by,
+\begin{figure}[ht]
+	\centering
+	\includegraphics[scale=0.5]{figures/drag.png} %replace this when the actual plot becomes available
+% 	\centerline{\includegraphics{ftcbuild2.pdf}}
+	\caption{Plot obtained from the above geodesics showing the phenomenon of frame dragging}
+	\label{fig:kerr}
+\end{figure}
+
+
+\subsubsection{Kerr-Newman Metric}
+Kerr-Newman metric \citep{Adamo:2014baa} presents the most general case within single-body vacuum solutions of Einstein Field Equation. It generalizes all the quantities used to describe a black hole, as affirmed by "no hair" theorem, i.e. Charge $Q$, Angular Momentum $J$ and Mass $M$. The metric equation is given by,
 
 \begin{gather}
 -ds^2 = c^2 d\tau^2 = -(\frac{dr^2}{\Delta}+d\theta^2)\rho^2 + (c dt - a sin^2 \theta d\phi)^2 \frac{\Delta}{\rho^2} - ((r^2 + a^2)d\phi - ac dt)^2 \frac{sin^2 \theta}{\rho^2}
@@ -471,18 +309,22 @@ a = \frac{J}{Mc}, \nonumber \\
 r_Q ^ 2 = \frac{Q^2 G}{4\pi\epsilon_0 c^4} \nonumber
 \end{gather}
 
-All the other symbols convey their usual meanings, as discussed in the previous two sections \ref{subsubsec:sch} and \ref{subsubsec:kerr}. For the sake of brevity, we would not go into the specifics of this class as the classes within \textit{Metric} module share very similar APIs as inferred in \ref{subsubsec:kerr}.
+All the other symbols convey their usual meanings, as discussed in the previous two sections Schwarzschild and Kerr Metric. For the sake of brevity, we would not go into the specifics of this class as the classes within \textit{Metric} module share very similar APIs as inferred in section for \texttt{Kerr}.
 
-\subsection{COORDINATES}
-The coordinates subpackage provides support for representing and transforming coordinates. Cartesian, Spherical and BoyerLindquist coordinate system can be accessed while using einsteinpy.
+\subsection{Coordinates}
+The coordinates subpackage provides support for representing and transforming coordinates. EinsteinPy provides support in Cartesian, Spherical and Boyer-Lindquist Coordinate systems. All of these are inter-convertible and can be used anytime. All the calculations within the module are majorly done in Spherical system. Numba \citep{Lam2015NumbaAL} is used to speed up the coordinate conversions for an extra performance boost.
+ 
+EinsteinPy is the only actively maintained Python project which supports Boyer-Lindquist Coordinate system \citep{doi:10.1063/1.1705193}. Boyer and Lindquist wanted to modify the Kerr metric in a form closer to the usual form of the Schwarzschild metric. To do this, they defined a new coordinate system(t, r, $ \theta, \phi$).  In spherical coordinates where surfaces of constant r are spheres, but in  Boyer-Lindquist coordinates the corresponding surfaces are ellipsoids. 
 
-\subsection{SYMBOLIC}
-General Relativity required heavy mathematical formulation to derive and describe various tensors attributing to various features essential for cogent description of an arbitrary space-time. We would describe the various quantities currently supported by this module while maintaining brevity. Each quantity has its own class, even scalars, which are treated as 0\textsuperscript{th} order tensors.
 
-All the mathematical quantities build upon \hyperref[subsec:BaseRelativityTensor]{\textit{BaseRelativityTensor}} as derived classes, which is discussed in detail in \ref{subsec:BaseRelativityTensor}. 
 
-\subsubsection{MetricTensor}\label{subsubsec:metric}
-Metric Tensor describes the differential length elements required to measure distance in a curved(also applies to flat) space-time. It is a second order tensor and is fundamental to describe any space-time geometry. The \textit{MetricTensor} class, being inherited from \hyperref[subsec:BaseRelativityTensor]{\textit{BaseRelativityTensor}} , inherits all its functions and also have some functions and constraints of its own. For example, metric tensor is bound to be a second order tensor.
+\subsection{Symbolic}
+General Relativity required heavy mathematical formulation to derive and describe various tensors attributing to various features essential for the cogent description of an arbitrary space-time. We would describe the various quantities currently supported by this module while maintaining brevity. Each quantity has its class, even scalars, which are treated as 0\textsuperscript{th} order tensors.
+
+All the mathematical quantities build upon \textit{BaseRelativityTensor} as derived classes, which is discussed in detail in section describing \textit{BaseRelativityTensor}.
+
+\subsubsection{MetricTensor}
+Metric Tensor describes the differential length elements required to measure distance in a curved(also applies to flat) space-time. It is a second order tensor and is fundamental to describe any space-time geometry. The \textit{MetricTensor} class, being inherited from  \textit{BaseRelativityTensor} , inherits all its functions and also have some functions and constraints of its own. For example, metric tensor is bound to be a second order tensor.
 
 % The defined class functions are :
 % \begin{itemize}
@@ -490,7 +332,7 @@ Metric Tensor describes the differential length elements required to measure dis
 % \item \texttt{inv} : returns inverse of the metric
 % \end{itemize}
 
-Also, the library maintains an ever expanding predefined metrics for direct use in research purposes.
+Also, the library maintains an ever expanding predefined metrics for direct use in research.
 
 %\begin{lstlisting}[language=Python, caption=Importing a predefined metric]
 %>>> from einsteinpy.symbolic.predefined import CMetric
@@ -513,7 +355,7 @@ Also, the library maintains an ever expanding predefined metrics for direct use 
 
 \subsubsection{ChristoffelSymbols}\label{subsubsec:chl}
 
-Although Christoffel Symbols are belong to class of pseudo-tensors, it is inherited from \hyperref[subsec:BaseRelativityTensor]{\textit{BaseRelativityTensor}} to maintain homogenity within the module. Being inherited from  \hyperref[subsec:BaseRelativityTensor]{\textit{BaseRelativityTensor}}, it already supports the functions of its parent class and imposes some restrictions of its own, such as order of the tensor should be 3.
+Although Christoffel Symbols belong to class of pseudo-tensors, it is inherited from \textit{BaseRelativityTensor} to maintain homogeneity within the module. Being inherited from \textit{BaseRelativityTensor}, it already supports the functions of its parent class and imposes some restrictions of its own, such as order of the tensor should be 3.
 
 % Instance of the class can be made by directly passing a 3\textsuperscript{rd} order tensor or can be obtained using the following classmethods,
 % \begin{itemize}
@@ -528,7 +370,7 @@ Although Christoffel Symbols are belong to class of pseudo-tensors, it is inheri
 
 \subsubsection{RiemannCurvatureTensor}\label{subsubsec:riemann}
 
-This quantity is the most extensive measure of curvature of a sapce-time. It is inherited from \hyperref[subsec:BaseRelativityTensor]{\textit{BaseRelativityTensor}} and supports all the functions of its parent class. 
+This quantity is the most extensive measure of curvature of a space-time. It is inherited from \textit{BaseRelativityTensor} and supports all the functions of its parent class. 
 
 % Instance of the class can be made by directly passing a 4\textsuperscript{th} order tensor or can be obtained using the following classmethods
 % \begin{itemize}
@@ -544,7 +386,7 @@ This quantity is the most extensive measure of curvature of a sapce-time. It is 
 
 \subsubsection{RicciTensor}\label{subsubsec:riccitensor}
 
-This tensor is used in solving Eintein's  equation and basically contraction of Riemann Curvature Tensor.  It is inherited from \hyperref[subsec:BaseRelativityTensor]{\textit{BaseRelativityTensor}} and supports all the functions of its parent class. 
+This tensor is used in solving Einstein's  equation and is basically contraction of Riemann Curvature Tensor.  It is inherited from \textit{BaseRelativityTensor} and supports all the functions of its parent class. 
 
 % Instance of the class can be made by directly passing a 2\textsuperscript{nd} order tensor or can be obtained using the following classmethods
 % \begin{itemize}
@@ -560,7 +402,7 @@ This tensor is used in solving Eintein's  equation and basically contraction of 
 
 \subsubsection{RicciScalar}\label{subsubsec:ricciscalar}
 
-It is a scalar quantity obtained by contracting a given Ricci Tensor. It is inherited from \hyperref[subsec:BaseRelativityTensor]{\textit{BaseRelativityTensor}} and supports all the functions of its parent class. Being a scalar quantity, it does not support \texttt{change\_config} unlike other tensors as discussed above.
+It is a scalar quantity obtained by contracting a given Ricci Tensor. It is inherited from \textit{BaseRelativityTensor} and supports all the functions of its parent class. Being a scalar quantity, it does not support \texttt{change\_config} unlike other tensors as discussed above.
 
 % Instance of the class can be made by directly passing a symbolic expression or can be obtained using the following classmethods
 % \begin{itemize}
@@ -575,8 +417,8 @@ It is a scalar quantity obtained by contracting a given Ricci Tensor. It is inhe
 % \item \texttt{expr} : returns the scalar symbolic expression contained in the class. 
 % \end{itemize}
 
-Here is a sample code snippet, using the above discussed Classes
 
+Here is a sample code snippet, using the above discussed classes : 
 
 \begin{lstlisting}[language=Python, caption=Importing Anti De-Sitter metric]
 >>> from einsteinpy.symbolic.predefined import AntiDeSitter
@@ -602,12 +444,13 @@ $\displaystyle \left[\begin{matrix}3 & 0 & 0 & 0\\0 & - 3 \cos^{2}{\left(t \righ
 $\displaystyle -12$
 \end{center}
 
-In congruence to theoretical results, the code outputs a constant negetive scalar curvature for Anti De-Sitter spacetime. All the above discussed classes are called in this snippet as \hyperref[subsubsec:riccitensor]{\textit{RicciTensor}} internally calls \hyperref[subsubsec:riemann]{\textit{RiemannCurvatureTensor}}, which in turn calls \hyperref[subsubsec:chl]{\textit{ChristoffelSymbols}}.
+
+In congruence to theoretical results, the code outputs a constant negetive scalar curvature for Anti De-Sitter spacetime. All the above discussed classes are called in this snippet as \textit{RicciTensor} internally calls \textit{RiemannCurvatureTensor}, which in turn calls \textit{ChristoffelSymbols}.
 
 
 \subsubsection{Other Defined Quantities}\label{subsubsec:other}
 
-As the library is in heavy development, new quantities are being added as and when required. Some other quantities currently supported are listed below. The quantities are all inherited from \hyperref[subsec:BaseRelativityTensor]{\textit{BaseRelativityTensor}}, and a similar API (same as that of discussed above) has been implemented to maintain compatiblity and homegenity. The class names denote usual quantities relevant to General Relativity.
+As the library is in heavy development, new quantities are being added as and when required. Some other quantities currently supported are listed below. The quantities are all inherited from \textit{BaseRelativityTensor}, and a similar API (same as that of discussed above) has been implemented to maintain compatiblity and homogeneity. The class names denote usual quantities relevant to General Relativity.
 
 \begin{itemize}
 \item \textit{EinsteinTensor}
@@ -621,18 +464,33 @@ As the library is in heavy development, new quantities are being added as and wh
 
 
 
-\subsection{HYPERSURFACE}
-This module provides basic computational functions which are essential for modelling the space-like hypersurface for any space-time geometry. Currently module has implementation for Schwarzschild geometry with conversion functions from Schwarzschild coordinates to 3-D spherical coordinates and some plotting utilities. The whole module is expected to extend for providing a super-class for implementations related to gravitational lensing simulations and numerical calculations of null geodesics on hypersurfaces and deviation angles for systems which are relevant to relativistic astrophysical problems. A small code snippet for plotting the hypersurface is as follows:
+\subsection{Hypersurface}
+This module provides basic computational functions which are essential for modelling the space-like hypersurface for any space-time geometry. Currently, the module has an implementation for Schwarzschild geometry with conversion functions from Schwarzschild coordinates to 3-D spherical coordinates and some plotting utilities. The whole module is expected to extend for providing a super-class for implementations related to gravitational lensing simulations and numerical calculations of null geodesics on hypersurfaces and deviation angles for systems which are relevant to relativistic astrophysical problems. A small code snippet for plotting the hypersurface is as follows:
 \begin{lstlisting}[language=Python, caption=Schwarzschild Embedding]
 >>> surface_obj = SchwarzschildEmbedding(5.927e23 * u.kg)
 >>> surface = HypersurfacePlotter(embedding=surface_obj, plot_type='surface')
 >>> surface.plot()
 >>> surface.show()
 \end{lstlisting}
+\begin{figure}[ht]
+	\centering
+	\includegraphics[scale=0.5]{figures/hypersurface_surface.png} %replace this when the actual plot becomes available
+% 	\centerline{\includegraphics{ftcbuild2.pdf}}
+	\caption{Schwarzschild embedding}
+	\label{fig:hypersurface}
+\end{figure}
 
-\subsection{PLOTTING}
-The plotting ecosystem in EinsteinPy has two back-ends for two type of users. A static, matplotlib based plotter for publication quality plots and an interactive plotly based plotter for analysis and interpretation. \\
-The plotting module is specifically designed keeping in mind the variety of IDEs and tools people working with Python use, for example python scripts, jupyter notebooks, spyder, pycharm etc. As plotly plots need JavasScript to render plots, it becomes difficult for the first time user to decide which backend to use. \texttt{StaticGeodesicPlotter} and \texttt{InteractiveGeodesicPlotter} undergo an internal switching depending on the environment variables and the appropriate environment aware plot is shown to the user for a better user experience and interface.\\
+\subsection{Plotting}
+The plotting ecosystem in EinsteinPy has two back-ends for two type of users. A static, matplotlib based plotter for publication-quality plots and an interactive plotly based plotter for analysis and interpretation. \\
+The plotting module is specifically designed keeping in mind the variety of IDEs and tools people working with Python use, for example, python scripts, jupyter notebooks, spyder, pycharm etc. As plotly plots need JavasScript to render plots, it becomes difficult for the first time user to decide which backend to use. \texttt{StaticGeodesicPlotter} and \texttt{InteractiveGeodesicPlotter} undergo an internal switching depending on the environment variables and the appropriate environment aware plot is shown to the user for better user experience and interface.\\
+The plotting module throughout the applications follow a very consistent API. \begin{lstlisting}[language=Python, caption=Plotting Module API]
+>>> data = Plotter()
+>>> data.plot()
+>>> data.show()
+\end{lstlisting}
+
+\subsection{Rays}
+The rays module of EinsteinPy tries to focus on how light behaves around heavy mass objects and the 
 The plotting module throughout the applications follow a very consistent API. \begin{lstlisting}[language=Python, caption=Plotting Module API]
 >>> data = Plotter()
 >>> data.plot()
@@ -640,93 +498,63 @@ The plotting module throughout the applications follow a very consistent API. \b
 \end{lstlisting}
 
 
-\section{INFRASTRUCTURE} \label{sec:infra}
-\subsection{ Testing} \label{subsec:testing}
-The EinsteinPy Project maintains a very high bar in accepting changes and introducing new features. Every patch of code that is accepted in the codebase through any pull request has to be well tested using some unit tests unless given an exception after discussion with both the lead developers. Currently the coverage of unit tests, which means the total fraction of codebase run by at least one unit test is 94\% and we hope to improve it in the future. The 100\% code coverage for this software at this level is not possible because of lack of accurate data to test the code against. We deliberately leave some parts of the codebase out of the testing loop because testing those modules is not possible with the current knowledge level and expertise. However, 94\% code coverage is good enough when we consider other packages in scientific Python community who face the similar problem.  
+\section{Infrastructure} \label{sec:infra}
+\subsection{Testing} \label{subsec:testing}
+The EinsteinPy Project maintains a very high bar in accepting changes and introducing new features. Every patch of code that is accepted in the codebase through any pull request has to be well tested using some unit tests unless given an exception after discussion with both the lead developers. Currently, the coverage of unit tests, which means the total fraction of codebase run by at least one unit test is 94\% and we hope to improve it in the future. The 100\% code coverage for this software at this level is not possible because of the lack of accurate data to test the code against. We deliberately leave some parts of the codebase out of the testing loop because testing those modules is not possible with the current knowledge level and expertise. However, 94\% code coverage is good enough when we consider other packages in the scientific Python community who face a similar problem.  
 
-The test suite can be run manually as well as it runs in an automated fashion on every commit as well as pull request to maintain the code standards, and make it easier for contributors to understand the implications and impact of their changes. The EinsteinPy Project uses many continuous-integration services which provide services to create automated pipelines for code inspection, unit testing, coverage publishing etc. All the contributions trigger these free services (Codecov, CircleCI, Appveyor, GitHub Actions, Codefactor, Codeclimate, Hound, WIP) which are integrated with GitHub repository. All the pull requests are checked for code linting by a pep8speaks bot, which suggests the lines of code which violate the PEP8 standard to the contributor in a human readable way. All these services run on three types of operating systems (Windows, MacOS and Linux). The unit tests run on various versions of Python. They test the documentation builds, test coverage, check whether the pull request author has indicated that it is a work in progress (WIP).They also run several code linting checks which further triggers the unit test build.
+The test suite can be run manually as well as it runs in an automated fashion on every commit as well as pull request to maintain the code standards, and make it easier for contributors to understand the implications and impact of their changes. The EinsteinPy Project uses many continuous-integration services which provide services to create automated pipelines for code inspection, unit testing, coverage publishing etc. All the contributions trigger these free services (Codecov, CircleCI, Appveyor, GitHub Actions, Codefactor, Codeclimate, Hound, WIP) which are integrated with GitHub repository. All the pull requests are checked for code linting by a pep8speaks bot, which suggests the lines of code which violate the PEP8 standard to the contributor in a human-readable way. All these services run on three types of operating systems (Windows, macOS and Linux). The unit tests run on various versions of Python. They test the documentation builds, test coverage, check whether the pull request author has indicated that it is a work in progress (WIP). They also run several code linting checks which further triggers the unit test build.
+
 
 \subsection{ Documentation and gallery} \label{subsec:doc}
-The EinsteinPy Project strives to provide high quality, up-to-date and accurate documentation of the software. The documentation is highly approachable with easy and intuitive user interface. The documentation is self-updating with every change in the codebase, and is rendered automatically from the docstrings written for each function and classes. Along with the main API, new example codes for different functionalities is added to the repository frequently in the form of jupyter notebooks. Many sections like User Guide and Developer Guide has been written for easy on-boarding of new users and contributors.
+The EinsteinPy Project strives to provide high quality, up-to-date and accurate documentation of the software. The documentation is highly approachable with an easy and intuitive user interface. The documentation is self-updating with every change in the codebase and is rendered automatically from the docstrings written for each function and classes. Along with the main API, new example codes for different functionalities are added to the repository frequently in the form of jupyter notebooks. Many sections like User Guide and Developer Guide has been written for easy on-boarding of new users and contributors.
 	
-\section{COMMUNITY} \label{sec:COMMUNITY}
-EinsteinPy is being developed as an open source community inside the wide and diverse general scientific python community. Our code is freely available, and we have seen a lot of people contributing and joining us since over the past year.
-We touched the landmark of 30 members recently. EinsteinPy is dedicated to problems arising in General Relativity and gravitational physics as well as encouraging open source development. EinsteinPy has benefited greatly from summer of code schemes. Last year EinsteinPy participated in the ESA Summer of Code In Space (SOCIS). This program is inspired by Google Summer Of Code (GSOC) and aims to raise the awareness of open source projects related to space, promote the European Space Agency. The symbolic module in EinsteinPy project was developed during this program.
+\section{Community} \label{sec:COMMUNITY}
+EinsteinPy is being developed as an open-source community inside the wide and diverse general scientific python community. Our code is freely available, and we have seen a lot of people contributing and joining us since over the past year. We touched the landmark of 50 contributors recently. EinsteinPy is dedicated to problems arising in General Relativity and gravitational physics as well as encouraging open source development. EinsteinPy has benefited greatly from summer of code schemes. In 2019 EinsteinPy participated in the ESA Summer of Code In Space (SOCIS). This program is inspired by the Google Summer Of Code (GSoC) and aims to raise the awareness of open source projects related to space, promote the European Space Agency. The symbolic module in EinsteinPy project was developed during this program.
 
-\section{FUTURE} \label{sec:FUTURE}
+In 2020, EinsteinPy is selected as a sub-organization in Google Summer of Code under OpenAstronomy Umbrella. 
+
+\section{Future} \label{sec:FUTURE}
 We intend to add more functionalities to our project, some of which are, 
 \begin{itemize}
-\item \texttt Support for null-geodesics in different geometries, . 
-\item \texttt Relativistic hydrodynamics
-\item \texttt Adaptive Mesh Refinement 
-\item \texttt Providing numerical solutions to Einstein’s equations for arbitrarily complex matter distribution.
+\item Support for null-geodesics in different geometries, . 
+\item Relativistic hydrodynamics
+\item Adaptive Mesh Refinement 
+\item Providing numerical solutions to Einstein’s equations for arbitrarily complex matter distribution.
 \end{itemize}
 
-We have an open community where suggestions from people to add functionalities are welcome. We wish to be as helpful as possible to people using EinsteinPy in.
+We have an open community where we welcome suggestions from people to add functionalities/features and everyone can report bugs and issues. We wish to be as helpful as possible to people using EinsteinPy in their research.
+
+
+\section{Conclusions}
 
 
 
-\acknowledgments
 
-We thank all the people that have made EinsteinPy what it is today.  
-The generous sponsorship by European Space Agency during Summer of Code in Space really helped us with the betterment of code. We would like to thank the awesome poliastro \citep{juan_luis_cano_rodriguez_2019_3588160} for always motivating us and for being the first sponsor for the project. We would also like to thank our host university, Indian institute of Technology, Mandi who provided us with significant support and have our deepest thanks.
-We would specially like to thank Prof.Abhay Ashtekar for his motivational email and  Prof. Timothy A. Gonsalves for his constant motivation and support.
+\begin{acknowledgements}
+      We thank all the people that have made EinsteinPy what it is today.  
+The generous sponsorship by European Space Agency during Summer of Code in Space really helped us with the betterment of code. We would like to thank the awesome poliastro \citep{juan_luis_cano_rodriguez_2019_3588160} for always motivating us and for being the first sponsor for the project. We would also like to thank our host university, Indian Institute of Technology, Mandi who provided us with significant support and have our deepest thanks.
+We would especially like to thank Prof.Abhay Ashtekar for his motivational email and  Prof. Timothy A. Gonsalves for his constant motivation and support.
 Lastly, we thank all our contributors who contributed selflessly for building this amazing software called EinsteinPy.
+      
+\end{acknowledgements}
 
-%% To help institutions obtain information on the effectiveness of their 
-%% telescopes the AAS Journals has created a group of keywords for telescope 
-%% facilities.
+% WARNING
+%-------------------------------------------------------------------
+% Please note that we have included the references to the file aa.dem in
+% order to compile it, but we ask you to:
 %
-%% Following the acknowledgments section, use the following syntax and the
-%% \facility{} or \facilities{} macros to list the keywords of facilities used 
-%% in the research for the paper.  Each keyword is check against the master 
-%% list during copy editing.  Individual instruments can be provided in 
-%% parentheses, after the keyword, but they are not verified.
+% - use BibTeX with the regular commands:
+%   \bibliographystyle{aa} % style aa.bst
+%   \bibliography{Yourfile} % your references Yourfile.bib
+%
+% - join the .bib files when you upload your source files
+%-------------------------------------------------------------------
 
 
-%% Similar to \facility{}, there is the optional \software command to allow 
-%% authors a place to specify which programs were used during the creation of 
-%% the manuscript. Authors should list each code and include either a
-%% citation or url to the code inside ()s when available.
 
-\software{astropy \citep{astropy:2013} \citep{astropy:2018},  
-          Numpy \citep{numpy}, 
-          scipy \citep{2019arXiv190710121V},
-          numba \citep{Lam2015NumbaAL},
-          matplotlib \citep{matplotlib}
-          }
-
-%% Appendix material should be preceded with a single \appendix command.
-%% There should be a \section command for each appendix. Mark appendix
-%% subsections with the same markup you use in the main body of the paper.
-
-%% Each Appendix (indicated with \section) will be lettered A, B, C, etc.
-%% The equation counter will reset when it encounters the \appendix
-%% command and will number appendix equations (A1), (A2), etc. The
-%% Figure and Table counter will not reset.
-
-% \appendix
-% \section{Appendix information}
-
-%% For this sample we use BibTeX plus aasjournals.bst to generate the
-%% the bibliography. The sample63.bib file was populated from ADS. To
-%% get the citations to show in the compiled file do the following:
-%%
-%% pdflatex sample63.tex
-%% bibtext sample63
-%% pdflatex sample63.tex
-%% pdflatex sample63.tex
-
-\bibliography{bibliography}{}
-\bibliographystyle{aasjournal}
+\bibliographystyle{aa}
+\bibliography{bibliography.bib}
 
 
-%% This command is needed to show the entire author+affiliation list when
-%% the collaboration and author truncation commands are used.  It has to
-%% go at the end of the manuscript.
-%\allauthors
 
-%% Include this line if you are using the \added, \replaced, \deleted
-%% commands to see a summary list of all changes at the end of the article.
-%\listofchanges
 \end{document}
